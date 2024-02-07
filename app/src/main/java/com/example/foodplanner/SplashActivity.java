@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        myText=findViewById(R.id.My_Text);
+        myText=findViewById(R.id.welcome);
         animationView=findViewById(R.id.Lottie_Img);
 
 
@@ -27,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(getApplicationContext(), HomeActivity.class);
+                    Intent i = new Intent(getApplicationContext(), StartActivity.class);
                     startActivity(i);
                 }
             }, 5000);
