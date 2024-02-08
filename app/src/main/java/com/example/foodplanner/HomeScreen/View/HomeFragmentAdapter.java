@@ -59,21 +59,9 @@ public class HomeFragmentAdapter extends
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Log.i(TAG, "position: "+position);
         Log.i(TAG, "name[0]: "+mealList.get(position).getName());
-
-        //meal=mealList.get(position);
         holder.nameView.setText(mealList.get(position).getName());
         Glide.with(context).load(mealList.get(position).getThumbnail())
                 .into(holder.mealImg);
-
-//        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.i(TAG, "btnAdd: "+ "added");
-//                onProductsClickListener.onProductClick(product);
-//            }
-//        });
-
-
     }
 
 
@@ -92,6 +80,5 @@ public class HomeFragmentAdapter extends
             nameView=v.findViewById(R.id.wrapped_meal_name);
             mealImg=v.findViewById(R.id.wrapped_meal_img);
         }
-
     }
 }

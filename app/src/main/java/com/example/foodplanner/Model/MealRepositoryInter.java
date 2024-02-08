@@ -7,7 +7,9 @@ import com.example.foodplanner.network.CallBackInter;
 import java.util.List;
 
 public interface MealRepositoryInter {
-    void getAllProducts(CallBackInter interCallBack);
+    void getAllMeals(CallBackInter interCallBack, String query);
+
+    void getRandomMeal(CallBackInter interCallBack);
 
     //void insertProduct(Meal product);
 

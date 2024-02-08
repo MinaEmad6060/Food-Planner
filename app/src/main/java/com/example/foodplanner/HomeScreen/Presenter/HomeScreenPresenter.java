@@ -23,13 +23,24 @@ public class HomeScreenPresenter implements
 
 
     @Override
-    public void getMeals() {
-        mealRepositoryInter.getAllProducts(this);
+    public void getMeals(String query) {
+
+        mealRepositoryInter.getAllMeals(this,query);
     }
 
     @Override
-    public void onSuccess(List<Meal> products) {
-        homeFragmentInter.showData(products);
+    public void getRandomMeal() {
+        mealRepositoryInter.getRandomMeal(this);
+    }
+
+    @Override
+    public void onSuccess(List<Meal> meals, String query) {
+        homeFragmentInter.showData(meals,query);
+    }
+
+    @Override
+    public void onSuccessRandom(List<Meal> meals) {
+        homeFragmentInter.showRandomMeal(meals);
     }
 
     @Override

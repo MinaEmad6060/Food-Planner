@@ -32,8 +32,8 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
     }
 
 
-
-    public void makeNetworkCall(CallBackInter interCallBack){
+    @Override
+    public void makeNetworkCall(CallBackInter interCallBack, String query){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(JSON_URL_RETROFIT)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -44,21 +44,38 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
         MealAPI mealAPI = retrofit.create(MealAPI.class);
         Log.i(TAG, "proAPI: ");
 
-        mealAPI.getByCategoryMealsAPI("Chicken").enqueue(new Callback<MealList>() {
-
+        mealAPI.getByCategoryMealsAPI(query).enqueue(new Callback<MealList>() {
             @Override
             public void onResponse(Call<MealList> call,
                                    Response<MealList> response) {
                 Log.i(TAG, "onResponse: ");
                 if (response.isSuccessful()) {
-                    Log.i(TAG, "response.isSuccessful: "+ response.body().meals.size());
-                    interCallBack.onSuccess(response.body().meals);
+                    //Log.i(TAG, "response.isSuccessful: "+ response.body().meals.size());
+                    interCallBack.onSuccess(response.body().meals, query);
                 }
             }
 
             @Override
             public void onFailure(Call<MealList> call, Throwable t) {
                 Log.i(TAG, "onFailure: ");
+                //interCallBack.onFail(t.getMessage());
+            }
+        });
+
+        mealAPI.getRandomMealAPI().enqueue(new Callback<MealList>() {
+            @Override
+            public void onResponse(Call<MealList> call,
+                                   Response<MealList> response) {
+                Log.i(TAG, "onResponseRandom: ");
+                if (response.isSuccessful()) {
+                    //Log.i(TAG, "response.isSuccessful: "+ response.body().meals.size());
+                    interCallBack.onSuccessRandom(response.body().meals);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealList> call, Throwable t) {
+                Log.i(TAG, "onFailureRandom: ");
                 //interCallBack.onFail(t.getMessage());
             }
         });
