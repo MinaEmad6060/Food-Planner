@@ -19,7 +19,7 @@ public class Meal {
     //private String[] ingredients;
 
     public Meal(long id, String name, String category, String area,
-                String instructions, String thumbnail, String[] ingredients) {
+                String instructions, String thumbnail/*, String[] ingredients*/) {
         this.id = id;
         this.name = name;
         this.category = category;

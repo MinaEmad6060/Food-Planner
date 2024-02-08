@@ -26,8 +26,8 @@ public class HomeFragmentAdapter extends
 
     private static final String TAG = "MyRecyclerAdapter";
     Context context;
-    Meal meal;
-    List<Meal> mealList;
+    Meal meal = new Meal(1,"","","","","");
+    List<Meal> mealList=new ArrayList<Meal>();
 
     //Button btnAdd;
 
@@ -38,7 +38,7 @@ public class HomeFragmentAdapter extends
               List<Meal> mealList) {
         this.context = context;
         this.mealList = mealList;
-        mealList=new ArrayList<Meal>();
+        //mealList=new ArrayList<Meal>();
     }
 
     public void setMyList(List<Meal> myList) {
@@ -58,9 +58,11 @@ public class HomeFragmentAdapter extends
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Log.i(TAG, "position: "+position);
-        Meal meal=mealList.get(position);
-        holder.nameView.setText(meal.getName());
-        Glide.with(context).load(meal.getThumbnail())
+        Log.i(TAG, "name[0]: "+mealList.get(position).getName());
+
+        //meal=mealList.get(position);
+        holder.nameView.setText(mealList.get(position).getName());
+        Glide.with(context).load(mealList.get(position).getThumbnail())
                 .into(holder.mealImg);
 
 //        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +89,8 @@ public class HomeFragmentAdapter extends
         //public Button btnAdd;
         public MyViewHolder(View v) {
             super(v);
-            nameView=v.findViewById(R.id.meal_name);
-            mealImg=v.findViewById(R.id.img_meal);
+            nameView=v.findViewById(R.id.wrapped_meal_name);
+            mealImg=v.findViewById(R.id.wrapped_meal_img);
         }
 
     }

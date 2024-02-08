@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,14 +17,35 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.Search.View.SearchFragment;
 import com.example.foodplanner.databinding.ActivityHomeBinding;
 
+import java.util.ArrayList;
+
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
+
+    RecyclerView recyclerView;
+    LinearLayoutManager linearManager;
+    HomeFragmentAdapter homeFragmentAdapter;
+    HomeFragment homeFragment;
+
     NavController navController;
     ActivityHomeBinding activityMainBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        if(savedInstanceState == null){
+            homeFragment = new HomeFragment();
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction transFragment = fragManager.beginTransaction();
+            transFragment.add(R.id.home_Fragment, homeFragment, "DYNAMIC");
+            transFragment.commit();
+        }
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         activityMainBinding=ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
         replacementFragment(new HomeFragment());
@@ -42,20 +65,13 @@ public class HomeActivity extends AppCompatActivity {
 
             return true;
         });
-    }
-
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
     }
 
     private void replacementFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.Frame_Layout,fragment);
+        fragmentTransaction.replace(R.id.home_Fragment,fragment);
         fragmentTransaction.commit();
     }
 }

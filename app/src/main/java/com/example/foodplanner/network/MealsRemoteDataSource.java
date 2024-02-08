@@ -59,7 +59,7 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
             @Override
             public void onFailure(Call<MealList> call, Throwable t) {
                 Log.i(TAG, "onFailure: ");
-                interCallBack.onFail(t.getMessage());
+                //interCallBack.onFail(t.getMessage());
             }
         });
     }

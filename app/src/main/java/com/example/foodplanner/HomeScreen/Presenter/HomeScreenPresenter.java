@@ -34,6 +34,6 @@ public class HomeScreenPresenter implements
 
     @Override
     public void onFail(String err) {
-        homeFragmentInter.showErr(err);
+        //homeFragmentInter.showErr(err);
     }
 }

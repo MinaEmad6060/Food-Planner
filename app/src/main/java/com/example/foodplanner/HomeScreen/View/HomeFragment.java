@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment
     LinearLayoutManager linearManager;
 
 
-    HomeActivity homeActivity=new HomeActivity();
+    //HomeActivity homeActivity=new HomeActivity();
     HomeFragmentAdapter homeFragmentAdapter;
 
     HomeScreenPresenterInter homeScreenPresenterInter;
@@ -47,15 +47,13 @@ public class HomeFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view=inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        recyclerView=view.findViewById(R.id.Chicken_View);
 
         homeScreenPresenterInter = new HomeScreenPresenter(
                 this,
@@ -64,10 +62,11 @@ public class HomeFragment extends Fragment
 
         homeScreenPresenterInter.getMeals();
 
-        linearManager = new LinearLayoutManager(homeActivity);
+        recyclerView=view.findViewById(R.id.Chicken_View);
+        linearManager = new LinearLayoutManager(view.getContext());
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         homeFragmentAdapter =
-                new HomeFragmentAdapter(homeActivity, new ArrayList<>());
+                new HomeFragmentAdapter(view.getContext(), new ArrayList<>());
         recyclerView.setLayoutManager(linearManager);
         recyclerView.setAdapter(homeFragmentAdapter);
     }
@@ -80,10 +79,10 @@ public class HomeFragment extends Fragment
 
     @Override
     public void showErr(String err) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(homeActivity);
-        builder.setMessage(err).setTitle("An Error Occurred");
-        AlertDialog dialog = builder.create();
-        dialog.show();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(homeActivity);
+//        builder.setMessage(err).setTitle("An Error Occurred");
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
     }
 
 }
