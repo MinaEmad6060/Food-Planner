@@ -2,25 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/Home"
+        android:id="@+id/homeFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/home"
         android:title="Home" />
     <item
-        android:id="@+id/Plan"
+        android:id="@+id/planOfWeekFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/plan"
         android:title="Plan" />
     <item
-        android:id="@+id/Favourate"
+        android:id="@+id/favouriteFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/favourate"
         android:title="Favourate" />
     <item
-        android:id="@+id/Search"
+        android:id="@+id/searchFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/search"
