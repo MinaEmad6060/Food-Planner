@@ -55,6 +55,11 @@ public class HomeScreenPresenter implements
     }
 
     @Override
+    public void onSuccessSeaFood(List<Meal> meals) {
+        homeFragmentInter.showSeaFoodCategory(meals);
+    }
+
+    @Override
     public void onSuccessRandom(List<Meal> meals) {
         homeFragmentInter.showRandomMeal(meals);
     }

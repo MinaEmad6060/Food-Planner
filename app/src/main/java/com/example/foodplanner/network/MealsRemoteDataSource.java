@@ -76,6 +76,23 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
             }
         });
 
+        mealAPI.getChickenCategoryMealsAPI("Seafood").enqueue(new Callback<MealList>() {
+            @Override
+            public void onResponse(Call<MealList> call,
+                                   Response<MealList> response) {
+                Log.i(TAG, "Category Seafood Response: ");
+                if (response.isSuccessful()) {
+                    interCallBack.onSuccessSeaFood(response.body().meals);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealList> call, Throwable t) {
+                Log.i(TAG, "Category Seafood Failure: ");
+            }
+        });
+
+
         mealAPI.getRandomMealAPI().enqueue(new Callback<MealList>() {
             @Override
             public void onResponse(Call<MealList> call,

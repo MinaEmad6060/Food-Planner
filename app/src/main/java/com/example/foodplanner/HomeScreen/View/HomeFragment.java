@@ -32,6 +32,8 @@ public class HomeFragment extends Fragment
 
     RecyclerView chickenRecyclerView;
     RecyclerView beefRecyclerView;
+    RecyclerView seaFoodRecyclerView;
+
 
     LinearLayoutManager linearManager;
 
@@ -45,6 +47,8 @@ public class HomeFragment extends Fragment
     //HomeActivity homeActivity=new HomeActivity();
     ChickenCategoryAdapter chickenCategoryAdapter;
     BeefCategoryAdapter beefCategoryAdapter;
+
+    SeaFoodCategoryAdapter seaFoodCategoryAdapter;
 
     HomeScreenPresenterInter homeScreenPresenterInter;
     MealsRemoteDataSourceInter mealsRemoteDataSourceInter;
@@ -72,6 +76,8 @@ public class HomeFragment extends Fragment
                 this,
                 MealRepository.getInstance(
                         MealsRemoteDataSource.getInstance()));
+
+        //Random Meal
         homeScreenPresenterInter.getRandomMeal();
 
         //Chicken cat.
@@ -79,7 +85,6 @@ public class HomeFragment extends Fragment
         linearManager = new LinearLayoutManager(view.getContext());
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         homeScreenPresenterInter.getCategoryMeals();
-
         chickenCategoryAdapter =
                 new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
         chickenRecyclerView.setLayoutManager(linearManager);
@@ -90,12 +95,20 @@ public class HomeFragment extends Fragment
         beefRecyclerView =view.findViewById(R.id.Beef_view);
         linearManager = new LinearLayoutManager(view.getContext());
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-
         beefCategoryAdapter =
                 new BeefCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
         beefRecyclerView.setLayoutManager(linearManager);
         beefRecyclerView.setAdapter(beefCategoryAdapter);
 
+
+        //Sea Food cat.
+        seaFoodRecyclerView =view.findViewById(R.id.SeaFood_view);
+        linearManager = new LinearLayoutManager(view.getContext());
+        linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        seaFoodCategoryAdapter =
+                new SeaFoodCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
+        seaFoodRecyclerView.setLayoutManager(linearManager);
+        seaFoodRecyclerView.setAdapter(seaFoodCategoryAdapter);
     }
 
     @Override
@@ -112,7 +125,8 @@ public class HomeFragment extends Fragment
 
     @Override
     public void showSeaFoodCategory(List<Meal> meals) {
-
+        seaFoodCategoryAdapter.setMyList(meals);
+        seaFoodCategoryAdapter.notifyDataSetChanged();
     }
 
 
