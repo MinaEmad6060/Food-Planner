@@ -22,10 +22,21 @@ public class HomeScreenPresenter implements
     }
 
 
-    @Override
-    public void getMeals(String query) {
+//    @Override
+//    public void getChickenMeals(String query) {
+//
+//        mealRepositoryInter.getAllChickenMeals(this,query);
+//    }
+//
+//    @Override
+//    public void getCategoryMeals(String query) {
+//        mealRepositoryInter.getAllBeefMeals(this,query);
+//
+//    }
 
-        mealRepositoryInter.getAllMeals(this,query);
+    @Override
+    public void getCategoryMeals() {
+        mealRepositoryInter.getAllMeals(this);
     }
 
     @Override
@@ -34,8 +45,13 @@ public class HomeScreenPresenter implements
     }
 
     @Override
-    public void onSuccess(List<Meal> meals, String query) {
-        homeFragmentInter.showData(meals,query);
+    public void onSuccessChicken(List<Meal> meals) {
+            homeFragmentInter.showChickenCategory(meals);
+    }
+
+    @Override
+    public void onSuccessBeef(List<Meal> meals) {
+        homeFragmentInter.showBeefCategory(meals);
     }
 
     @Override

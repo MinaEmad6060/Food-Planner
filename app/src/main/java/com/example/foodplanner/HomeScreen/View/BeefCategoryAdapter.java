@@ -5,9 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,8 +18,8 @@ import com.example.foodplanner.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragmentAdapter extends
-        RecyclerView.Adapter<HomeFragmentAdapter.MyViewHolder>{
+public class BeefCategoryAdapter extends
+        RecyclerView.Adapter<BeefCategoryAdapter.MyViewHolder>{
 
 
     private static final String TAG = "MyRecyclerAdapter";
@@ -34,8 +32,8 @@ public class HomeFragmentAdapter extends
 
     //OnProductsClickListener onProductsClickListener;
 
-    public HomeFragmentAdapter(Context context,
-              List<Meal> mealList) {
+    public BeefCategoryAdapter(Context context,
+                                  List<Meal> mealList) {
         this.context = context;
         this.mealList = mealList;
         //mealList=new ArrayList<Meal>();

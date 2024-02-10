@@ -43,7 +43,8 @@ public class HomeFragment extends Fragment
     ImageView randomMealImg;
 
     //HomeActivity homeActivity=new HomeActivity();
-    HomeFragmentAdapter homeFragmentAdapter;
+    ChickenCategoryAdapter chickenCategoryAdapter;
+    BeefCategoryAdapter beefCategoryAdapter;
 
     HomeScreenPresenterInter homeScreenPresenterInter;
     MealsRemoteDataSourceInter mealsRemoteDataSourceInter;
@@ -73,39 +74,48 @@ public class HomeFragment extends Fragment
                         MealsRemoteDataSource.getInstance()));
         homeScreenPresenterInter.getRandomMeal();
 
-//        homeScreenPresenterInter.getMeals("Chicken");
-//        //Chicken cat.
-//        chickenRecyclerView =view.findViewById(R.id.Chicken_View);
-//        linearManager = new LinearLayoutManager(view.getContext());
-//        linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        homeFragmentAdapter =
-//                new HomeFragmentAdapter(view.getContext(), new ArrayList<>());
-//        chickenRecyclerView.setLayoutManager(linearManager);
-//        chickenRecyclerView.setAdapter(homeFragmentAdapter);
+        //Chicken cat.
+        chickenRecyclerView =view.findViewById(R.id.Chicken_View);
+        linearManager = new LinearLayoutManager(view.getContext());
+        linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        homeScreenPresenterInter.getCategoryMeals();
+
+        chickenCategoryAdapter =
+                new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
+        chickenRecyclerView.setLayoutManager(linearManager);
+        chickenRecyclerView.setAdapter(chickenCategoryAdapter);
 
 
         //Beef cat.
-        homeScreenPresenterInter.getMeals("Beef");
-
         beefRecyclerView =view.findViewById(R.id.Beef_view);
         linearManager = new LinearLayoutManager(view.getContext());
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        homeFragmentAdapter =
-//                new HomeFragmentAdapter(view.getContext(), new ArrayList<>());
-//        beefRecyclerView.setLayoutManager(linearManager);
-//        beefRecyclerView.setAdapter(homeFragmentAdapter);
+
+        beefCategoryAdapter =
+                new BeefCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
+        beefRecyclerView.setLayoutManager(linearManager);
+        beefRecyclerView.setAdapter(beefCategoryAdapter);
 
     }
 
     @Override
-    public void showData(List<Meal> meals, String query) {
-        homeFragmentAdapter =
-                new HomeFragmentAdapter(viewFrag.getContext(), new ArrayList<>());
-        beefRecyclerView.setLayoutManager(linearManager);
-        beefRecyclerView.setAdapter(homeFragmentAdapter);
-            homeFragmentAdapter.setMyList(meals);
-            homeFragmentAdapter.notifyDataSetChanged();
+    public void showChickenCategory(List<Meal> meals) {
+        chickenCategoryAdapter.setMyList(meals);
+        chickenCategoryAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void showBeefCategory(List<Meal> meals) {
+        beefCategoryAdapter.setMyList(meals);
+        beefCategoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showSeaFoodCategory(List<Meal> meals) {
+
+    }
+
+
 
     @Override
     public void showRandomMeal(List<Meal> meals) {

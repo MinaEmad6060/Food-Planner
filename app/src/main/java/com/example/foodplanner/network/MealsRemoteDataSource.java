@@ -33,32 +33,46 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
 
 
     @Override
-    public void makeNetworkCall(CallBackInter interCallBack, String query){
+    public void makeNetworkCall(CallBackInter interCallBack){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(JSON_URL_RETROFIT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        Log.i(TAG, "Retrofit: ");
+        //Log.i(TAG, "Retrofit: ");
 
         MealAPI mealAPI = retrofit.create(MealAPI.class);
-        Log.i(TAG, "proAPI: ");
+        //Log.i(TAG, "proAPI: ");
 
-        mealAPI.getByCategoryMealsAPI(query).enqueue(new Callback<MealList>() {
+        mealAPI.getChickenCategoryMealsAPI("Chicken").enqueue(new Callback<MealList>() {
             @Override
             public void onResponse(Call<MealList> call,
                                    Response<MealList> response) {
-                Log.i(TAG, "onResponse: ");
+                Log.i(TAG, "Category Chicken Response: ");
                 if (response.isSuccessful()) {
-                    //Log.i(TAG, "response.isSuccessful: "+ response.body().meals.size());
-                    interCallBack.onSuccess(response.body().meals, query);
+                    interCallBack.onSuccessChicken(response.body().meals);
                 }
             }
 
             @Override
             public void onFailure(Call<MealList> call, Throwable t) {
-                Log.i(TAG, "onFailure: ");
-                //interCallBack.onFail(t.getMessage());
+                Log.i(TAG, "Category Chicken Failure: ");
+            }
+        });
+
+        mealAPI.getChickenCategoryMealsAPI("Beef").enqueue(new Callback<MealList>() {
+            @Override
+            public void onResponse(Call<MealList> call,
+                                   Response<MealList> response) {
+                Log.i(TAG, "Category Beef Response: ");
+                if (response.isSuccessful()) {
+                    interCallBack.onSuccessBeef(response.body().meals);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MealList> call, Throwable t) {
+                Log.i(TAG, "Category Beef Failure: ");
             }
         });
 
@@ -66,19 +80,16 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
             @Override
             public void onResponse(Call<MealList> call,
                                    Response<MealList> response) {
-                Log.i(TAG, "onResponseRandom: ");
+                Log.i(TAG, "Random Response: ");
                 if (response.isSuccessful()) {
-                    //Log.i(TAG, "response.isSuccessful: "+ response.body().meals.size());
                     interCallBack.onSuccessRandom(response.body().meals);
                 }
             }
 
             @Override
             public void onFailure(Call<MealList> call, Throwable t) {
-                Log.i(TAG, "onFailureRandom: ");
-                //interCallBack.onFail(t.getMessage());
+                Log.i(TAG, "Random Failure: ");
             }
         });
     }
-
 }

@@ -8,7 +8,8 @@ import retrofit2.http.Query;
 
 public interface MealAPI {
     @GET("filter.php")
-    Call<MealList> getByCategoryMealsAPI(@Query("c") String category);
+    Call<MealList> getChickenCategoryMealsAPI(@Query("c") String category);
+
     @GET("random.php")
     Call<MealList> getRandomMealAPI();
 }

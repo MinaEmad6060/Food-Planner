@@ -31,13 +31,13 @@ public class MealRepository implements MealRepositoryInter{
 
 
     @Override
-    public void getAllMeals(CallBackInter interCallBack, String query) {
-        interProductsRemoteDataSource.makeNetworkCall(interCallBack, query);
+    public void getAllMeals(CallBackInter interCallBack) {
+        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
     }
 
     @Override
     public void getRandomMeal(CallBackInter interCallBack) {
-        interProductsRemoteDataSource.makeNetworkCall(interCallBack, "");
+        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
     }
 
 }

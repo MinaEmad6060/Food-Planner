@@ -6,7 +6,11 @@ import java.util.List;
 
 public interface HomeFragmentInter {
 
-    void showData(List<Meal> meals, String query);
+    void showChickenCategory(List<Meal> meals);
+    void showBeefCategory(List<Meal> meals);
+
+    void showSeaFoodCategory(List<Meal> meals);
+
     void showRandomMeal(List<Meal> meals);
 
     void showErr(String err);

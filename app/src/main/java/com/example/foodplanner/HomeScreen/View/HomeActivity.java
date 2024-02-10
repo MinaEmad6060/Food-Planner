@@ -17,14 +17,12 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.Search.View.SearchFragment;
 import com.example.foodplanner.databinding.ActivityHomeBinding;
 
-import java.util.ArrayList;
-
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
 
     RecyclerView recyclerView;
     LinearLayoutManager linearManager;
-    HomeFragmentAdapter homeFragmentAdapter;
+    ChickenCategoryAdapter chickenCategoryAdapter;
     HomeFragment homeFragment;
 
     NavController navController;
