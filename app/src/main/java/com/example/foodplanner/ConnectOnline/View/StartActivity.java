@@ -1,6 +1,9 @@
 package com.example.foodplanner.ConnectOnline.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import com.example.foodplanner.R;
 
 public class StartActivity extends AppCompatActivity {
 
+    NavController navController;
 
     Button btnGuest;
     @Override
@@ -19,15 +23,14 @@ public class StartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        btnGuest=findViewById(R.id.btn_guest);
+        navController = Navigation.findNavController(
+                this,R.id.Start_nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this,navController);
 
+    }
 
-        btnGuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent nextPage = new Intent(StartActivity.this, HomeActivity.class);
-                startActivity(nextPage);
-            }
-        });
+    @Override
+    public boolean onSupportNavigateUp() {
+        return navController.navigateUp()||super.onSupportNavigateUp();
     }
 }

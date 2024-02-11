@@ -19,13 +19,7 @@ import com.example.foodplanner.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
-
-    RecyclerView recyclerView;
-    LinearLayoutManager linearManager;
-    ChickenCategoryAdapter chickenCategoryAdapter;
     HomeFragment homeFragment;
-
-    NavController navController;
     ActivityHomeBinding activityMainBinding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
