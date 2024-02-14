@@ -2,6 +2,7 @@ package com.example.foodplanner.network;
 
 import android.util.Log;
 
+import com.example.foodplanner.Model.CategoryList;
 import com.example.foodplanner.Model.MealList;
 
 import retrofit2.Call;
@@ -43,6 +44,21 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
 
         MealAPI mealAPI = retrofit.create(MealAPI.class);
         //Log.i(TAG, "proAPI: ");
+        mealAPI.getAllCategoriesAPI().enqueue(new Callback<CategoryList>() {
+            @Override
+            public void onResponse(Call<CategoryList> call,
+                                   Response<CategoryList> response) {
+                Log.i(TAG, "Categories Response: ");
+                if (response.isSuccessful()) {
+                    interCallBack.onSuccessCategory(response.body().categories);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CategoryList> call, Throwable t) {
+                Log.i(TAG, "Categories Failure: ");
+            }
+        });
 
         mealAPI.getChickenCategoryMealsAPI("Chicken").enqueue(new Callback<MealList>() {
             @Override

@@ -1,6 +1,7 @@
 package com.example.foodplanner.HomeScreen.Presenter;
 
 import com.example.foodplanner.HomeScreen.View.HomeFragmentInter;
+import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.network.CallBackInter;
@@ -12,7 +13,7 @@ public class HomeScreenPresenter implements
 
     private HomeFragmentInter homeFragmentInter;
 
-    private MealRepositoryInter mealRepositoryInter;
+    private static MealRepositoryInter mealRepositoryInter;
 
 
     public HomeScreenPresenter(HomeFragmentInter interAllProductsView,
@@ -45,6 +46,16 @@ public class HomeScreenPresenter implements
     }
 
     @Override
+    public void addFavMeal(Meal meal) {
+        mealRepositoryInter.insertProduct(meal);
+    }
+
+//    @Override
+//    public static void addFavMeal(Meal meal) {
+//        mealRepositoryInter.insertProduct(meal);
+//    }
+
+    @Override
     public void onSuccessChicken(List<Meal> meals) {
             homeFragmentInter.showChickenCategory(meals);
     }
@@ -57,6 +68,11 @@ public class HomeScreenPresenter implements
     @Override
     public void onSuccessSeaFood(List<Meal> meals) {
         homeFragmentInter.showSeaFoodCategory(meals);
+    }
+
+    @Override
+    public void onSuccessCategory(List<Category> categories) {
+
     }
 
     @Override

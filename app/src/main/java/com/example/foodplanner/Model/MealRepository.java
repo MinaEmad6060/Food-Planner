@@ -22,9 +22,9 @@ public class MealRepository implements MealRepositoryInter{
     private static MealRepository productsRepository =null;
 
     private MealRepository(MealsRemoteDataSourceInter interProductsRemoteDataSource
-                            ,FavLocalDataSource favLocalDataSource) {
+                            ,InterFavLocalDataSource interFavLocalDataSource) {
         this.interProductsRemoteDataSource = interProductsRemoteDataSource;
-        this.favLocalDataSource = favLocalDataSource;
+        this.interFavLocalDataSource = interFavLocalDataSource;
     }
 
     public static MealRepository getInstance(
@@ -61,6 +61,11 @@ public class MealRepository implements MealRepositoryInter{
     @Override
     public void deleteProduct(Meal meal) {
         interFavLocalDataSource.deleteMeal(meal);
+    }
+
+    @Override
+    public void getAllCategoriesRepo(CallBackInter interCallBack) {
+        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
     }
 
 //    public Flowable<List<Product>> getStoredProducts(){

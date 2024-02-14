@@ -17,4 +17,6 @@ public interface MealRepositoryInter {
 
     public void deleteProduct(Meal meal);
 
+    void  getAllCategoriesRepo(CallBackInter interCallBack);
+
 }

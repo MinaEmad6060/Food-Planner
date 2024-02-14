@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,20 +23,22 @@ public class ChickenCategoryAdapter extends
         RecyclerView.Adapter<ChickenCategoryAdapter.MyViewHolder>{
 
 
+    HomeFragmentInter homeFragmentInter;
     private static final String TAG = "MyRecyclerAdapter";
     Context context;
     Meal meal = new Meal(1,"","","","","");
     List<Meal> mealList=new ArrayList<Meal>();
 
-    //Button btnAdd;
+    Button btnAdd;
 
 
     //OnProductsClickListener onProductsClickListener;
 
     public ChickenCategoryAdapter(Context context,
-                                  List<Meal> mealList) {
+                                  List<Meal> mealList,HomeFragmentInter homeFragmentInter) {
         this.context = context;
         this.mealList = mealList;
+        this.homeFragmentInter=homeFragmentInter;
         //mealList=new ArrayList<Meal>();
     }
 
@@ -60,6 +63,13 @@ public class ChickenCategoryAdapter extends
         holder.nameView.setText(mealList.get(position).getName());
         Glide.with(context).load(mealList.get(position).getThumbnail())
                 .into(holder.mealImg);
+
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeFragmentInter.onProductClick(meal);
+            }
+        });
     }
 
 
@@ -72,11 +82,12 @@ public class ChickenCategoryAdapter extends
         TextView nameView;
         ImageView mealImg;
 
-        //public Button btnAdd;
+        Button btnAdd;
         public MyViewHolder(View v) {
             super(v);
             nameView=v.findViewById(R.id.wrapped_meal_name);
             mealImg=v.findViewById(R.id.wrapped_meal_img);
+            btnAdd=v.findViewById(R.id.btn_add);
         }
     }
 }

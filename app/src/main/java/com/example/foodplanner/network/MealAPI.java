@@ -1,5 +1,6 @@
 package com.example.foodplanner.network;
 
+import com.example.foodplanner.Model.CategoryList;
 import com.example.foodplanner.Model.MealList;
 
 import retrofit2.Call;
@@ -12,4 +13,6 @@ public interface MealAPI {
 
     @GET("random.php")
     Call<MealList> getRandomMealAPI();
+    @GET("categories.php")
+    Call<CategoryList> getAllCategoriesAPI();
 }
