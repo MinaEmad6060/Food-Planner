@@ -21,6 +21,7 @@ import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.R;
+import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSourceInter;
 
@@ -75,16 +76,18 @@ public class HomeFragment extends Fragment
         homeScreenPresenterInter = new HomeScreenPresenter(
                 this,
                 MealRepository.getInstance(
-                        MealsRemoteDataSource.getInstance()));
+                        MealsRemoteDataSource.getInstance()
+                        , FavLocalDataSource.getInstance(viewFrag.getContext())));
 
         //Random Meal
         homeScreenPresenterInter.getRandomMeal();
+        homeScreenPresenterInter.getCategoryMeals();
+
 
         //Chicken cat.
         chickenRecyclerView =view.findViewById(R.id.Chicken_View);
         linearManager = new LinearLayoutManager(view.getContext());
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        homeScreenPresenterInter.getCategoryMeals();
         chickenCategoryAdapter =
                 new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
         chickenRecyclerView.setLayoutManager(linearManager);

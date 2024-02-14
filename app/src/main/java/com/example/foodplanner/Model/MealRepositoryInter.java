@@ -2,15 +2,19 @@ package com.example.foodplanner.Model;
 
 import com.example.foodplanner.network.CallBackInter;
 
+import java.util.List;
+
+import io.reactivex.rxjava3.core.Flowable;
+
 public interface MealRepositoryInter {
     void getAllMeals(CallBackInter interCallBack);
 
     void getRandomMeal(CallBackInter interCallBack);
 
-    //void insertProduct(Meal product);
+    Flowable<List<Meal>> getStoredProducts();
 
-    //LiveData<List<Meal>> getStoredProducts();
+    void insertProduct(Meal meal);
 
-    //public void deleteProduct(Meal product);
+    public void deleteProduct(Meal meal);
 
 }

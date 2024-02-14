@@ -1,8 +1,14 @@
 package com.example.foodplanner.Model;
 
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.SerializedName;
+@Entity(tableName = "meal_table")
 public class Meal {
+    @PrimaryKey
+    @NonNull
     @SerializedName("idMeal")
     private long id;
     @SerializedName("strMeal")
