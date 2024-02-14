@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment
         linearManager = new LinearLayoutManager(view.getContext());
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         chickenCategoryAdapter =
-                new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
+                new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),this);
         chickenRecyclerView.setLayoutManager(linearManager);
         chickenRecyclerView.setAdapter(chickenCategoryAdapter);
 
@@ -147,6 +147,11 @@ public class HomeFragment extends Fragment
 //        builder.setMessage(err).setTitle("An Error Occurred");
 //        AlertDialog dialog = builder.create();
 //        dialog.show();
+    }
+
+    @Override
+    public void onProductClick(Meal meal) {
+        homeScreenPresenterInter.addFavMeal(meal);
     }
 
 }

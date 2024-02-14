@@ -2,59 +2,49 @@ package com.example.foodplanner.Search.View;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
+import com.example.foodplanner.HomeScreen.View.SeaFoodCategoryAdapter;
+import com.example.foodplanner.Model.Category;
+import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
+import com.example.foodplanner.Search.Presenter.SearchFragmentPresenter;
+import com.example.foodplanner.Search.Presenter.SearchFragmentPresenterInter;
+import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.network.MealsRemoteDataSource;
+import com.google.android.material.chip.Chip;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SearchFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class SearchFragment extends Fragment implements SearchViewInter{
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String TAG = "SearchFragment";
+    SearchFragmentPresenterInter searchFragmentPresenterInter;
 
-    public SearchFragment() {
-        // Required empty public constructor
-    }
+    LinearLayoutManager linearManager;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    View viewFrag;
+
+    RecyclerView categoriesRecyclerView;
+
+    CategoriesAdapter categoriesAdapter;
+    Chip category;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -62,5 +52,43 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        category=view.findViewById(R.id.cat_chip);
+        viewFrag=view;
+
+        searchFragmentPresenterInter = new SearchFragmentPresenter(
+                this,
+                MealRepository.getInstance(
+                        MealsRemoteDataSource.getInstance()
+                        , FavLocalDataSource.getInstance(viewFrag.getContext())));
+
+
+
+        categoriesRecyclerView =view.findViewById(R.id.categories_recyclerView);
+        linearManager = new LinearLayoutManager(view.getContext());
+        linearManager.setOrientation(LinearLayoutManager.VERTICAL);
+        categoriesAdapter =
+                new CategoriesAdapter(viewFrag.getContext(), new ArrayList<>());
+        categoriesRecyclerView.setLayoutManager(linearManager);
+        categoriesRecyclerView.setAdapter(categoriesAdapter);
+
+        category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "SearchFragment: selected");
+                searchFragmentPresenterInter.getAllCategoriesPres();
+            }
+        });
+    }
+
+    @Override
+    public void showCategories(List<Category> categories) {
+        categoriesAdapter.setMyList(categories);
+        categoriesAdapter.notifyDataSetChanged();
     }
 }
