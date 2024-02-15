@@ -42,7 +42,6 @@ public class FavouriteFragment extends Fragment implements InterFavProductsView{
 
     InterFavMealsPresenter interFavMealsPresenter;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
