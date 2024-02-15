@@ -1,6 +1,8 @@
 package com.example.foodplanner.network;
 
+import com.example.foodplanner.Model.AreasList;
 import com.example.foodplanner.Model.CategoryList;
+import com.example.foodplanner.Model.IngredientsList;
 import com.example.foodplanner.Model.MealList;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -19,6 +21,12 @@ public interface MealAPI {
     Observable<MealList> getSearchMealsAPI(@Query("s") String category);
     @GET("categories.php")
     Observable<CategoryList> getAllCategoriesAPI();
+
+    @GET("list.php")
+    Observable<AreasList> getAllAreasAPI(@Query("a") String category);
+    @GET("list.php")
+    Observable<IngredientsList> getAllIngredientsAPI(@Query("i") String category);
+
 
 
 }

@@ -43,6 +43,15 @@ public class MealRepository implements MealRepositoryInter{
     }
 
     @Override
+    public Observable<AreasList> getAllAreasRepo() {
+        return interProductsRemoteDataSource.getAllAreasRemote();    }
+
+    @Override
+    public Observable<IngredientsList> getAllIngredientRepo() {
+        return interProductsRemoteDataSource.getAllIngredientRemote();
+    }
+
+    @Override
     public Observable<MealList> getMealsOfCategoryRepo(String category) {
         return interProductsRemoteDataSource.getMealsOfCategoryRemote(category);
     }

@@ -2,7 +2,9 @@ package com.example.foodplanner.network;
 
 import android.util.Log;
 
+import com.example.foodplanner.Model.AreasList;
 import com.example.foodplanner.Model.CategoryList;
+import com.example.foodplanner.Model.IngredientsList;
 import com.example.foodplanner.Model.MealList;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
@@ -65,6 +67,17 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
     @Override
     public Observable<CategoryList> getAllCategoriesRemote() {
         Observable<CategoryList> observable= mealAPI.getAllCategoriesAPI();
+        return observable.subscribeOn(Schedulers.io());
+    }
+
+    @Override
+    public Observable<AreasList> getAllAreasRemote() {
+        Observable<AreasList> observable= mealAPI.getAllAreasAPI("");
+        return observable.subscribeOn(Schedulers.io());    }
+
+    @Override
+    public Observable<IngredientsList> getAllIngredientRemote() {
+        Observable<IngredientsList> observable= mealAPI.getAllIngredientsAPI("");
         return observable.subscribeOn(Schedulers.io());
     }
 }
