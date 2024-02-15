@@ -6,6 +6,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +23,7 @@ import android.widget.EditText;
 
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
 import com.example.foodplanner.HomeScreen.View.ChickenCategoryAdapter;
+import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.HomeScreen.View.SeaFoodCategoryAdapter;
 import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.Model.Meal;
@@ -52,9 +57,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
 
     RecyclerView categoriesRecyclerView;
 
-    CategoriesAdapter categoriesAdapter;
     Chip category;
-
 
     ChickenCategoryAdapter adapter;
 
@@ -90,16 +93,16 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(viewFrag.getContext())));
         //Name
-        searchFragmentPresenterInter.getSearchMealsPres();
         categoriesRecyclerView =view.findViewById(R.id.categories_recyclerView);
         linearManagerSearch = new LinearLayoutManager(view.getContext());
         linearManagerSearch.setOrientation(LinearLayoutManager.VERTICAL);
         adapter = new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
         categoriesRecyclerView.setLayoutManager(linearManagerSearch);
         categoriesRecyclerView.setAdapter(adapter);
+        searchFragmentPresenterInter.getSearchMealsPres();
+
 
         //Category
-//
 //        linearManager = new LinearLayoutManager(view.getContext());
 //        linearManager.setOrientation(LinearLayoutManager.VERTICAL);
 //        categoriesAdapter =
@@ -110,18 +113,11 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 searchFragmentPresenterInter.getAllCategoriesPres();
-
-//                if(category.isChecked()){
-//                    Log.i(TAG, "SearchFragment: selected");
-//                }else{
-//
-//                }
+//                NavDirections action = SearchFragmentDirections.actionSearchFragmentToCategoryFragment();
+//                Navigation.findNavController(v).navigate(action);
             }
         });
-
-
 
 //        setupRecyclerView();
 
@@ -165,17 +161,15 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                 );
     }
 
-    @Override
-    public void showCategories(List<Category> categories) {
+//    @Override
+//    public void showCategories(List<Category> categories) {
 //        categoriesAdapter.setMyList(categories);
 //        categoriesAdapter.notifyDataSetChanged();
-    }
+//    }
 
     @Override
     public void showSearchMeals(List<Meal> meals) {
         searchMeals=meals;
-//        adapter.setMyList(searchMeals);
-//        adapter.notifyDataSetChanged();
         Log.i(TAG, "showSearchMeals sizeOfsearchMeals: "+searchMeals.size());
     }
 }
