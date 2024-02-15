@@ -28,8 +28,7 @@ import com.example.foodplanner.network.MealsRemoteDataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment
-            implements HomeFragmentInter{
+public class HomeFragment extends Fragment implements HomeFragmentInter{
 
     public static final String EXTRA_MEAL = "mealTag";
     public static final String EXTRA_POSITION = "position";
