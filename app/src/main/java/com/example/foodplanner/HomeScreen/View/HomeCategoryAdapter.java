@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,29 +19,33 @@ import com.example.foodplanner.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BeefCategoryAdapter extends
-        RecyclerView.Adapter<BeefCategoryAdapter.MyViewHolder>{
+public class HomeCategoryAdapter extends
+        RecyclerView.Adapter<HomeCategoryAdapter.MyViewHolder>{
 
 
+    HomeFragmentInter homeFragmentInter;
     private static final String TAG = "MyRecyclerAdapter";
     Context context;
     Meal meal = new Meal(1,"","","","","");
     List<Meal> mealList=new ArrayList<Meal>();
 
-    //Button btnAdd;
+    OnClickMealInter onClickMealInter;
 
 
-    //OnProductsClickListener onProductsClickListener;
 
-    public BeefCategoryAdapter(Context context,
-                                  List<Meal> mealList) {
+    public HomeCategoryAdapter(Context context,
+                               List<Meal> mealList, HomeFragmentInter homeFragmentInter) {
         this.context = context;
         this.mealList = mealList;
-        //mealList=new ArrayList<Meal>();
+        this.homeFragmentInter=homeFragmentInter;
     }
 
     public void setMyList(List<Meal> myList) {
         this.mealList = myList;
+    }
+
+    public void setClickMeal(OnClickMealInter onClickMealInter){
+        this.onClickMealInter=onClickMealInter;
     }
 
     @NonNull
@@ -60,6 +65,15 @@ public class BeefCategoryAdapter extends
         holder.nameView.setText(mealList.get(position).getName());
         Glide.with(context).load(mealList.get(position).getThumbnail())
                 .into(holder.mealImg);
+
+
+
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeFragmentInter.onMealClick(meal);
+            }
+        });
     }
 
 
@@ -68,15 +82,23 @@ public class BeefCategoryAdapter extends
         return mealList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nameView;
         ImageView mealImg;
 
-        //public Button btnAdd;
+        Button btnAdd;
         public MyViewHolder(View v) {
             super(v);
             nameView=v.findViewById(R.id.wrapped_meal_name);
             mealImg=v.findViewById(R.id.wrapped_meal_img);
+            btnAdd=v.findViewById(R.id.btn_add);
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onClickMealInter.onClick(v,getAdapterPosition());
         }
     }
 }

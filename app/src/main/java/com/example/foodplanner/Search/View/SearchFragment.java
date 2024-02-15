@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.foodplanner.HomeScreen.View.ChickenCategoryAdapter;
+import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.Model.Meal;
@@ -59,7 +59,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
     Chip ingredients;
 
 
-    ChickenCategoryAdapter adapter;
+    HomeCategoryAdapter adapter;
 
     EditText searchEditText;
     List<Meal> searchMeals;
@@ -101,7 +101,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         categoriesRecyclerView =view.findViewById(R.id.categories_recyclerView);
         linearManagerSearch = new LinearLayoutManager(view.getContext());
         linearManagerSearch.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter = new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),new HomeFragment());
+        adapter = new HomeCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),new HomeFragment());
         categoriesRecyclerView.setLayoutManager(linearManagerSearch);
         categoriesRecyclerView.setAdapter(adapter);
         searchFragmentPresenterInter.getSearchMealsPres("");
