@@ -31,11 +31,13 @@ public class ChickenCategoryAdapter extends
 
     Button btnAdd;
 
+    OnClickMealInter onClickMealInter;
+
 
     //OnProductsClickListener onProductsClickListener;
 
     public ChickenCategoryAdapter(Context context,
-                                  List<Meal> mealList) {
+                                  List<Meal> mealList,HomeFragmentInter homeFragmentInter) {
         this.context = context;
         this.mealList = mealList;
         this.homeFragmentInter=homeFragmentInter;
@@ -44,6 +46,10 @@ public class ChickenCategoryAdapter extends
 
     public void setMyList(List<Meal> myList) {
         this.mealList = myList;
+    }
+
+    public void setClickMeal(OnClickMealInter onClickMealInter){
+        this.onClickMealInter=onClickMealInter;
     }
 
     @NonNull
@@ -64,6 +70,8 @@ public class ChickenCategoryAdapter extends
         Glide.with(context).load(mealList.get(position).getThumbnail())
                 .into(holder.mealImg);
 
+
+
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +86,12 @@ public class ChickenCategoryAdapter extends
         return mealList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+//    @Override
+//    public void getMealDetails(View view,int position) {
+//        OnClickMealInter.getMealDetails(view, getAdapterPosition());
+//    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nameView;
         ImageView mealImg;
 
@@ -88,6 +101,12 @@ public class ChickenCategoryAdapter extends
             nameView=v.findViewById(R.id.wrapped_meal_name);
             mealImg=v.findViewById(R.id.wrapped_meal_img);
             btnAdd=v.findViewById(R.id.btn_add);
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onClickMealInter.onClick(v,getAdapterPosition());
         }
     }
 }

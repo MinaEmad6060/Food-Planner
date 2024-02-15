@@ -5,5 +5,8 @@ import com.example.foodplanner.Model.Category;
 import java.util.List;
 
 public interface CategoryFragmentPresenterInter {
-    public void onSuccessCategory(List<Category> categories);
+
+    public void getAllCategoriesPres();
+
+    //public void onSuccessCategory(List<Category> categories);
 }

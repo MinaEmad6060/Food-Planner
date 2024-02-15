@@ -20,6 +20,7 @@ import android.widget.EditText;
 
 import com.example.foodplanner.HomeScreen.View.ChickenCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
+import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
@@ -100,10 +101,12 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         categoriesRecyclerView =view.findViewById(R.id.categories_recyclerView);
         linearManagerSearch = new LinearLayoutManager(view.getContext());
         linearManagerSearch.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter = new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
+        adapter = new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),new HomeFragment());
         categoriesRecyclerView.setLayoutManager(linearManagerSearch);
         categoriesRecyclerView.setAdapter(adapter);
-        searchFragmentPresenterInter.getSearchMealsPres();
+        searchFragmentPresenterInter.getSearchMealsPres("");
+
+
 
 
         //Category
@@ -168,6 +171,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(searchTerm -> {
+//                    searchFragmentPresenterInter.getSearchMealsPres(searchTerm);
                     List<Meal> filteredNames = new ArrayList<>();
                     Log.i(TAG, "Observer sizeOfsearchMeals: "+searchMeals.size());
                     for (Meal searchMeal : searchMeals) {
@@ -175,6 +179,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                             filteredNames.add(searchMeal);
                         }
                     }
+//                    searchFragmentPresenterInter.getSearchMealsPres(searchTerm);
                     Log.i(TAG, "sizeOfMeals: "+filteredNames.size());
                     adapter.setMyList(filteredNames);
                     adapter.notifyDataSetChanged();

@@ -5,6 +5,10 @@ import android.util.Log;
 import com.example.foodplanner.Model.CategoryList;
 import com.example.foodplanner.Model.MealList;
 
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,10 +22,20 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
     private static final String JSON_URL_RETROFIT =
             "https://www.themealdb.com/api/json/v1/1/";
     CallBackInter interCallBack;
+    MealAPI mealAPI;
 
     private static MealsRemoteDataSource connectToProduct=null;
 
     public MealsRemoteDataSource() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(JSON_URL_RETROFIT)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .build();
+
+        //Log.i(TAG, "Retrofit: ");
+
+        mealAPI = retrofit.create(MealAPI.class);
     }
 
 
@@ -33,16 +47,14 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
     }
 
 
+
     @Override
     public void makeNetworkCall(CallBackInter interCallBack){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(JSON_URL_RETROFIT)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        //Log.i(TAG, "Retrofit: ");
 
-        MealAPI mealAPI = retrofit.create(MealAPI.class);
+
+
+
         //Log.i(TAG, "proAPI: ");
         mealAPI.getAllCategoriesAPI().enqueue(new Callback<CategoryList>() {
             @Override
@@ -60,21 +72,21 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
             }
         });
 
-        mealAPI.getSearchMealsAPI("").enqueue(new Callback<MealList>() {
-            @Override
-            public void onResponse(Call<MealList> call,
-                                   Response<MealList> response) {
-                Log.i(TAG, "Search Response: ");
-                if (response.isSuccessful()) {
-                    interCallBack.onSuccessSearch(response.body().meals);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MealList> call, Throwable t) {
-                Log.i(TAG, "Search Failure: ");
-            }
-        });
+//        mealAPI.getSearchMealsAPI("").enqueue(new Callback<MealList>() {
+//            @Override
+//            public void onResponse(Call<MealList> call,
+//                                   Response<MealList> response) {
+//                Log.i(TAG, "Search Response: ");
+//                if (response.isSuccessful()) {
+//                    interCallBack.onSuccessSearch(response.body().meals);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MealList> call, Throwable t) {
+//                Log.i(TAG, "Search Failure: ");
+//            }
+//        });
 
 
 
@@ -142,5 +154,11 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
                 Log.i(TAG, "Random Failure: ");
             }
         });
+    }
+
+    @Override
+    public Observable<MealList> getSearchMealsRemote(String query) {
+        Observable<MealList> observable= mealAPI.getSearchMealsAPI(query);
+        return observable.subscribeOn(Schedulers.io());
     }
 }

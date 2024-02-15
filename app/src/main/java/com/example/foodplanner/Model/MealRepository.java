@@ -12,6 +12,7 @@ import com.example.foodplanner.network.MealsRemoteDataSourceInter;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 public class MealRepository implements MealRepositoryInter{
 
@@ -69,9 +70,14 @@ public class MealRepository implements MealRepositoryInter{
     }
 
     @Override
-    public void getSearchMealsRepo(CallBackInter interCallBack) {
-        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
+    public Observable<MealList> getSearchMealsRepo(String query) {
+        return interProductsRemoteDataSource.getSearchMealsRemote(query);
     }
+
+//    @Override
+//    public void getSearchMealsRepo(CallBackInter interCallBack) {
+//        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
+//    }
 
 //    public Flowable<List<Product>> getStoredProducts(){
 //        return interProductsLocalDataSource.getAllProductsData();

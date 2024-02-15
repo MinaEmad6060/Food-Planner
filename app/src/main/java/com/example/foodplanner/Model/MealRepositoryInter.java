@@ -6,6 +6,7 @@ import com.example.foodplanner.network.CallBackInter;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 public interface MealRepositoryInter {
     void getAllMeals(CallBackInter interCallBack);
@@ -20,5 +21,7 @@ public interface MealRepositoryInter {
 
     void  getAllCategoriesRepo(CallBackInter interCallBack);
 
-    void getSearchMealsRepo(CallBackInter interCallBack);
+//    void getSearchMealsRepo(CallBackInter interCallBack);
+    Observable<MealList> getSearchMealsRepo(String query);
+
 }
