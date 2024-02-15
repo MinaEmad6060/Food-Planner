@@ -114,8 +114,6 @@ public class SearchFragment extends Fragment implements SearchViewInter{
             @Override
             public void onClick(View v) {
                 searchFragmentPresenterInter.getAllCategoriesPres();
-//                NavDirections action = SearchFragmentDirections.actionSearchFragmentToCategoryFragment();
-//                Navigation.findNavController(v).navigate(action);
             }
         });
 
