@@ -140,7 +140,6 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         ingredients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                searchFragmentPresenterInter.getAllCategoriesPres();
                 Intent transferData = new Intent(homeActivity,IngredientsActivity.class);
                 startActivity(transferData);
             }
