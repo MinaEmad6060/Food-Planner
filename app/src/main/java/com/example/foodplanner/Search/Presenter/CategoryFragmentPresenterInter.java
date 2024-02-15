@@ -7,6 +7,4 @@ import java.util.List;
 public interface CategoryFragmentPresenterInter {
 
     public void getAllCategoriesPres();
-
-    //public void onSuccessCategory(List<Category> categories);
 }

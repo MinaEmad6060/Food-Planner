@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface SearchFragmentPresenterInter {
 
-    //void getAllCategoriesPres();
-
     void getSearchMealsPres(String query);
 
 }
