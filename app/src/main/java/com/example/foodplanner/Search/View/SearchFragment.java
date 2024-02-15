@@ -1,15 +1,12 @@
 package com.example.foodplanner.Search.View;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,11 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
 import com.example.foodplanner.HomeScreen.View.ChickenCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
-import com.example.foodplanner.HomeScreen.View.SeaFoodCategoryAdapter;
-import com.example.foodplanner.Model.Category;
+import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
@@ -52,12 +47,17 @@ public class SearchFragment extends Fragment implements SearchViewInter{
     LinearLayoutManager linearManager;
     LinearLayoutManager linearManagerSearch;
 
-
+    HomeActivity homeActivity;
     View viewFrag;
 
     RecyclerView categoriesRecyclerView;
 
     Chip category;
+
+    Chip area;
+
+    Chip ingredients;
+
 
     ChickenCategoryAdapter adapter;
 
@@ -85,7 +85,12 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         searchMeals=new ArrayList<>();
         searchEditText =view.findViewById(R.id.searchEditText);
         category=view.findViewById(R.id.cat_chip);
+        area=view.findViewById(R.id.area_chip);
+        ingredients =view.findViewById(R.id.ingredients_chip);
+
         viewFrag=view;
+
+        homeActivity=(HomeActivity)getActivity();
 
         searchFragmentPresenterInter = new SearchFragmentPresenter(
                 this,
@@ -96,23 +101,41 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         categoriesRecyclerView =view.findViewById(R.id.categories_recyclerView);
         linearManagerSearch = new LinearLayoutManager(view.getContext());
         linearManagerSearch.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter = new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
+        adapter = new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),new HomeFragment());
         categoriesRecyclerView.setLayoutManager(linearManagerSearch);
         categoriesRecyclerView.setAdapter(adapter);
-        searchFragmentPresenterInter.getSearchMealsPres();
+        searchFragmentPresenterInter.getSearchMealsPres("");
 
 
-        //Category
-//        linearManager = new LinearLayoutManager(view.getContext());
-//        linearManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        categoriesAdapter =
-//                new CategoriesAdapter(viewFrag.getContext(), new ArrayList<>());
-//        categoriesRecyclerView.setLayoutManager(linearManager);
-//        categoriesRecyclerView.setAdapter(categoriesAdapter);
+
+
+
+
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchFragmentPresenterInter.getAllCategoriesPres();
+//                searchFragmentPresenterInter.getAllCategoriesPres();
+                Intent transferData = new Intent(homeActivity,CategoryActivity.class);
+                startActivity(transferData);
+            }
+        });
+
+
+        area.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                searchFragmentPresenterInter.getAllCategoriesPres();
+                Intent transferData = new Intent(homeActivity,AreaActivity.class);
+                startActivity(transferData);
+            }
+        });
+
+
+        ingredients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transferData = new Intent(homeActivity,IngredientsActivity.class);
+                startActivity(transferData);
             }
         });
 
@@ -141,18 +164,20 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(searchTerm -> {
-                    List<Meal> filteredNames = new ArrayList<>();
-                    Log.i(TAG, "Observer sizeOfsearchMeals: "+searchMeals.size());
-                    for (Meal searchMeal : searchMeals) {
-                        if (searchMeal.getName().toLowerCase().contains(searchTerm)) {
-                            filteredNames.add(searchMeal);
-                        }
-                    }
-                    Log.i(TAG, "sizeOfMeals: "+filteredNames.size());
-                    adapter.setMyList(filteredNames);
-                    adapter.notifyDataSetChanged();
-                },
-                err-> Log.i(TAG, "error: ")
+//                    searchFragmentPresenterInter.getSearchMealsPres(searchTerm);
+                            List<Meal> filteredNames = new ArrayList<>();
+                            Log.i(TAG, "Observer sizeOfsearchMeals: "+searchMeals.size());
+                            for (Meal searchMeal : searchMeals) {
+                                if (searchMeal.getName().toLowerCase().contains(searchTerm)) {
+                                    filteredNames.add(searchMeal);
+                                }
+                            }
+//                    searchFragmentPresenterInter.getSearchMealsPres(searchTerm);
+                            Log.i(TAG, "sizeOfMeals: "+filteredNames.size());
+                            adapter.setMyList(filteredNames);
+                            adapter.notifyDataSetChanged();
+                        },
+                        err-> Log.i(TAG, "error: ")
                 );
     }
 
