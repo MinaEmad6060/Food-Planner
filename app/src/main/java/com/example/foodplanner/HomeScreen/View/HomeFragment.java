@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment
         linearManager = new LinearLayoutManager(view.getContext());
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         chickenCategoryAdapter =
-                new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),this);
+                new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
         chickenRecyclerView.setLayoutManager(linearManager);
         chickenRecyclerView.setAdapter(chickenCategoryAdapter);
 

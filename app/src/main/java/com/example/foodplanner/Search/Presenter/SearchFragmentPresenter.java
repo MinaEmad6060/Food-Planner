@@ -28,8 +28,19 @@ public class SearchFragmentPresenter implements SearchFragmentPresenterInter, Ca
     }
 
     @Override
+    public void onSuccessSearch(List<Meal> meals) {
+        searchViewInter.showSearchMeals(meals);
+    }
+
+
+    @Override
     public void getAllCategoriesPres() {
         mealRepositoryInter.getAllCategoriesRepo(this);
+    }
+
+    @Override
+    public void getSearchMealsPres() {
+        mealRepositoryInter.getSearchMealsRepo(this);
     }
 
     @Override

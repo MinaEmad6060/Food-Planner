@@ -1,5 +1,6 @@
 package com.example.foodplanner.Model;
 
+import com.example.foodplanner.Search.Presenter.SearchFragmentPresenter;
 import com.example.foodplanner.network.CallBackInter;
 
 import java.util.List;
@@ -19,4 +20,5 @@ public interface MealRepositoryInter {
 
     void  getAllCategoriesRepo(CallBackInter interCallBack);
 
+    void getSearchMealsRepo(CallBackInter interCallBack);
 }

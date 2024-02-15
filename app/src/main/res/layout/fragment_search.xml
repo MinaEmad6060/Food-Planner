@@ -15,7 +15,7 @@
         android:background="#739E9A9A" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/searchEditText"
         android:layout_width="269dp"
         android:layout_height="42dp"
         android:background="#ffffff"
@@ -26,19 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/area_chip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="Area"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243" />
+        app:layout_constraintVertical_bias="0.107" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/cat_chip"
@@ -51,7 +39,7 @@
         app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243" />
+        app:layout_constraintVertical_bias="0.204" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/gradients_chip"
@@ -59,22 +47,35 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="274dp"
         android:layout_marginEnd="90dp"
-        android:text="Gredients"
         android:checked="false"
+        android:text="Gredients"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.177"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243" />
+        app:layout_constraintVertical_bias="0.204" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/area_chip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="Area"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.204" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories_recyclerView"
         android:layout_width="360dp"
-        android:layout_height="430dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="#7ADAC7C7"
         app:layout_constraintEnd_toEndOf="@+id/gradients_chip"
+        app:layout_constraintHorizontal_bias="0.425"
         app:layout_constraintStart_toStartOf="@+id/cat_chip"
-        app:layout_constraintTop_toBottomOf="@+id/area_chip"
-        app:layout_constraintVertical_bias="0.498" />
+        app:layout_constraintTop_toBottomOf="@+id/area_chip" />
 </androidx.constraintlayout.widget.ConstraintLayout>

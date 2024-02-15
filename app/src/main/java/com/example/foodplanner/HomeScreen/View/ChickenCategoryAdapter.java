@@ -35,7 +35,7 @@ public class ChickenCategoryAdapter extends
     //OnProductsClickListener onProductsClickListener;
 
     public ChickenCategoryAdapter(Context context,
-                                  List<Meal> mealList,HomeFragmentInter homeFragmentInter) {
+                                  List<Meal> mealList) {
         this.context = context;
         this.mealList = mealList;
         this.homeFragmentInter=homeFragmentInter;

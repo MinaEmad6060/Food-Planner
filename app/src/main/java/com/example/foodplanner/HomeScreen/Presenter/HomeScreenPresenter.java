@@ -76,6 +76,11 @@ public class HomeScreenPresenter implements
     }
 
     @Override
+    public void onSuccessSearch(List<Meal> meals) {
+
+    }
+
+    @Override
     public void onSuccessRandom(List<Meal> meals) {
         homeFragmentInter.showRandomMeal(meals);
     }
