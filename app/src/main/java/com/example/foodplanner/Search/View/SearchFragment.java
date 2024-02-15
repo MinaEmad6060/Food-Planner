@@ -109,7 +109,6 @@ public class SearchFragment extends Fragment implements SearchViewInter{
 //                new CategoriesAdapter(viewFrag.getContext(), new ArrayList<>());
 //        categoriesRecyclerView.setLayoutManager(linearManager);
 //        categoriesRecyclerView.setAdapter(categoriesAdapter);
-
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
