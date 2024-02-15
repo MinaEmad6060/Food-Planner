@@ -1,13 +1,9 @@
 package com.example.foodplanner.HomeScreen.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -33,13 +29,6 @@ public class HomeActivity extends AppCompatActivity {
             transFragment.add(R.id.home_Fragment, homeFragment, "DYNAMIC");
             transFragment.commit();
         }
-//        else{
-//            int fragId = savedInstanceState.getInt("CURRENT_FRAGMENT_ID");
-//            FragmentManager fragManager = getSupportFragmentManager();
-//            FragmentTransaction transFragment = fragManager.beginTransaction();
-//            transFragment.add(R.id.home_Fragment, homeFragment, "DYNAMIC");
-//            transFragment.commit();
-//        }
     }
 
 
@@ -75,21 +64,4 @@ public class HomeActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment currentFragment = fragmentManager.findFragmentById(R.id.home_Fragment);
-
-        // Save the current fragment's tag or ID
-        if (currentFragment != null) {
-            String fragmentTag = currentFragment.getTag();
-            if (fragmentTag != null) {
-                outState.putInt("CURRENT_FRAGMENT_ID", Integer.parseInt(fragmentTag));
-            } else {
-                int fragmentId = currentFragment.getId();
-                outState.putInt("CURRENT_FRAGMENT_ID", fragmentId);
-            }
-        }
-    }
 }

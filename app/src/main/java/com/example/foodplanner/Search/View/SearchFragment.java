@@ -181,12 +181,6 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                 );
     }
 
-//    @Override
-//    public void showCategories(List<Category> categories) {
-//        categoriesAdapter.setMyList(categories);
-//        categoriesAdapter.notifyDataSetChanged();
-//    }
-
     @Override
     public void showSearchMeals(List<Meal> meals) {
         searchMeals=meals;

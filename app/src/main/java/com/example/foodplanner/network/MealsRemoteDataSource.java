@@ -20,7 +20,6 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
 
     private static final String JSON_URL_RETROFIT =
             "https://www.themealdb.com/api/json/v1/1/";
-    CallBackInter interCallBack;
     MealAPI mealAPI;
 
     private static MealsRemoteDataSource connectToProduct=null;
@@ -44,48 +43,6 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
         }
         return connectToProduct;
     }
-
-
-
-    @Override
-    public void makeNetworkCall(CallBackInter interCallBack){
-
-        //Log.i(TAG, "proAPI: ");
-//        mealAPI.getAllCategoriesAPI().enqueue(new Callback<CategoryList>() {
-//            @Override
-//            public void onResponse(Call<CategoryList> call,
-//                                   Response<CategoryList> response) {
-//                Log.i(TAG, "Categories Response: ");
-//                if (response.isSuccessful()) {
-//                    interCallBack.onSuccessCategory(response.body().categories);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CategoryList> call, Throwable t) {
-//                Log.i(TAG, "Categories Failure: ");
-//            }
-//        });
-//
-//        mealAPI.getRandomMealAPI().enqueue(new Callback<MealList>() {
-//            @Override
-//            public void onResponse(Call<MealList> call,
-//                                   Response<MealList> response) {
-//                Log.i(TAG, "Random Response: ");
-//                if (response.isSuccessful()) {
-//                    interCallBack.onSuccessRandom(response.body().meals);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<MealList> call, Throwable t) {
-//                Log.i(TAG, "Random Failure: ");
-//            }
-//        });
-    }
-
-
-
 
 
     @Override
