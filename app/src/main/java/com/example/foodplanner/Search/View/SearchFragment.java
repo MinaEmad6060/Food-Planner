@@ -172,7 +172,6 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                                     filteredNames.add(searchMeal);
                                 }
                             }
-//                    searchFragmentPresenterInter.getSearchMealsPres(searchTerm);
                             Log.i(TAG, "sizeOfMeals: "+filteredNames.size());
                             adapter.setMyList(filteredNames);
                             adapter.notifyDataSetChanged();
