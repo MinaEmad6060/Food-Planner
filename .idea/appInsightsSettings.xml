@@ -8,23 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
-=======
-=======
->>>>>>> origin/development
                   <option name="appId" value="com.example.foodplanner" />
                   <option name="mobileSdkAppId" value="1:173711819771:android:b6b1a1ba2d402b2748815e" />
                   <option name="projectId" value="foodplanner-8796d" />
                   <option name="projectNumber" value="173711819771" />
-<<<<<<< HEAD
->>>>>>> faa23b7 (implement Room database for local data storage)
-=======
->>>>>>> origin/development
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

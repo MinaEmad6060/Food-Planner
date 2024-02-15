@@ -1,5 +1,6 @@
 package com.example.foodplanner.HomeScreen.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodplanner.DetailsOfMealActivity;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenterInter;
 import com.example.foodplanner.Model.Meal;
@@ -31,6 +33,8 @@ import java.util.List;
 public class HomeFragment extends Fragment
             implements HomeFragmentInter{
 
+    public static final String EXTRA_MEAL = "mealTag";
+    public static final String EXTRA_POSITION = "position";
     RecyclerView chickenRecyclerView;
     RecyclerView beefRecyclerView;
     RecyclerView seaFoodRecyclerView;
@@ -80,8 +84,11 @@ public class HomeFragment extends Fragment
                         , FavLocalDataSource.getInstance(viewFrag.getContext())));
 
         //Random Meal
-        homeScreenPresenterInter.getRandomMeal();
-        homeScreenPresenterInter.getCategoryMeals();
+        homeScreenPresenterInter.getRandomMealPres();
+        homeScreenPresenterInter.getMealsOfCategoryPres("Chicken");
+        homeScreenPresenterInter.getMealsOfCategoryPres("Beef");
+        homeScreenPresenterInter.getMealsOfCategoryPres("Seafood");
+
 
 
         //Chicken cat.
@@ -89,9 +96,17 @@ public class HomeFragment extends Fragment
         linearManager = new LinearLayoutManager(view.getContext());
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         chickenCategoryAdapter =
-                new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
+                new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),this);
         chickenRecyclerView.setLayoutManager(linearManager);
         chickenRecyclerView.setAdapter(chickenCategoryAdapter);
+        chickenCategoryAdapter.setClickMeal((view1, position) -> {
+            TextView mealname = view.findViewById(R.id.wrapped_meal_name);
+                        Intent intent = new Intent(viewFrag.getContext(),
+                                DetailsOfMealActivity.class);
+                        intent.putExtra(EXTRA_MEAL,mealname.getText().toString());
+                        startActivity(intent);
+                    });
+
 
 
         //Beef cat.

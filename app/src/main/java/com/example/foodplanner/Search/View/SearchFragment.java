@@ -114,12 +114,8 @@ public class SearchFragment extends Fragment implements SearchViewInter{
             @Override
             public void onClick(View v) {
                 searchFragmentPresenterInter.getAllCategoriesPres();
-//                NavDirections action = SearchFragmentDirections.actionSearchFragmentToCategoryFragment();
-//                Navigation.findNavController(v).navigate(action);
             }
         });
-
-//        setupRecyclerView();
 
         // Creating an observable for text changes in the EditText
         Observable.create((ObservableOnSubscribe<String>) emitter ->

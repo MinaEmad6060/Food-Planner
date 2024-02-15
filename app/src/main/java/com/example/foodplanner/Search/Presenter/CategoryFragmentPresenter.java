@@ -1,8 +1,13 @@
 package com.example.foodplanner.Search.Presenter;
 
+import android.annotation.SuppressLint;
+
 import com.example.foodplanner.Model.Category;
+import com.example.foodplanner.Model.CategoryList;
 import com.example.foodplanner.Model.Meal;
+import com.example.foodplanner.Model.MealList;
 import com.example.foodplanner.Model.MealRepositoryInter;
+import com.example.foodplanner.Search.View.CategoryActivity;
 import com.example.foodplanner.Search.View.CategoryViewInter;
 import com.example.foodplanner.Search.View.SearchViewInter;
 import com.example.foodplanner.network.CallBackInter;
@@ -10,7 +15,10 @@ import com.example.foodplanner.network.CallBackInter;
 
 import java.util.List;
 
-public class CategoryFragmentPresenter implements SearchFragmentPresenterInter, CallBackInter {
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+
+public class CategoryFragmentPresenter implements CategoryFragmentPresenterInter, CallBackInter {
 
 
     SearchViewInter searchViewInter;
@@ -18,11 +26,12 @@ public class CategoryFragmentPresenter implements SearchFragmentPresenterInter, 
     MealRepositoryInter mealRepositoryInter;
     CategoryViewInter categoryViewInter;
 
-    public CategoryFragmentPresenter(SearchViewInter interAllProductsView,
+    public CategoryFragmentPresenter(CategoryViewInter categoryViewInter,
                                    MealRepositoryInter interProductsRepository) {
-        this.searchViewInter = interAllProductsView;
+        this.categoryViewInter = categoryViewInter;
         this.mealRepositoryInter = interProductsRepository;
     }
+
 
     @Override
     public void onSuccessChicken(List<Meal> meals) {
@@ -44,7 +53,6 @@ public class CategoryFragmentPresenter implements SearchFragmentPresenterInter, 
         categoryViewInter.showCategories(categories);
     }
 
-
     @Override
     public void onSuccessSearch(List<Meal> meals) {
 
@@ -60,13 +68,17 @@ public class CategoryFragmentPresenter implements SearchFragmentPresenterInter, 
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void getAllCategoriesPres() {
-
-    }
-
-    @Override
-    public void getSearchMealsPres() {
-
+        Observable<CategoryList> observable =
+                mealRepositoryInter.getAllCategoriesRepo();
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        categoryList -> {
+                            categoryViewInter.showCategories(categoryList.categories);
+                        },
+                        err -> {}
+                );
     }
 }

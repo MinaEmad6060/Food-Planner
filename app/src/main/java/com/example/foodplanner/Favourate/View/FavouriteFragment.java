@@ -42,7 +42,6 @@ public class FavouriteFragment extends Fragment implements InterFavProductsView{
 
     InterFavMealsPresenter interFavMealsPresenter;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +60,7 @@ public class FavouriteFragment extends Fragment implements InterFavProductsView{
         recyclerView = view.findViewById(R.id.Fav_Recycler_List);
         viewFrag=view;
         linearManager = new LinearLayoutManager(viewFrag.getContext());
-        linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearManager.setOrientation(LinearLayoutManager.VERTICAL);
         mealRepositoryInter = MealRepository.getInstance(
                 MealsRemoteDataSource.getInstance(),
                 FavLocalDataSource.getInstance(viewFrag.getContext()));

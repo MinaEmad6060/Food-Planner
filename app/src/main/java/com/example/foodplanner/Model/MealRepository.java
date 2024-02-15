@@ -1,17 +1,14 @@
 package com.example.foodplanner.Model;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.db.InterFavLocalDataSource;
 import com.example.foodplanner.network.CallBackInter;
-import com.example.foodplanner.network.MealAPI;
-import com.example.foodplanner.network.MealsRemoteDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSourceInter;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 public class MealRepository implements MealRepositoryInter{
 
@@ -38,15 +35,17 @@ public class MealRepository implements MealRepositoryInter{
     }
 
 
-    @Override
-    public void getAllMeals(CallBackInter interCallBack) {
-        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
-    }
+//    @Override
+//    public void getAllMeals(CallBackInter interCallBack) {
+//        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
+//    }
 
-    @Override
-    public void getRandomMeal(CallBackInter interCallBack) {
-        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
-    }
+
+
+//    @Override
+//    public void getRandomMeal(CallBackInter interCallBack) {
+//        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
+//    }
 
     @Override
     public Flowable<List<Meal>> getStoredProducts() {
@@ -63,15 +62,35 @@ public class MealRepository implements MealRepositoryInter{
         interFavLocalDataSource.deleteMeal(meal);
     }
 
+//    @Override
+//    public void getAllCategoriesRepo(CallBackInter interCallBack) {
+//        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
+//    }
+
     @Override
-    public void getAllCategoriesRepo(CallBackInter interCallBack) {
-        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
+    public Observable<MealList> getSearchMealsRepo(String query) {
+        return interProductsRemoteDataSource.getSearchMealsRemote(query);
     }
 
     @Override
-    public void getSearchMealsRepo(CallBackInter interCallBack) {
-        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
+    public Observable<CategoryList> getAllCategoriesRepo() {
+        return interProductsRemoteDataSource.getAllCategoriesRemote();
     }
+
+    @Override
+    public Observable<MealList> getMealsOfCategoryRepo(String category) {
+        return interProductsRemoteDataSource.getMealsOfCategoryRemote(category);
+    }
+
+    @Override
+    public Observable<MealList> getRandomMealRepo() {
+        return interProductsRemoteDataSource.getRandomMealRemote();
+    }
+
+//    @Override
+//    public void getSearchMealsRepo(CallBackInter interCallBack) {
+//        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
+//    }
 
 //    public Flowable<List<Product>> getStoredProducts(){
 //        return interProductsLocalDataSource.getAllProductsData();
