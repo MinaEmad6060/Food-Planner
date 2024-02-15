@@ -8,4 +8,5 @@ import java.util.List;
 public interface SearchViewInter {
     void showCategories(List<Category> categories);
 
+    void showSearchMeals(List<Meal> searchMeals);
 }

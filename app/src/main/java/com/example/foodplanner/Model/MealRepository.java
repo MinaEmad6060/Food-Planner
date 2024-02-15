@@ -68,6 +68,11 @@ public class MealRepository implements MealRepositoryInter{
         interProductsRemoteDataSource.makeNetworkCall(interCallBack);
     }
 
+    @Override
+    public void getSearchMealsRepo(CallBackInter interCallBack) {
+        interProductsRemoteDataSource.makeNetworkCall(interCallBack);
+    }
+
 //    public Flowable<List<Product>> getStoredProducts(){
 //        return interProductsLocalDataSource.getAllProductsData();
 //    }

@@ -1,5 +1,6 @@
 package com.example.foodplanner.Search.View;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,14 +9,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
+import com.example.foodplanner.HomeScreen.View.ChickenCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.SeaFoodCategoryAdapter;
 import com.example.foodplanner.Model.Category;
+import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.SearchFragmentPresenter;
@@ -26,6 +32,12 @@ import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class SearchFragment extends Fragment implements SearchViewInter{
 
@@ -33,6 +45,8 @@ public class SearchFragment extends Fragment implements SearchViewInter{
     SearchFragmentPresenterInter searchFragmentPresenterInter;
 
     LinearLayoutManager linearManager;
+    LinearLayoutManager linearManagerSearch;
+
 
     View viewFrag;
 
@@ -40,6 +54,12 @@ public class SearchFragment extends Fragment implements SearchViewInter{
 
     CategoriesAdapter categoriesAdapter;
     Chip category;
+
+
+    ChickenCategoryAdapter adapter;
+
+    EditText searchEditText;
+    List<Meal> searchMeals=new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +75,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
     }
 
 
+    @SuppressLint("CheckResult")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -66,29 +87,100 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                 MealRepository.getInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(viewFrag.getContext())));
-
-
-
+        //Name
+        searchFragmentPresenterInter.getSearchMealsPres();
         categoriesRecyclerView =view.findViewById(R.id.categories_recyclerView);
-        linearManager = new LinearLayoutManager(view.getContext());
-        linearManager.setOrientation(LinearLayoutManager.VERTICAL);
-        categoriesAdapter =
-                new CategoriesAdapter(viewFrag.getContext(), new ArrayList<>());
-        categoriesRecyclerView.setLayoutManager(linearManager);
-        categoriesRecyclerView.setAdapter(categoriesAdapter);
+        linearManagerSearch = new LinearLayoutManager(view.getContext());
+        linearManagerSearch.setOrientation(LinearLayoutManager.VERTICAL);
+        adapter = new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
+        categoriesRecyclerView.setLayoutManager(linearManagerSearch);
+        categoriesRecyclerView.setAdapter(adapter);
+
+        //Category
+//
+//        linearManager = new LinearLayoutManager(view.getContext());
+//        linearManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        categoriesAdapter =
+//                new CategoriesAdapter(viewFrag.getContext(), new ArrayList<>());
+//        categoriesRecyclerView.setLayoutManager(linearManager);
+//        categoriesRecyclerView.setAdapter(categoriesAdapter);
 
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "SearchFragment: selected");
+
                 searchFragmentPresenterInter.getAllCategoriesPres();
+
+//                if(category.isChecked()){
+//                    Log.i(TAG, "SearchFragment: selected");
+//                }else{
+//
+//                }
             }
         });
+
+        searchEditText =view.findViewById(R.id.searchEditText);
+
+//        setupRecyclerView();
+
+        // Creating an observable for text changes in the EditText
+        Observable.create((ObservableOnSubscribe<String>) emitter ->
+                        searchEditText.addTextChangedListener(new TextWatcher() {
+                            @Override
+                            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
+                                Log.i(TAG, "beforeTextChanged: ");
+                            }
+
+                            @Override
+                            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+                                emitter.onNext(charSequence.toString());
+                                Log.i(TAG, "onTextChanged: ");
+                            }
+
+                            @Override
+                            public void afterTextChanged(Editable editable) {
+                                Log.i(TAG, "afterTextChanged: ");
+                            }
+                        }))
+                .debounce(300, TimeUnit.MILLISECONDS) // Add a debounce to avoid rapid searches
+                .map(String::toLowerCase)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(searchTerm -> {
+                    List<Meal> filteredNames = new ArrayList<>();
+                    Log.i(TAG, "Observer sizeOfsearchMeals: "+searchMeals.size());
+                    for (Meal searchMeal : searchMeals) {
+                        if (searchMeal.getName().toLowerCase().contains(searchTerm)) {
+                            filteredNames.add(searchMeal);
+                        }
+                    }
+                    Log.i(TAG, "sizeOfMeals: "+filteredNames.size());
+//                    List<Category> filteredNamesCat = new ArrayList<>();
+//                    for (int i=0; i<filteredNames.size(); i++) {
+//                        filteredNamesCat.get(i).setName(
+//                                filteredNames.get(i).getName()
+//                        );
+//                        filteredNamesCat.get(i).setThumbnail(
+//                                filteredNames.get(i).getThumbnail()
+//                        );
+//                    }
+//                    Log.i(TAG, "sizeOfCategories: "+filteredNamesCat.size());
+                    adapter.setMyList(filteredNames);
+                    adapter.notifyDataSetChanged();
+                },
+                err-> Log.i(TAG, "error: ")
+                );
     }
 
     @Override
     public void showCategories(List<Category> categories) {
-        categoriesAdapter.setMyList(categories);
-        categoriesAdapter.notifyDataSetChanged();
+//        categoriesAdapter.setMyList(categories);
+//        categoriesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showSearchMeals(List<Meal> meals) {
+        searchMeals=meals;
+        Log.i(TAG, "showSearchMeals sizeOfsearchMeals: "+searchMeals.size());
     }
 }
