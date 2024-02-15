@@ -10,16 +10,22 @@ import android.widget.ImageView;
 
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.R;
+import com.example.foodplanner.Search.Presenter.SearchFragmentPresenterInter;
 
 public class CategoryActivity extends AppCompatActivity {
 
     ImageView btnBack;
+
+    SearchFragmentPresenterInter searchFragmentPresenterInter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
         btnBack=findViewById(R.id.btn_category_back);
+
+        searchFragmentPresenterInter.getAllCategoriesPres();
+
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

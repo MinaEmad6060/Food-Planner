@@ -117,7 +117,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchFragmentPresenterInter.getAllCategoriesPres();
+//                searchFragmentPresenterInter.getAllCategoriesPres();
                 Intent transferData = new Intent(homeActivity,CategoryActivity.class);
                 startActivity(transferData);
             }
@@ -127,7 +127,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         area.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchFragmentPresenterInter.getAllCategoriesPres();
+//                searchFragmentPresenterInter.getAllCategoriesPres();
                 Intent transferData = new Intent(homeActivity,AreaActivity.class);
                 startActivity(transferData);
             }
@@ -137,7 +137,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         ingredients.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchFragmentPresenterInter.getAllCategoriesPres();
+//                searchFragmentPresenterInter.getAllCategoriesPres();
                 Intent transferData = new Intent(homeActivity,IngredientsActivity.class);
                 startActivity(transferData);
             }
