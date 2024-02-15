@@ -42,13 +42,13 @@
         app:layout_constraintVertical_bias="0.204" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/gradients_chip"
+        android:id="@+id/ingredients_chip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="274dp"
         android:layout_marginEnd="90dp"
         android:checked="false"
-        android:text="Gredients"
+        android:text="Ingredients"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.177"
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:background="#7ADAC7C7"
-        app:layout_constraintEnd_toEndOf="@+id/gradients_chip"
+        app:layout_constraintEnd_toEndOf="@+id/ingredients_chip"
         app:layout_constraintHorizontal_bias="0.425"
         app:layout_constraintStart_toStartOf="@+id/cat_chip"
         app:layout_constraintTop_toBottomOf="@+id/area_chip" />
