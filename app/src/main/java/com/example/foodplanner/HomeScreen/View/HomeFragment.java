@@ -21,11 +21,9 @@ import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenterInter;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
-import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
-import com.example.foodplanner.network.MealsRemoteDataSourceInter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,25 +37,12 @@ public class HomeFragment extends Fragment
     RecyclerView beefRecyclerView;
     RecyclerView seaFoodRecyclerView;
 
-
-    LinearLayoutManager linearManager;
-
-
     TextView randomMealName;
-
 
     View viewFrag;
     ImageView randomMealImg;
 
-    //HomeActivity homeActivity=new HomeActivity();
-    ChickenCategoryAdapter chickenCategoryAdapter;
-    BeefCategoryAdapter beefCategoryAdapter;
-
-    SeaFoodCategoryAdapter seaFoodCategoryAdapter;
-
     HomeScreenPresenterInter homeScreenPresenterInter;
-    MealsRemoteDataSourceInter mealsRemoteDataSourceInter;
-    MealRepositoryInter mealRepositoryInter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,74 +62,36 @@ public class HomeFragment extends Fragment
         randomMealName=view.findViewById(R.id.random_name);
         randomMealImg=view.findViewById(R.id.random_img);
         viewFrag=view;
+
+        chickenRecyclerView=view.findViewById(R.id.Chicken_View);
+        beefRecyclerView=view.findViewById(R.id.Beef_view);
+        seaFoodRecyclerView=view.findViewById(R.id.SeaFood_view);
+
         homeScreenPresenterInter = new HomeScreenPresenter(
                 this,
                 MealRepository.getInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(viewFrag.getContext())));
 
-        //Random Meal
         homeScreenPresenterInter.getRandomMealPres();
         homeScreenPresenterInter.getMealsOfCategoryPres("Chicken");
         homeScreenPresenterInter.getMealsOfCategoryPres("Beef");
         homeScreenPresenterInter.getMealsOfCategoryPres("Seafood");
-
-
-
-        //Chicken cat.
-        chickenRecyclerView =view.findViewById(R.id.Chicken_View);
-        linearManager = new LinearLayoutManager(view.getContext());
-        linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        chickenCategoryAdapter =
-                new ChickenCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),this);
-        chickenRecyclerView.setLayoutManager(linearManager);
-        chickenRecyclerView.setAdapter(chickenCategoryAdapter);
-        chickenCategoryAdapter.setClickMeal((view1, position) -> {
-            TextView mealname = view.findViewById(R.id.wrapped_meal_name);
-                        Intent intent = new Intent(viewFrag.getContext(),
-                                DetailsOfMealActivity.class);
-                        intent.putExtra(EXTRA_MEAL,mealname.getText().toString());
-                        startActivity(intent);
-                    });
-
-
-
-        //Beef cat.
-        beefRecyclerView =view.findViewById(R.id.Beef_view);
-        linearManager = new LinearLayoutManager(view.getContext());
-        linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        beefCategoryAdapter =
-                new BeefCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
-        beefRecyclerView.setLayoutManager(linearManager);
-        beefRecyclerView.setAdapter(beefCategoryAdapter);
-
-
-        //Sea Food cat.
-        seaFoodRecyclerView =view.findViewById(R.id.SeaFood_view);
-        linearManager = new LinearLayoutManager(view.getContext());
-        linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        seaFoodCategoryAdapter =
-                new SeaFoodCategoryAdapter(viewFrag.getContext(), new ArrayList<>());
-        seaFoodRecyclerView.setLayoutManager(linearManager);
-        seaFoodRecyclerView.setAdapter(seaFoodCategoryAdapter);
     }
 
     @Override
     public void showChickenCategory(List<Meal> meals) {
-        chickenCategoryAdapter.setMyList(meals);
-        chickenCategoryAdapter.notifyDataSetChanged();
+        setRecyclerViewAdpter(chickenRecyclerView,meals);
     }
 
     @Override
     public void showBeefCategory(List<Meal> meals) {
-        beefCategoryAdapter.setMyList(meals);
-        beefCategoryAdapter.notifyDataSetChanged();
+        setRecyclerViewAdpter(beefRecyclerView,meals);
     }
 
     @Override
     public void showSeaFoodCategory(List<Meal> meals) {
-        seaFoodCategoryAdapter.setMyList(meals);
-        seaFoodCategoryAdapter.notifyDataSetChanged();
+        setRecyclerViewAdpter(seaFoodRecyclerView,meals);
     }
 
 
@@ -165,8 +112,26 @@ public class HomeFragment extends Fragment
     }
 
     @Override
-    public void onProductClick(Meal meal) {
+    public void onMealClick(Meal meal) {
         homeScreenPresenterInter.addFavMeal(meal);
     }
 
+
+    public void setRecyclerViewAdpter(RecyclerView recyclerView, List<Meal> meals){
+        LinearLayoutManager linearManager = new LinearLayoutManager(viewFrag.getContext());
+        linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        HomeCategoryAdapter homeCategoryAdapter =
+                new HomeCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),this);
+        recyclerView.setLayoutManager(linearManager);
+        recyclerView.setAdapter(homeCategoryAdapter);
+        homeCategoryAdapter.setClickMeal((view1, position) -> {
+            TextView mealname = viewFrag.findViewById(R.id.wrapped_meal_name);
+            Intent intent = new Intent(viewFrag.getContext(),
+                    DetailsOfMealActivity.class);
+            intent.putExtra(EXTRA_MEAL,mealname.getText().toString());
+            startActivity(intent);
+        });
+        homeCategoryAdapter.setMyList(meals);
+        homeCategoryAdapter.notifyDataSetChanged();
+    }
 }
