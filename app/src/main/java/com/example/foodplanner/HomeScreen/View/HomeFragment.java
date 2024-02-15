@@ -1,7 +1,5 @@
 package com.example.foodplanner.HomeScreen.View;
 
-import static android.nfc.cardemulation.CardEmulation.EXTRA_CATEGORY;
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -29,7 +27,6 @@ import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSourceInter;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,8 +84,11 @@ public class HomeFragment extends Fragment
                         , FavLocalDataSource.getInstance(viewFrag.getContext())));
 
         //Random Meal
-        homeScreenPresenterInter.getRandomMeal();
-        homeScreenPresenterInter.getCategoryMeals();
+        homeScreenPresenterInter.getRandomMealPres();
+        homeScreenPresenterInter.getMealsOfCategoryPres("Chicken");
+        homeScreenPresenterInter.getMealsOfCategoryPres("Beef");
+        homeScreenPresenterInter.getMealsOfCategoryPres("Seafood");
+
 
 
         //Chicken cat.

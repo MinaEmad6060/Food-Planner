@@ -10,12 +10,12 @@ import retrofit2.http.Query;
 
 public interface MealAPI {
     @GET("filter.php")
-    Call<MealList> getChickenCategoryMealsAPI(@Query("c") String category);
+    Observable<MealList> getMealsOfCategoryMealsAPI(@Query("c") String category);
 
     @GET("random.php")
-    Call<MealList> getRandomMealAPI();
+    Observable<MealList> getRandomMealAPI();
     @GET("categories.php")
-    Call<CategoryList> getAllCategoriesAPI();
+    Observable<CategoryList> getAllCategoriesAPI();
 
     @GET("search.php")
     Observable<MealList> getSearchMealsAPI(@Query("s") String category);

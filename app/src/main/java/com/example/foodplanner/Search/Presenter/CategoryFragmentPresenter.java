@@ -1,7 +1,11 @@
 package com.example.foodplanner.Search.Presenter;
 
+import android.annotation.SuppressLint;
+
 import com.example.foodplanner.Model.Category;
+import com.example.foodplanner.Model.CategoryList;
 import com.example.foodplanner.Model.Meal;
+import com.example.foodplanner.Model.MealList;
 import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.Search.View.CategoryActivity;
 import com.example.foodplanner.Search.View.CategoryViewInter;
@@ -10,6 +14,9 @@ import com.example.foodplanner.network.CallBackInter;
 
 
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
 
 public class CategoryFragmentPresenter implements CategoryFragmentPresenterInter, CallBackInter {
 
@@ -61,8 +68,17 @@ public class CategoryFragmentPresenter implements CategoryFragmentPresenterInter
 
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void getAllCategoriesPres() {
-        mealRepositoryInter.getAllCategoriesRepo(this);
+        Observable<CategoryList> observable =
+                mealRepositoryInter.getAllCategoriesRepo();
+        observable.observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        categoryList -> {
+                            categoryViewInter.showCategories(categoryList.categories);
+                        },
+                        err -> {}
+                );
     }
 }

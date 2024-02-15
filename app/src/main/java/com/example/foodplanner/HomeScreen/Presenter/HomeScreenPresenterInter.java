@@ -3,10 +3,11 @@ package com.example.foodplanner.HomeScreen.Presenter;
 import com.example.foodplanner.Model.Meal;
 
 public interface HomeScreenPresenterInter {
-    public void getCategoryMeals();
+    void getMealsOfCategoryPres(String query);
+    void getRandomMealPres();
 
-    public void getRandomMeal();
+//
+//    public void getRandomMeal();
 
     public void addFavMeal(Meal meal);
-    //public void addFavProduct(Meal meal);
 }

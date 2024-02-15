@@ -1,6 +1,5 @@
 package com.example.foodplanner.Model;
 
-import com.example.foodplanner.Search.Presenter.SearchFragmentPresenter;
 import com.example.foodplanner.network.CallBackInter;
 
 import java.util.List;
@@ -9,9 +8,14 @@ import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 
 public interface MealRepositoryInter {
-    void getAllMeals(CallBackInter interCallBack);
+    Observable<MealList> getRandomMealRepo();
 
-    void getRandomMeal(CallBackInter interCallBack);
+    Observable<MealList> getMealsOfCategoryRepo(String category);
+    Observable<MealList> getSearchMealsRepo(String query);
+    Observable<CategoryList>  getAllCategoriesRepo();
+
+
+
 
     Flowable<List<Meal>> getStoredProducts();
 
@@ -19,9 +23,6 @@ public interface MealRepositoryInter {
 
     public void deleteProduct(Meal meal);
 
-    void  getAllCategoriesRepo(CallBackInter interCallBack);
 
-//    void getSearchMealsRepo(CallBackInter interCallBack);
-    Observable<MealList> getSearchMealsRepo(String query);
 
 }
