@@ -119,8 +119,6 @@ public class SearchFragment extends Fragment implements SearchViewInter{
             }
         });
 
-//        setupRecyclerView();
-
         // Creating an observable for text changes in the EditText
         Observable.create((ObservableOnSubscribe<String>) emitter ->
                         searchEditText.addTextChangedListener(new TextWatcher() {
