@@ -59,7 +59,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
     ChickenCategoryAdapter adapter;
 
     EditText searchEditText;
-    List<Meal> searchMeals=new ArrayList<>();
+    List<Meal> searchMeals;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,6 +79,8 @@ public class SearchFragment extends Fragment implements SearchViewInter{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        searchMeals=new ArrayList<>();
+        searchEditText =view.findViewById(R.id.searchEditText);
         category=view.findViewById(R.id.cat_chip);
         viewFrag=view;
 
@@ -119,7 +121,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
             }
         });
 
-        searchEditText =view.findViewById(R.id.searchEditText);
+
 
 //        setupRecyclerView();
 
@@ -129,6 +131,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                             @Override
                             public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
                                 Log.i(TAG, "beforeTextChanged: ");
+                                emitter.onNext(charSequence.toString());
                             }
 
                             @Override
@@ -155,16 +158,6 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                         }
                     }
                     Log.i(TAG, "sizeOfMeals: "+filteredNames.size());
-//                    List<Category> filteredNamesCat = new ArrayList<>();
-//                    for (int i=0; i<filteredNames.size(); i++) {
-//                        filteredNamesCat.get(i).setName(
-//                                filteredNames.get(i).getName()
-//                        );
-//                        filteredNamesCat.get(i).setThumbnail(
-//                                filteredNames.get(i).getThumbnail()
-//                        );
-//                    }
-//                    Log.i(TAG, "sizeOfCategories: "+filteredNamesCat.size());
                     adapter.setMyList(filteredNames);
                     adapter.notifyDataSetChanged();
                 },
@@ -181,6 +174,8 @@ public class SearchFragment extends Fragment implements SearchViewInter{
     @Override
     public void showSearchMeals(List<Meal> meals) {
         searchMeals=meals;
+//        adapter.setMyList(searchMeals);
+//        adapter.notifyDataSetChanged();
         Log.i(TAG, "showSearchMeals sizeOfsearchMeals: "+searchMeals.size());
     }
 }
