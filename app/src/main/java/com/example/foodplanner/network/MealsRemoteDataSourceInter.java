@@ -1,6 +1,8 @@
 package com.example.foodplanner.network;
 
+import com.example.foodplanner.Model.AreasList;
 import com.example.foodplanner.Model.CategoryList;
+import com.example.foodplanner.Model.IngredientsList;
 import com.example.foodplanner.Model.MealList;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -15,5 +17,7 @@ public interface MealsRemoteDataSourceInter {
     //Search Screen
     Observable<MealList> getSearchMealsRemote(String query);
     Observable<CategoryList> getAllCategoriesRemote();
+    Observable<AreasList> getAllAreasRemote();
+    Observable<IngredientsList> getAllIngredientRemote();
 
 }

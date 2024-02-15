@@ -13,7 +13,9 @@ public interface MealRepositoryInter {
     Observable<MealList> getSearchMealsRepo(String query);
     Observable<CategoryList>  getAllCategoriesRepo();
 
+    Observable<AreasList> getAllAreasRepo();
 
+    Observable<IngredientsList> getAllIngredientRepo();
 
 
     Flowable<List<Meal>> getStoredProducts();

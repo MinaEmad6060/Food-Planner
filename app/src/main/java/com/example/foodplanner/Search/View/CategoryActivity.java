@@ -8,16 +8,14 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
-import com.example.foodplanner.Search.Presenter.CategoryFragmentPresenter;
-import com.example.foodplanner.Search.Presenter.SearchFragmentPresenter;
-import com.example.foodplanner.Search.Presenter.SearchFragmentPresenterInter;
+import com.example.foodplanner.Search.Presenter.CategoryActivityPresenter;
+import com.example.foodplanner.Search.Presenter.CategoryActivityPresenterInter;
 import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
@@ -27,10 +25,10 @@ import java.util.List;
 public class CategoryActivity extends AppCompatActivity implements CategoryViewInter{
     LinearLayoutManager linearManager;
 
-    CategoryFragmentPresenter categoryFragmentPresenter;
+    CategoryActivityPresenterInter categoryActivityPresenterInter;
     RecyclerView categoriesRecyclerView;
 
-    CategoriesAdapter categoriesAdapter;
+    CategoryAdapter categoryAdapter;
     ImageView btnBack;
 
 
@@ -41,20 +39,20 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
         setContentView(R.layout.activity_category);
         btnBack=findViewById(R.id.btn_category_back);
         categoriesRecyclerView=findViewById(R.id.Cat_Recycler_List);
-        categoryFragmentPresenter = new CategoryFragmentPresenter(
+        categoryActivityPresenterInter = new CategoryActivityPresenter(
                 this,
                 MealRepository.getInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(this)));
 
-        categoryFragmentPresenter.getAllCategoriesPres();
+        categoryActivityPresenterInter.getAllCategoriesPres();
 
         linearManager = new LinearLayoutManager(this);
         linearManager.setOrientation(LinearLayoutManager.VERTICAL);
-        categoriesAdapter =
-                new CategoriesAdapter(this, new ArrayList<>());
+        categoryAdapter =
+                new CategoryAdapter(this, new ArrayList<>());
         categoriesRecyclerView.setLayoutManager(linearManager);
-        categoriesRecyclerView.setAdapter(categoriesAdapter);
+        categoriesRecyclerView.setAdapter(categoryAdapter);
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +67,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
     }
 
     public void showCategories(List<Category> categories) {
-        categoriesAdapter.setMyList(categories);
-        categoriesAdapter.notifyDataSetChanged();
+        categoryAdapter.setMyList(categories);
+        categoryAdapter.notifyDataSetChanged();
     }
 }
