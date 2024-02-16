@@ -15,6 +15,9 @@
         android:theme="@style/Theme.FoodPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".Plans.View.VideoMealActivity"
+            android:exported="false" />
+        <activity
             android:name=".Search.View.Ingredients.MealsOfIngredientActivity"
             android:exported="false" />
         <activity
@@ -27,7 +30,7 @@
             android:name=".Search.View.Area.MealsOfAreaActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailsOfMealActivity"
+            android:name=".Plans.View.DetailsOfMealActivity"
             android:exported="false" />
         <activity
             android:name=".Search.View.IngredientsActivity"
