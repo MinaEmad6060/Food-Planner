@@ -13,16 +13,17 @@ import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.Model.Ingredient;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
-import com.example.foodplanner.Search.Presenter.AreaActivityPresenter;
-import com.example.foodplanner.Search.Presenter.AreaActivityPresenterInter;
 import com.example.foodplanner.Search.Presenter.IngredientsActivityPresenter;
+import com.example.foodplanner.Search.View.Ingredients.MealsOfIngredientActivity;
 import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientsActivity extends AppCompatActivity implements IngredientActivityInter{
+public class IngredientsActivity extends AppCompatActivity
+        implements IngredientActivityInter{
+    public static final String CATEGORY_Ingredients = "CategoryActivity";
     LinearLayoutManager linearManager;
 
     IngredientsActivityPresenter ingredientsActivityPresenter;
@@ -53,6 +54,13 @@ public class IngredientsActivity extends AppCompatActivity implements Ingredient
                 new IngredientsAdapter(this, new ArrayList<>());
         ingredientsRecyclerView.setLayoutManager(linearManager);
         ingredientsRecyclerView.setAdapter(ingredientsAdapter);
+        ingredientsAdapter.setClickMealIngredints((view, position) -> {
+            String mealName = ingredientsAdapter.getItemIngredient(position).getIngredientName();
+            Intent intent = new Intent(getApplicationContext(),
+                    MealsOfIngredientActivity.class);
+            intent.putExtra(CATEGORY_Ingredients,mealName);
+            startActivity(intent);
+        });
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {

@@ -17,8 +17,8 @@ public class DetailsOfMealActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_of_meal);
 
+        //click on meal
         Intent listenMessage = getIntent();
-
         String message = listenMessage.getStringExtra(EXTRA_MEAL);
         Log.i(TAG, "message: "+message);
 

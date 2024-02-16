@@ -15,6 +15,8 @@ import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.AreaActivityPresenter;
 import com.example.foodplanner.Search.Presenter.AreaActivityPresenterInter;
+import com.example.foodplanner.Search.View.Area.MealsOfAreaActivity;
+import com.example.foodplanner.Search.View.Category.MealsOfCategoryActivity;
 import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
@@ -22,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AreaActivity extends AppCompatActivity implements AreaActivityInter{
+    public static final String CATEGORY_Area = "CategoryActivity";
+
     LinearLayoutManager linearManager;
 
     AreaActivityPresenterInter areaActivityPresenterInter;
@@ -52,6 +56,13 @@ public class AreaActivity extends AppCompatActivity implements AreaActivityInter
                 new AreaAdapter(this, new ArrayList<>());
         areasRecyclerView.setLayoutManager(linearManager);
         areasRecyclerView.setAdapter(areaAdapter);
+        areaAdapter.setClickMealArea((view, position) -> {
+            String mealName = areaAdapter.getItemArea(position).getAreaName();
+            Intent intent = new Intent(getApplicationContext(),
+                    MealsOfAreaActivity.class);
+            intent.putExtra(CATEGORY_Area,mealName);
+            startActivity(intent);
+        });
 
 
 
