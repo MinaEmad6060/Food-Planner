@@ -94,6 +94,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInter{
         });
     }
 
+
     @Override
     public void showChickenCategory(List<Meal> meals) {
         setRecyclerViewAdpter(chickenRecyclerView,meals);
