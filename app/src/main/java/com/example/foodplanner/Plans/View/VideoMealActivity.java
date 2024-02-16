@@ -42,7 +42,6 @@ public class VideoMealActivity extends AppCompatActivity {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 super.onReady(youTubePlayer);
-                youTubePlayer.loadVideo(message, 0);
             }
         });
 
