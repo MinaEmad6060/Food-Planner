@@ -8,6 +8,10 @@ import io.reactivex.rxjava3.core.Observable;
 public interface MealRepositoryInter {
     Observable<MealList> getRandomMealRepo();
     Observable<MealList> getMealsOfCategoryRepo(String category);
+    Observable<MealList> getAllMealsOfAreasRepo(String category);
+
+    Observable<MealList> getAllMealsIngredientRepo(String category);
+
 
 
     Observable<MealList> getSearchMealsRepo(String query);
@@ -16,6 +20,10 @@ public interface MealRepositoryInter {
     Observable<AreasList> getAllAreasRepo();
 
     Observable<IngredientsList> getAllIngredientRepo();
+
+//    Observable<MealList>  getAllMealsOfCategoriesRepo();
+
+
 
 
     Flowable<List<Meal>> getStoredProducts();

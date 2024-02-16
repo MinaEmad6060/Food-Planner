@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodplanner.HomeScreen.View.OnClickMealInter;
 import com.example.foodplanner.Model.Area;
 import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.R;
@@ -27,6 +28,8 @@ public class AreaAdapter extends
     Context context;
 
     List<Area> areaList =new ArrayList<Area>();
+    static OnClickMealInter onClickMealInterArea;
+
 
 
     public AreaAdapter(Context context,
@@ -38,6 +41,11 @@ public class AreaAdapter extends
 
     public void setMyList(List<Area> areaList) {
         this.areaList = areaList;
+    }
+
+    //click on meal
+    public void setClickMealArea(OnClickMealInter onClickMealInter){
+        this.onClickMealInterArea=onClickMealInter;
     }
 
     @NonNull
@@ -58,13 +66,16 @@ public class AreaAdapter extends
         holder.worldImg.setImageResource(R.drawable.world);
     }
 
+    public Area getItemArea (int position){
+        return areaList.get(position);
+    }
 
     @Override
     public int getItemCount() {
         return areaList.size();
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder{
+    static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nameView;
         ImageView worldImg;
 
@@ -73,6 +84,13 @@ public class AreaAdapter extends
             super(v);
             nameView=v.findViewById(R.id.search_name);
             worldImg=v.findViewById(R.id.search_img);
+            //click on meal
+            v.setOnClickListener(this);
+        }
+        //click on meal
+        @Override
+        public void onClick(View v) {
+            onClickMealInterArea.onClick(v,getAdapterPosition());
         }
     }
 }
