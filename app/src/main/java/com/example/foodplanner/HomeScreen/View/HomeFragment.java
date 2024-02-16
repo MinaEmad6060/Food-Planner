@@ -37,7 +37,6 @@ public class HomeFragment extends Fragment implements HomeFragmentInter{
     RecyclerView beefRecyclerView;
     RecyclerView seaFoodRecyclerView;
 
-
     TextView randomMealName;
 
     View viewFrag;
