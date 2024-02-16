@@ -16,6 +16,7 @@ import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.CategoryActivityPresenter;
 import com.example.foodplanner.Search.Presenter.CategoryActivityPresenterInter;
+import com.example.foodplanner.Search.View.Category.MealsOfCategoryActivity;
 import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity implements CategoryViewInter{
+
+    public static final String CATEGORY = "CategoryActivity";
     LinearLayoutManager linearManager;
 
     CategoryActivityPresenterInter categoryActivityPresenterInter;
@@ -53,6 +56,15 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
                 new CategoryAdapter(this, new ArrayList<>());
         categoriesRecyclerView.setLayoutManager(linearManager);
         categoriesRecyclerView.setAdapter(categoryAdapter);
+        categoryAdapter.setClickMeal((view, position) -> {
+            String mealName = categoryAdapter.getItemCategory(position).getName();
+            Intent intent = new Intent(getApplicationContext(),
+                    MealsOfCategoryActivity.class);
+            intent.putExtra(CATEGORY,mealName);
+            startActivity(intent);
+        });
+
+
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +74,6 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
                 startActivity(transferData);
             }
         });
-
 
     }
 

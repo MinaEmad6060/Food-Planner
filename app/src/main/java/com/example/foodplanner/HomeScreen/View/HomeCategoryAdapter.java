@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.R;
 
@@ -29,6 +30,7 @@ public class HomeCategoryAdapter extends
     Meal meal = new Meal(1,"","","","","");
     List<Meal> mealList=new ArrayList<Meal>();
 
+    //click on meal
     OnClickMealInter onClickMealInter;
 
 
@@ -44,6 +46,7 @@ public class HomeCategoryAdapter extends
         this.mealList = myList;
     }
 
+    //click on meal
     public void setClickMeal(OnClickMealInter onClickMealInter){
         this.onClickMealInter=onClickMealInter;
     }
@@ -66,14 +69,16 @@ public class HomeCategoryAdapter extends
         Glide.with(context).load(mealList.get(position).getThumbnail())
                 .into(holder.mealImg);
 
-
-
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 homeFragmentInter.onMealClick(meal);
             }
         });
+    }
+
+    public Meal getItem (int position){
+        return mealList.get(position);
     }
 
 
@@ -83,6 +88,7 @@ public class HomeCategoryAdapter extends
     }
 
 
+    //click on meal
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nameView;
         ImageView mealImg;
@@ -93,9 +99,11 @@ public class HomeCategoryAdapter extends
             nameView=v.findViewById(R.id.wrapped_meal_name);
             mealImg=v.findViewById(R.id.wrapped_meal_img);
             btnAdd=v.findViewById(R.id.btn_add);
+            //click on meal
             v.setOnClickListener(this);
         }
 
+        //click on meal
         @Override
         public void onClick(View v) {
             onClickMealInter.onClick(v,getAdapterPosition());

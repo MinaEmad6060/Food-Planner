@@ -1,7 +1,5 @@
 package com.example.foodplanner.network;
 
-import android.util.Log;
-
 import com.example.foodplanner.Model.AreasList;
 import com.example.foodplanner.Model.CategoryList;
 import com.example.foodplanner.Model.IngredientsList;
@@ -10,9 +8,6 @@ import com.example.foodplanner.Model.MealList;
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -54,9 +49,19 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
     }
     @Override
     public Observable<MealList> getMealsOfCategoryRemote(String category) {
-        Observable<MealList> observable= mealAPI.getMealsOfCategoryMealsAPI(category);
+        Observable<MealList> observable= mealAPI.getMealsOfCategoryAPI(category);
         return observable.subscribeOn(Schedulers.io());
     }
+
+    @Override
+    public Observable<MealList> getMealsOfAreaRemote(String area) {
+        Observable<MealList> observable= mealAPI.getMealsOfAreaAPI(area);
+        return observable.subscribeOn(Schedulers.io());    }
+
+    @Override
+    public Observable<MealList> getMealsOfIngredientsRemote(String ingredient) {
+        Observable<MealList> observable= mealAPI.getMealsOfIngredientsAPI(ingredient);
+        return observable.subscribeOn(Schedulers.io());    }
 
     @Override
     public Observable<MealList> getSearchMealsRemote(String query) {
@@ -80,4 +85,9 @@ public class MealsRemoteDataSource implements MealsRemoteDataSourceInter{
         Observable<IngredientsList> observable= mealAPI.getAllIngredientsAPI("");
         return observable.subscribeOn(Schedulers.io());
     }
+
+//    @Override
+//    public Observable<MealList> getAllMealsOfCategoriesRemote() {
+//        Observable<MealList> observable= mealAPI.getMealsOfCategoryAPI();
+//        return observable.subscribeOn(Schedulers.io());    }
 }

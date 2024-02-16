@@ -6,7 +6,6 @@ import com.example.foodplanner.Model.IngredientsList;
 import com.example.foodplanner.Model.MealList;
 
 import io.reactivex.rxjava3.core.Observable;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -14,7 +13,13 @@ public interface MealAPI {
     @GET("random.php")
     Observable<MealList> getRandomMealAPI();
     @GET("filter.php")
-    Observable<MealList> getMealsOfCategoryMealsAPI(@Query("c") String category);
+    Observable<MealList> getMealsOfCategoryAPI(@Query("c") String category);
+
+    @GET("filter.php")
+    Observable<MealList> getMealsOfAreaAPI(@Query("a") String category);
+
+    @GET("filter.php")
+    Observable<MealList> getMealsOfIngredientsAPI(@Query("i") String category);
 
 
     @GET("search.php")
@@ -26,7 +31,5 @@ public interface MealAPI {
     Observable<AreasList> getAllAreasAPI(@Query("a") String category);
     @GET("list.php")
     Observable<IngredientsList> getAllIngredientsAPI(@Query("i") String category);
-
-
 
 }

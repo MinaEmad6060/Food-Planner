@@ -22,6 +22,7 @@ import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenterInter;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
+import com.example.foodplanner.Search.View.Category.MealsOfCategoryActivity;
 import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
@@ -30,8 +31,8 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements HomeFragmentInter{
 
+    //click on meal
     public static final String EXTRA_MEAL = "mealTag";
-    public static final String EXTRA_POSITION = "position";
     RecyclerView chickenRecyclerView;
     RecyclerView beefRecyclerView;
     RecyclerView seaFoodRecyclerView;
@@ -124,13 +125,16 @@ public class HomeFragment extends Fragment implements HomeFragmentInter{
                 new HomeCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),this);
         recyclerView.setLayoutManager(linearManager);
         recyclerView.setAdapter(homeCategoryAdapter);
+
+        //click on meal
         homeCategoryAdapter.setClickMeal((view1, position) -> {
-            TextView mealname = viewFrag.findViewById(R.id.wrapped_meal_name);
+            String mealName = homeCategoryAdapter.getItem(position).getName();
             Intent intent = new Intent(viewFrag.getContext(),
                     DetailsOfMealActivity.class);
-            intent.putExtra(EXTRA_MEAL,mealname.getText().toString());
+            intent.putExtra(EXTRA_MEAL,mealName);
             startActivity(intent);
         });
+
         homeCategoryAdapter.setMyList(meals);
         homeCategoryAdapter.notifyDataSetChanged();
     }

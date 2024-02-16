@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".Search.View.Area.MealsOfAreaActivity">
+    tools:context=".Search.View.Ingredients.MealsOfIngredientsActivity">
 
     <View
         android:id="@+id/view3"
@@ -14,7 +14,7 @@
         android:background="#739E9A9A" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Meals_Of_Area_Recycler_List"
+        android:id="@+id/Meals_Of_Ingredient_Recycler_List"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#8C936060"
-        android:text="Meals Of Area"
+        android:text="Meals Of Ingredients"
         android:textColor="#FFFFFF"
         android:textSize="38sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="0.071" />
 
     <ImageView
-        android:id="@+id/btn_Meals_Of_area_back"
+        android:id="@+id/btn_Meals_Of_ingredients_back"
         android:layout_width="99dp"
         android:layout_height="51dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,5 +50,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.914"
         app:srcCompat="@drawable/btn_back" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

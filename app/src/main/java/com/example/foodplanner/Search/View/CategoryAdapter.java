@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.foodplanner.HomeScreen.View.OnClickMealInter;
 import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.R;
 
@@ -28,10 +29,8 @@ public class CategoryAdapter extends
     Category category = new Category("","");
     List<Category> categoryList=new ArrayList<Category>();
 
-    //Button btnAdd;
-
-
-    //OnProductsClickListener onProductsClickListener;
+    //click on meal
+    static OnClickMealInter onClickMealInter;
 
     public CategoryAdapter(Context context,
                            List<Category> categoryList) {
@@ -42,6 +41,11 @@ public class CategoryAdapter extends
 
     public void setMyList(List<Category> categoryList) {
         this.categoryList = categoryList;
+    }
+
+    //click on meal
+    public void setClickMeal(OnClickMealInter onClickMealInter){
+        this.onClickMealInter=onClickMealInter;
     }
 
     @NonNull
@@ -63,13 +67,17 @@ public class CategoryAdapter extends
                 .into(holder.categoryImg);
     }
 
+    public Category getItemCategory(int position){
+        return categoryList.get(position);
+    }
+
 
     @Override
     public int getItemCount() {
         return categoryList.size();
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder{
+    static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView nameView;
         ImageView categoryImg;
 
@@ -78,6 +86,13 @@ public class CategoryAdapter extends
             super(v);
             nameView=v.findViewById(R.id.search_name);
             categoryImg=v.findViewById(R.id.search_img);
+            //click on meal
+            v.setOnClickListener(this);
+        }
+        //click on meal
+        @Override
+        public void onClick(View v) {
+            onClickMealInter.onClick(v,getAdapterPosition());
         }
     }
 }
