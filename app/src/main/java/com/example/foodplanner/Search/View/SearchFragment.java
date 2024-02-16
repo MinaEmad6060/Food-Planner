@@ -189,8 +189,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                 err-> Log.i(TAG, "error: ")
                 );
     }
-
-
+    
     @Override
     public void showSearchMeals(List<Meal> meals) {
         searchMeals=meals;
