@@ -1,5 +1,6 @@
 package com.example.foodplanner.Search.View.Category;
 
+import static com.example.foodplanner.HomeScreen.View.HomeFragment.EXTRA_MEAL;
 import static com.example.foodplanner.Search.View.CategoryActivity.CATEGORY;
 
 import android.annotation.SuppressLint;
@@ -17,6 +18,7 @@ import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
+import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.Category.MealsOfCategoryActivityPresenter;
 import com.example.foodplanner.Search.Presenter.Category.MealsOfCategoryActivityPresenterInter;
@@ -67,6 +69,13 @@ public class MealsOfCategoryActivity extends AppCompatActivity
                 new HomeCategoryAdapter(this, new ArrayList<>(),new HomeFragment());
         mealsOfCategoriesRecyclerView.setLayoutManager(linearManager);
         mealsOfCategoriesRecyclerView.setAdapter(homeCategoryAdapter);
+        homeCategoryAdapter.setClickMeal((view1, position) -> {
+            String mealName = homeCategoryAdapter.getItem(position).getName();
+            Intent intent = new Intent(this,
+                    DetailsOfMealActivity.class);
+            intent.putExtra(EXTRA_MEAL,mealName);
+            startActivity(intent);
+        });
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {

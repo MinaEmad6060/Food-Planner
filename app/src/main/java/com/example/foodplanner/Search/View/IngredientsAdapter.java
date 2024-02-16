@@ -63,13 +63,15 @@ public class IngredientsAdapter extends
     @Override
     public void onBindViewHolder(@NonNull IngredientsAdapter.MyViewHolder holder, int position) {
         Log.i(TAG, "position: "+position);
-        holder.nameView.setText(ingredientList.get(position).getIngredientName());
-        String imgURL="https://www.themealdb.com/images/ingredients/"+
-                ingredientList.get(position).getIngredientName()+".png";
-        Log.i(TAG_IMG, "img: "+imgURL);
+        if(!ingredientList.get(position).getIngredientName().equals("")){
+            holder.nameView.setText(ingredientList.get(position).getIngredientName());
+            String imgURL="https://www.themealdb.com/images/ingredients/"+
+                    ingredientList.get(position).getIngredientName()+".png";
+            Log.i(TAG_IMG, "img: "+imgURL);
 
-        Glide.with(context).load(imgURL)
-                .into(holder.ingredientsImg);
+            Glide.with(context).load(imgURL)
+                    .into(holder.ingredientsImg);
+        }
     }
 
     public Ingredient getItemIngredient (int position){
