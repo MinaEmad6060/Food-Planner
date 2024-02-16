@@ -187,6 +187,7 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                 );
     }
 
+
     @Override
     public void showSearchMeals(List<Meal> meals) {
         searchMeals=meals;
