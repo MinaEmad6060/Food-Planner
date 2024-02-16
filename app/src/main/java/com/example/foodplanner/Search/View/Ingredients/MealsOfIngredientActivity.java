@@ -1,5 +1,6 @@
 package com.example.foodplanner.Search.View.Ingredients;
 
+import static com.example.foodplanner.HomeScreen.View.HomeFragment.EXTRA_MEAL;
 import static com.example.foodplanner.Search.View.CategoryActivity.CATEGORY;
 import static com.example.foodplanner.Search.View.IngredientsActivity.CATEGORY_Ingredients;
 
@@ -20,6 +21,7 @@ import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
+import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.Category.MealsOfCategoryActivityPresenterInter;
 import com.example.foodplanner.Search.Presenter.CategoryActivityPresenter;
@@ -75,6 +77,13 @@ public class MealsOfIngredientActivity extends AppCompatActivity
                 new HomeCategoryAdapter(this, new ArrayList<>(), new HomeFragment());
         mealsOfIngredientsRecyclerView.setLayoutManager(linearManager);
         mealsOfIngredientsRecyclerView.setAdapter(homeCategoryAdapter);
+        homeCategoryAdapter.setClickMeal((view1, position) -> {
+            String mealName = homeCategoryAdapter.getItem(position).getName();
+            Intent intent = new Intent(this,
+                    DetailsOfMealActivity.class);
+            intent.putExtra(EXTRA_MEAL,mealName);
+            startActivity(intent);
+        });
 
 
         btnBack.setOnClickListener(new View.OnClickListener() {

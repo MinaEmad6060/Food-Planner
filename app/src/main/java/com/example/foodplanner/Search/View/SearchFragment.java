@@ -109,7 +109,13 @@ public class SearchFragment extends Fragment implements SearchViewInter{
 
 
 
-
+        //Category
+//        linearManager = new LinearLayoutManager(view.getContext());
+//        linearManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        categoriesAdapter =
+//                new CategoriesAdapter(viewFrag.getContext(), new ArrayList<>());
+//        categoriesRecyclerView.setLayoutManager(linearManager);
+//        categoriesRecyclerView.setAdapter(categoriesAdapter);
 
         category.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,18 +171,19 @@ public class SearchFragment extends Fragment implements SearchViewInter{
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(searchTerm -> {
 //                    searchFragmentPresenterInter.getSearchMealsPres(searchTerm);
-                            List<Meal> filteredNames = new ArrayList<>();
-                            Log.i(TAG, "Observer sizeOfsearchMeals: "+searchMeals.size());
-                            for (Meal searchMeal : searchMeals) {
-                                if (searchMeal.getName().toLowerCase().contains(searchTerm)) {
-                                    filteredNames.add(searchMeal);
-                                }
-                            }
-                            Log.i(TAG, "sizeOfMeals: "+filteredNames.size());
-                            adapter.setMyList(filteredNames);
-                            adapter.notifyDataSetChanged();
-                        },
-                        err-> Log.i(TAG, "error: ")
+                    List<Meal> filteredNames = new ArrayList<>();
+                    Log.i(TAG, "Observer sizeOfsearchMeals: "+searchMeals.size());
+                    for (Meal searchMeal : searchMeals) {
+                        if (searchMeal.getName().toLowerCase().contains(searchTerm)) {
+                            filteredNames.add(searchMeal);
+                        }
+                    }
+//                    searchFragmentPresenterInter.getSearchMealsPres(searchTerm);
+                    Log.i(TAG, "sizeOfMeals: "+filteredNames.size());
+                    adapter.setMyList(filteredNames);
+                    adapter.notifyDataSetChanged();
+                },
+                err-> Log.i(TAG, "error: ")
                 );
     }
 

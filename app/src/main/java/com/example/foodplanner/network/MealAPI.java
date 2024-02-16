@@ -24,6 +24,7 @@ public interface MealAPI {
 
     @GET("search.php")
     Observable<MealList> getSearchMealsAPI(@Query("s") String category);
+
     @GET("categories.php")
     Observable<CategoryList> getAllCategoriesAPI();
 

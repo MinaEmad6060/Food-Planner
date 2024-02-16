@@ -12,17 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.foodplanner.DetailsOfMealActivity;
+import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenterInter;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
-import com.example.foodplanner.Search.View.Category.MealsOfCategoryActivity;
+import com.example.foodplanner.Search.View.AreaActivity;
 import com.example.foodplanner.db.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
@@ -38,6 +39,8 @@ public class HomeFragment extends Fragment implements HomeFragmentInter{
     RecyclerView seaFoodRecyclerView;
 
     TextView randomMealName;
+
+    Button btnRandom;
 
     View viewFrag;
     ImageView randomMealImg;
@@ -61,6 +64,7 @@ public class HomeFragment extends Fragment implements HomeFragmentInter{
         super.onViewCreated(view, savedInstanceState);
         randomMealName=view.findViewById(R.id.random_name);
         randomMealImg=view.findViewById(R.id.random_img);
+        btnRandom=view.findViewById(R.id.btn_random);
         viewFrag=view;
 
         chickenRecyclerView=view.findViewById(R.id.Chicken_View);
@@ -77,6 +81,18 @@ public class HomeFragment extends Fragment implements HomeFragmentInter{
         homeScreenPresenterInter.getMealsOfCategoryPres("Chicken");
         homeScreenPresenterInter.getMealsOfCategoryPres("Beef");
         homeScreenPresenterInter.getMealsOfCategoryPres("Seafood");
+
+
+        btnRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String mealName = randomMealName.getText().toString();
+                Intent intent = new Intent(viewFrag.getContext(),
+                        DetailsOfMealActivity.class);
+                intent.putExtra(EXTRA_MEAL,mealName);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
