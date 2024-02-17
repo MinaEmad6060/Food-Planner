@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:background="@drawable/background"
     tools:context=".ConnectOnline.View.LoginFragment">
 
@@ -11,116 +12,104 @@
         android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#739E9A9A"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:background="#739E9A9A" />
 
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
-        android:text="Login"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:gravity="center"
+        android:paddingTop="65dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@drawable/account"
+            >
+        </ImageView>
 
-    <EditText
-        android:id="@+id/Login_Password"
-        android:layout_width="214dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="8dp"
-        android:background="#73FFFFFF"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="numberPassword"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Login_Email" />
+        <EditText
+            android:id="@+id/Login_Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textSize="20sp"
+            android:ems="10"
+            android:hint="E-Mail"
+            android:padding="10dp"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@drawable/rounded_corner"
+            />
+        <EditText
+            android:id="@+id/Login_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="numberPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:background="@drawable/rounded_corner"
+            />
+        <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:padding="10dp"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+                android:text="Login" />
 
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="364dp"
-        android:width="200dp"
-        android:text="Login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_Google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="420dp"
-        android:width="200dp"
-        android:text="Gmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+                android:id="@+id/btn_guest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:padding="10dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+                android:text="Guest" />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="center">
 
-    <Button
-        android:id="@+id/btn_guest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="480dp"
-        android:width="200dp"
-        android:text="Guest"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/Login_Email"
-        android:layout_width="214dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="28dp"
-        android:background="#73FFFFFF"
-        android:ems="10"
-        android:hint="E-Mail"
-        android:inputType="textEmailAddress"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/btn_Google"
+                android:layout_width="84dp"
+                android:layout_height="74dp"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.828"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="11dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/google"
+                />
 
-    <TextView
-        android:id="@+id/Sign_Up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SignUp"
-        android:textColor="#553F47"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.883"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.804" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create a new account, "
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.414"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/Sign_Up"
+                android:layout_width="104dp"
+                android:layout_height="94dp"
+                android:layout_margin="19dp"
+                android:background="@drawable/signup"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
