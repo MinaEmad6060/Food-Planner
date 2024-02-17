@@ -2,7 +2,6 @@ package com.example.foodplanner.db.PlanDB;
 
 import android.content.Context;
 
-import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.Plan;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
         dao = db.getMealDAO();
         storedProducts=dao.getDayMeals(columnName);
     }
-    public static PlanLocalDataSource getInstance(Context context){
+    public static PlanLocalDataSource getPlanInstance(Context context){
         if(connectToMeal ==null){
             connectToMeal = new PlanLocalDataSource(context);
         }

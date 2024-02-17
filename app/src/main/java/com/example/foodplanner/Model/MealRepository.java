@@ -3,6 +3,7 @@ package com.example.foodplanner.Model;
 import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.db.FavDB.InterFavLocalDataSource;
 import com.example.foodplanner.db.PlanDB.InterPlanLocalDataSource;
+import com.example.foodplanner.db.PlanDB.PlanLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSourceInter;
 
 import java.util.List;
@@ -17,7 +18,9 @@ public class MealRepository implements MealRepositoryInter{
     InterPlanLocalDataSource interPlanLocalDataSource;
     static MealsRemoteDataSourceInter interMealsRemoteDataSource;
 
-    private static MealRepository mealsRepository =null;
+    private static MealRepository favMealsRepository =null;
+    private static MealRepository planMealsRepository =null;
+
 
     private MealRepository(MealsRemoteDataSourceInter interMealsRemoteDataSource
                             ,InterFavLocalDataSource interFavLocalDataSource) {
@@ -34,21 +37,21 @@ public class MealRepository implements MealRepositoryInter{
     public static MealRepository getFavInstance(
             MealsRemoteDataSourceInter interProductsRemoteDataSource
             ,FavLocalDataSource favLocalDataSource){
-        if(mealsRepository ==null){
-            mealsRepository = new MealRepository(
+        if(favMealsRepository ==null){
+            favMealsRepository = new MealRepository(
                     interProductsRemoteDataSource,favLocalDataSource);
         }
-        return mealsRepository;
+        return favMealsRepository;
     }
 
     public static MealRepository getPlanInstance(
             MealsRemoteDataSourceInter interProductsRemoteDataSource
-            ,InterPlanLocalDataSource interPlanLocalDataSource){
-        if(mealsRepository ==null){
-            mealsRepository = new MealRepository(
-                    interProductsRemoteDataSource,interPlanLocalDataSource);
+            , PlanLocalDataSource PlanLocalDataSource){
+        if(planMealsRepository ==null){
+            planMealsRepository = new MealRepository(
+                    interProductsRemoteDataSource,PlanLocalDataSource);
         }
-        return mealsRepository;
+        return planMealsRepository;
     }
 
     @Override

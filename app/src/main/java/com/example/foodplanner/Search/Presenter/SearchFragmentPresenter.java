@@ -1,6 +1,7 @@
 package com.example.foodplanner.Search.Presenter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,15 +22,14 @@ public class SearchFragmentPresenter implements SearchFragmentPresenterInter{
     private static final String TAG_mealDetails = "SearchFragmentPresenter";
     private SearchViewInter searchViewInter;
     private static MealRepositoryInter mealRepositoryInter;
+    Context context;
 
-    HomeActivity homeActivity;
-
-
-    public SearchFragmentPresenter(SearchViewInter interAllProductsView,
-                               MealRepositoryInter interProductsRepository) {
-        this.searchViewInter = interAllProductsView;
-        this.mealRepositoryInter = interProductsRepository;
+    public SearchFragmentPresenter(SearchViewInter interAllMealsView,
+                               MealRepositoryInter interMealsRepository) {
+        this.searchViewInter = interAllMealsView;
+        this.mealRepositoryInter = interMealsRepository;
     }
+
 
     @SuppressLint("CheckResult")
     @Override
@@ -39,9 +39,13 @@ public class SearchFragmentPresenter implements SearchFragmentPresenterInter{
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         mealList -> {
+                            Log.i(TAG_mealDetails, "AllmealList: "+
+                                    mealList.meals.get(0).getName());
+                            Log.i(TAG_mealDetails, "AllmealList: "+
+                                    mealList.meals.get(1).getName());
                             searchViewInter.showSearchMeals(mealList.meals);
                         },
-                        err -> {}
+                        err -> Log.i(TAG_mealDetails, "AllMealList: failure ")
                 );
     }
 
@@ -57,22 +61,26 @@ public class SearchFragmentPresenter implements SearchFragmentPresenterInter{
         switch (day){
             case "saturday":
                 plan.setSaturday(mealDetails);
+                break;
             case "sunday":
                 plan.setSunday(mealDetails);
+                break;
             case "monday":
                 plan.setMonday(mealDetails);
+                break;
             case "tuesday":
                 plan.setTuesday(mealDetails);
+                break;
             case "wednesday":
                 plan.setWednesday(mealDetails);
+                break;
             case "thursday":
                 plan.setThursday(mealDetails);
+                break;
             case "friday":
                 plan.setFriday(mealDetails);
-//            default:
-//                Toast.makeText(, "", Toast.LENGTH_SHORT).show();
+                break;
         }
-
         mealRepositoryInter.insertDayMeal(plan);
     }
 }
