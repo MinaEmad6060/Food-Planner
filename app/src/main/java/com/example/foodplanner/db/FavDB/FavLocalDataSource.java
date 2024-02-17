@@ -13,7 +13,7 @@ public class FavLocalDataSource implements InterFavLocalDataSource {
 
     private InterFavDAO dao;
 //    private static ProductsLocalDataSource localSource = null;
-    private Flowable<List<Meal>> storedProducts;
+    private Flowable<List<Meal>> storedMeals;
     //private LiveData<List<Product>> storedProducts;
 
     private static FavLocalDataSource connectToMeal =null;
@@ -21,7 +21,7 @@ public class FavLocalDataSource implements InterFavLocalDataSource {
     private FavLocalDataSource(Context context){
         MealAppDataBase db= MealAppDataBase.getInstance(context.getApplicationContext());
         dao = db.getMealDAO();
-        storedProducts=dao.getAllMeals();
+        storedMeals =dao.getAllMeals();
     }
     public static FavLocalDataSource getInstance(Context context){
         if(connectToMeal ==null){
@@ -31,7 +31,7 @@ public class FavLocalDataSource implements InterFavLocalDataSource {
     }
     @Override
     public Flowable<List<Meal>> getAllMealsData() {
-        return storedProducts.subscribeOn(Schedulers.io());
+        return storedMeals.subscribeOn(Schedulers.io());
     }
 
     @Override

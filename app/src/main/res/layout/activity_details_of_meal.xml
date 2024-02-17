@@ -106,32 +106,32 @@
 
     <TextView
         android:id="@+id/meal_name_detailes"
-        android:layout_width="152dp"
-        android:layout_height="60dp"
+        android:layout_width="206dp"
+        android:layout_height="38dp"
         android:background="@color/lightGreen"
         android:text="(Meal Name)"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.768"
+        app:layout_constraintHorizontal_bias="0.79"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.057" />
 
     <TextView
         android:id="@+id/Area_text"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_width="143dp"
+        android:layout_height="33dp"
         android:background="@color/blue"
         android:text="(Area)"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.778"
+        app:layout_constraintHorizontal_bias="0.864"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.705" />
+        app:layout_constraintVertical_bias="0.434" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
