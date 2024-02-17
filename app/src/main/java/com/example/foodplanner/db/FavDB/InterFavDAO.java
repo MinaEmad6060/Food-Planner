@@ -23,7 +23,7 @@
 //}
 //
 
-package com.example.foodplanner.db;
+package com.example.foodplanner.db.FavDB;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

@@ -26,19 +26,19 @@ public class FavMealsAdapter extends
     InterFavProductsView interFavProductsView;
     private static final String TAG = "MyRecyclerAdapter";
     Context context;
-    Meal meal = new Meal(1,"","","","","");
+//    Meal meal = new Meal("","","","","","");
     List<Meal> mealList=new ArrayList<Meal>();
 
     Button btnRemove;
 
 
-    //OnProductsClickListener onProductsClickListener;
+    OnMealClickListener onMealClickListener;
 
     public FavMealsAdapter(Context context,
-                               List<Meal> mealList) {
+                               List<Meal> mealList,OnMealClickListener onMealClickListener) {
         this.context = context;
         this.mealList = mealList;
-        //mealList=new ArrayList<Meal>();
+        this.onMealClickListener=onMealClickListener;
     }
 
     public void setMyList(List<Meal> myList) {
@@ -57,6 +57,7 @@ public class FavMealsAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Meal meal=mealList.get(position);
         Log.i(TAG, "position: "+position);
         Log.i(TAG, "name[0]: "+mealList.get(position).getName());
         holder.nameView.setText(mealList.get(position).getName());
@@ -65,7 +66,7 @@ public class FavMealsAdapter extends
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                interFavProductsView.onFavClick(meal);
+                onMealClickListener.onFavClick(meal);
             }
         });
     }

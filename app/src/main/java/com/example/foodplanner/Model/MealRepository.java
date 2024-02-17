@@ -1,7 +1,7 @@
 package com.example.foodplanner.Model;
 
-import com.example.foodplanner.db.FavLocalDataSource;
-import com.example.foodplanner.db.InterFavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.InterFavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSourceInter;
 
 import java.util.List;

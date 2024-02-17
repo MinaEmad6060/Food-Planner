@@ -17,7 +17,7 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.CategoryActivityPresenter;
 import com.example.foodplanner.Search.Presenter.CategoryActivityPresenterInter;
 import com.example.foodplanner.Search.View.Category.MealsOfCategoryActivity;
-import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;

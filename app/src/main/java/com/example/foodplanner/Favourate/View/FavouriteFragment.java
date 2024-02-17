@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.R;
-import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
-public class FavouriteFragment extends Fragment implements InterFavProductsView{
+public class FavouriteFragment extends Fragment
+        implements InterFavProductsView, OnMealClickListener {
 
     private static final String TAG = "FavProductsActivity";
     View viewFrag;
@@ -70,7 +72,7 @@ public class FavouriteFragment extends Fragment implements InterFavProductsView{
 
         favMealsAdapter =
                 new FavMealsAdapter(
-                        viewFrag.getContext(), new ArrayList<>());
+                        viewFrag.getContext(), new ArrayList<>(),this);
         recyclerView.setLayoutManager(linearManager);
         recyclerView.setAdapter(favMealsAdapter);
 
@@ -82,6 +84,16 @@ public class FavouriteFragment extends Fragment implements InterFavProductsView{
 //    public void onFavClick(Product product) {
 //
 //    }
+//    public void getData() {
+//        Flowable<List<Meals.Meal>> data = presenter.getStoredMeals();
+//        data.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(meals -> {
+//                    adapter.setMyList((ArrayList<Meals.Meal>) meals);
+//                    adapter.notifyDataSetChanged();
+//                });
+//
+//    }
 
     @SuppressLint({"CheckResult", "NotifyDataSetChanged"})
     @Override
@@ -89,10 +101,12 @@ public class FavouriteFragment extends Fragment implements InterFavProductsView{
         meals.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        productList ->{
-                            favMealsAdapter.setMyList(productList);
+                        mealList ->{
+                            Log.i(TAG, "succes: ");
+                            favMealsAdapter.setMyList(mealList);
                             favMealsAdapter.notifyDataSetChanged();
-                        }
+                        },
+                        err -> Log.i(TAG, "error: ")
                 );
     }
 
@@ -100,4 +114,5 @@ public class FavouriteFragment extends Fragment implements InterFavProductsView{
     public void onFavClick(Meal meal) {
         interFavMealsPresenter.removeFavProduct(meal);
     }
+
 }

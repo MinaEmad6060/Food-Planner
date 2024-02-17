@@ -27,19 +27,24 @@ public class HomeCategoryAdapter extends
     HomeFragmentInter homeFragmentInter;
     private static final String TAG = "MyRecyclerAdapter";
     Context context;
-    Meal meal = new Meal(1,"","","","","");
+//    Meal meal = new Meal("","","","","","");
     List<Meal> mealList=new ArrayList<Meal>();
 
     //click on meal
     OnClickMealInter onClickMealInter;
 
+    OnAddMealListener onAddMealListener;
+
 
 
     public HomeCategoryAdapter(Context context,
-                               List<Meal> mealList, HomeFragmentInter homeFragmentInter) {
+                               List<Meal> mealList,
+                               HomeFragmentInter homeFragmentInter,
+                               OnAddMealListener onAddMealListener) {
         this.context = context;
         this.mealList = mealList;
         this.homeFragmentInter=homeFragmentInter;
+        this.onAddMealListener=onAddMealListener;
     }
 
     public void setMyList(List<Meal> myList) {
@@ -63,6 +68,7 @@ public class HomeCategoryAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        Meal meal=mealList.get(position);
         Log.i(TAG, "position: "+position);
         Log.i(TAG, "name[0]: "+mealList.get(position).getName());
         holder.nameView.setText(mealList.get(position).getName());
@@ -72,7 +78,7 @@ public class HomeCategoryAdapter extends
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                homeFragmentInter.onMealClick(meal);
+                onAddMealListener.onMealClick(meal);
             }
         });
     }

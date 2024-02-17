@@ -23,13 +23,14 @@ import android.widget.EditText;
 import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
+import com.example.foodplanner.HomeScreen.View.OnAddMealListener;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.SearchFragmentPresenter;
 import com.example.foodplanner.Search.Presenter.SearchFragmentPresenterInter;
-import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 import com.google.android.material.chip.Chip;
 
@@ -42,7 +43,8 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchFragment extends Fragment implements SearchViewInter{
+public class SearchFragment extends Fragment
+        implements SearchViewInter, OnAddMealListener {
 
     private static final String TAG = "SearchFragment";
     SearchFragmentPresenterInter searchFragmentPresenterInter;
@@ -104,7 +106,9 @@ public class SearchFragment extends Fragment implements SearchViewInter{
         categoriesRecyclerView =view.findViewById(R.id.categories_recyclerView);
         linearManagerSearch = new LinearLayoutManager(view.getContext());
         linearManagerSearch.setOrientation(LinearLayoutManager.VERTICAL);
-        adapter = new HomeCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),new HomeFragment());
+        adapter = new HomeCategoryAdapter(viewFrag.getContext(), new ArrayList<>()
+                ,new HomeFragment()
+        ,this);
         categoriesRecyclerView.setLayoutManager(linearManagerSearch);
         categoriesRecyclerView.setAdapter(adapter);
         adapter.setClickMeal((view1, position) -> {
@@ -195,5 +199,10 @@ public class SearchFragment extends Fragment implements SearchViewInter{
     public void showSearchMeals(List<Meal> meals) {
         searchMeals=meals;
         Log.i(TAG, "showSearchMeals sizeOfsearchMeals: "+searchMeals.size());
+    }
+
+    @Override
+    public void onMealClick(Meal meal) {
+
     }
 }

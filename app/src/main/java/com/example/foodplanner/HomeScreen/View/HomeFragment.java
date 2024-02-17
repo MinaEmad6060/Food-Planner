@@ -23,15 +23,14 @@ import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenterInter;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
-import com.example.foodplanner.Search.View.AreaActivity;
-import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment
-            implements HomeFragmentInter{
+            implements HomeFragmentInter,OnAddMealListener{
 
     //click on meal
     public static final String EXTRA_MEAL = "mealTag";
@@ -138,7 +137,9 @@ public class HomeFragment extends Fragment
         LinearLayoutManager linearManager = new LinearLayoutManager(viewFrag.getContext());
         linearManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         HomeCategoryAdapter homeCategoryAdapter =
-                new HomeCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),this);
+                new HomeCategoryAdapter(viewFrag.getContext(), new ArrayList<>(),
+                        this,
+                        this);
         recyclerView.setLayoutManager(linearManager);
         recyclerView.setAdapter(homeCategoryAdapter);
 
