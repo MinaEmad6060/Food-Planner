@@ -51,7 +51,6 @@ public class DetailsOfMealActivity extends AppCompatActivity
     RecyclerView mealDetailsRecyclerView;
 
     IngredientsAdapter ingredientsAdapter;
-    ImageView btnBack;
 
     String videoURI;
 
@@ -66,7 +65,6 @@ public class DetailsOfMealActivity extends AppCompatActivity
         btnVideo=findViewById(R.id.btn_Video);
         areaOfMeal=findViewById(R.id.Area_text);
         instructionsContent=findViewById(R.id.instructions_content);
-        btnBack=findViewById(R.id.btn_Meals_Details_back);
 
 
         //click on meal
@@ -102,13 +100,7 @@ public class DetailsOfMealActivity extends AppCompatActivity
 
 
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent transferData = new Intent(DetailsOfMealActivity.this, HomeActivity.class);
-                startActivity(transferData);
-            }
-        });
+
         btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
