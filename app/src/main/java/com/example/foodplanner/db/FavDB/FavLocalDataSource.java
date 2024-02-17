@@ -35,7 +35,7 @@ public class FavLocalDataSource implements InterFavLocalDataSource {
     }
 
     @Override
-    public void insertMeal(Meal meal) {
+    public void insertMealData(Meal meal) {
         new Thread(){
             @Override
             public void run() {
@@ -45,7 +45,7 @@ public class FavLocalDataSource implements InterFavLocalDataSource {
     }
 
     @Override
-    public void deleteMeal(Meal meal) {
+    public void deleteMealData(Meal meal) {
         new Thread(){
             @Override
             public void run() {

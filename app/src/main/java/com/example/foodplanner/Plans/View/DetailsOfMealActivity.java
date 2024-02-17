@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.Model.Ingredient;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
@@ -80,7 +79,7 @@ public class DetailsOfMealActivity extends AppCompatActivity
         mealDetailsRecyclerView =findViewById(R.id.ingredients_meal_recyckerView);
         detailsOfMealActivityPresInter = new DetailsOfMealActivityPres(
                 this,
-                MealRepository.getInstance(
+                MealRepository.getFavInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(this))) {
         };

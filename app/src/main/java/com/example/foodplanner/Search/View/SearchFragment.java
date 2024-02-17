@@ -49,7 +49,6 @@ public class SearchFragment extends Fragment
     private static final String TAG = "SearchFragment";
     SearchFragmentPresenterInter searchFragmentPresenterInter;
 
-    LinearLayoutManager linearManager;
     LinearLayoutManager linearManagerSearch;
 
     HomeActivity homeActivity;
@@ -99,7 +98,7 @@ public class SearchFragment extends Fragment
 
         searchFragmentPresenterInter = new SearchFragmentPresenter(
                 this,
-                MealRepository.getInstance(
+                MealRepository.getFavInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(viewFrag.getContext())));
         //Name

@@ -64,7 +64,7 @@ public class FavouriteFragment extends Fragment
         viewFrag=view;
         linearManager = new LinearLayoutManager(viewFrag.getContext());
         linearManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mealRepositoryInter = MealRepository.getInstance(
+        mealRepositoryInter = MealRepository.getFavInstance(
                 MealsRemoteDataSource.getInstance(),
                 FavLocalDataSource.getInstance(viewFrag.getContext()));
         interFavMealsPresenter = new FavMealsPresenter(mealRepositoryInter);

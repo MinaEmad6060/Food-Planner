@@ -42,7 +42,7 @@ public class IngredientsActivity extends AppCompatActivity
         ingredientsRecyclerView =findViewById(R.id.Ingredients_Recycler_List);
         ingredientsActivityPresenter = new IngredientsActivityPresenter(
                 this,
-                MealRepository.getInstance(
+                MealRepository.getFavInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(this)));
 

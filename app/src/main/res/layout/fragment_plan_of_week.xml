@@ -19,43 +19,47 @@
         android:id="@+id/btn_new_plan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:width="@dimen/widthOfBigButton"
-        android:backgroundTint="@color/darkGreen"
+        android:backgroundTint="@color/simpleGreen"
+        android:padding="10dp"
         android:text="New Plan"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view7"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        android:textSize="@dimen/buttonTextSize"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <Button
         android:id="@+id/btn_my_plan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
         android:width="@dimen/widthOfBigButton"
-        android:backgroundTint="@color/darkBrown"
+        android:background="@drawable/button_shape"
         android:text="My Plan"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.638" />
+        android:textSize="@dimen/buttonTextSize"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintHorizontal_bias="0.469"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="@dimen/widthOfHeader"
-        android:height="@dimen/heightOfHeader"
+        android:layout_width="@dimen/headerWidth"
+        android:layout_height="@dimen/heightOfHeader"
+        android:background="@color/brown"
+        android:gravity="center"
         android:text="Plan OF Week"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="40sp"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="196dp" />
-
+        android:textSize="@dimen/headerTextSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.299" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

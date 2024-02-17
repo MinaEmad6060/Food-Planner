@@ -39,7 +39,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     }
 
     @Override
-    public void insertMeal(Plan plan) {
+    public void insertDayMealData(Plan plan) {
         new Thread(){
             @Override
             public void run() {
@@ -50,7 +50,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
 
 
     @Override
-    public void deleteSatMeal(String mealDetails) {
+    public void deleteSatMealData(String mealDetails) {
         new Thread(){
             @Override
             public void run() {
@@ -60,7 +60,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     }
 
     @Override
-    public void deleteSunMeal(String mealDetails) {
+    public void deleteSunMealData(String mealDetails) {
         new Thread(){
             @Override
             public void run() {
@@ -70,7 +70,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     }
 
     @Override
-    public void deleteMonMeal(String mealDetails) {
+    public void deleteMonMealData(String mealDetails) {
         new Thread(){
             @Override
             public void run() {
@@ -80,7 +80,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     }
 
     @Override
-    public void deleteTueMeal(String mealDetails) {
+    public void deleteTueMealData(String mealDetails) {
         new Thread(){
             @Override
             public void run() {
@@ -90,7 +90,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     }
 
     @Override
-    public void deleteWedMeal(String mealDetails) {
+    public void deleteWedMealData(String mealDetails) {
         new Thread(){
             @Override
             public void run() {
@@ -100,7 +100,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     }
 
     @Override
-    public void deleteThMeal(String mealDetails) {
+    public void deleteThMealData(String mealDetails) {
         new Thread(){
             @Override
             public void run() {
@@ -110,7 +110,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     }
 
     @Override
-    public void deleteFriMeal(String mealDetails) {
+    public void deleteFriMealData(String mealDetails) {
         new Thread(){
             @Override
             public void run() {

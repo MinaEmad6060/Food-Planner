@@ -43,7 +43,7 @@ public class AreaActivity extends AppCompatActivity implements AreaActivityInter
         areasRecyclerView =findViewById(R.id.Area_Recycler_List);
         areaActivityPresenterInter = new AreaActivityPresenter(
                 this,
-                MealRepository.getInstance(
+                MealRepository.getFavInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(this)));
 

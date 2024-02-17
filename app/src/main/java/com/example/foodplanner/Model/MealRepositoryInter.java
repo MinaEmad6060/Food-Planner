@@ -26,11 +26,24 @@ public interface MealRepositoryInter {
 
 
 
-    Flowable<List<Meal>> getStoredProducts();
+    Flowable<List<Meal>> getStoredMeals();
 
-    void insertProduct(Meal meal);
+    void insertMeals(Meal meal);
 
-    public void deleteProduct(Meal meal);
+    void deleteMeals(Meal meal);
+
+
+    Flowable<List<String>> getDayMeals(String columnName);
+
+    void insertDayMeal(Plan plan);
+
+    void deleteSatMeal(String mealDetails);
+    void deleteSunMeal(String mealDetails);
+    void deleteMonMeal(String mealDetails);
+    void deleteTueMeal(String mealDetails);
+    void deleteWedMeal(String mealDetails);
+    void deleteThMeal(String mealDetails);
+    void deleteFriMeal(String mealDetails);
 
 
 

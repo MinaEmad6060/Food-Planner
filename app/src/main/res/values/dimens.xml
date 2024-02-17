@@ -9,4 +9,7 @@
     <dimen name="heigthOfHorizontalView">116dp</dimen>
     <dimen name="widthOfHorizontalView">391dp</dimen>
     <dimen name="standardMargin">10dp</dimen>
+    <dimen name="buttonTextSize">20dp</dimen>
+    <dimen name="headerTextSize">34dp</dimen>
+    <dimen name="headerWidth">303dp</dimen>
 </resources>
