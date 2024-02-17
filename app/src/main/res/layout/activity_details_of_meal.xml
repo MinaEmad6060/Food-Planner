@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Instructions"
+        android:background="@color/lightGray"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,6 +46,7 @@
         android:layout_height="wrap_content"
         android:text="Ingrediance"
         android:textColor="#FFFFFF"
+        android:background="@color/lightGray"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +83,7 @@
         android:layout_height="49dp"
         android:text="(Instructions)"
         android:textColor="#FFFFFF"
+        android:background="@color/brown"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,6 +108,7 @@
         android:id="@+id/meal_name_detailes"
         android:layout_width="152dp"
         android:layout_height="60dp"
+        android:background="@color/lightGreen"
         android:text="(Meal Name)"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
@@ -115,22 +119,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.055" />
 
-    <ImageView
-        android:id="@+id/btn_Meals_Details_back"
-        android:layout_width="99dp"
-        android:layout_height="51dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
-        app:layout_constraintStart_toStartOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9"
-        app:srcCompat="@drawable/btn_back" />
-
     <TextView
         android:id="@+id/Area_text"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:background="@color/blue"
         android:text="(Area)"
         android:textColor="#FFFFFF"
         android:textSize="24sp"

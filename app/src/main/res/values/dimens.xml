@@ -6,4 +6,7 @@
     <dimen name="fontSizeOfHeader">48dp</dimen>
     <dimen name="fontSizeOfsmallHeader">38dp</dimen>
     <dimen name="marginTop">35dp</dimen>
+    <dimen name="heigthOfHorizontalView">116dp</dimen>
+    <dimen name="widthOfHorizontalView">391dp</dimen>
+    <dimen name="standardMargin">10dp</dimen>
 </resources>
