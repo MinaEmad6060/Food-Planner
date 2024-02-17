@@ -82,6 +82,7 @@ public class HomeFragment extends Fragment
         homeScreenPresenterInter.getMealsOfCategoryPres("Beef");
         homeScreenPresenterInter.getMealsOfCategoryPres("Seafood");
 
+
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
