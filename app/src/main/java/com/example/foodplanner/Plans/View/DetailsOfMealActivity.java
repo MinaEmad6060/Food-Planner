@@ -112,10 +112,10 @@ public class DetailsOfMealActivity extends AppCompatActivity
         btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailsOfMealActivity.this,
-                        VideoMealActivity.class);
-                intent.putExtra(VIDEO_URI,videoURI);
-                startActivity(intent);
+//                Intent intent = new Intent(DetailsOfMealActivity.this,
+//                        VideoMealActivity.class);
+//                intent.putExtra(VIDEO_URI,videoURI);
+//                startActivity(intent);
             }
         });
     }
