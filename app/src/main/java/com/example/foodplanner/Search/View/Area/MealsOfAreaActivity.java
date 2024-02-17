@@ -17,26 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
-import com.example.foodplanner.Model.Category;
+import com.example.foodplanner.HomeScreen.View.OnAddMealListener;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.Area.MealsOfAreaActivityPresenter;
 import com.example.foodplanner.Search.Presenter.Area.MealsOfAreaActivityPresenterInter;
-import com.example.foodplanner.Search.Presenter.Category.MealsOfCategoryActivityPresenterInter;
-import com.example.foodplanner.Search.Presenter.CategoryActivityPresenter;
-import com.example.foodplanner.Search.Presenter.CategoryActivityPresenterInter;
-import com.example.foodplanner.Search.View.CategoryAdapter;
-import com.example.foodplanner.Search.View.CategoryViewInter;
-import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MealsOfAreaActivity extends AppCompatActivity
-        implements MealsOfAreaViewInter {
+        implements MealsOfAreaViewInter, OnAddMealListener {
 
     private static final String TAG = "MealsOfAreaActivity";
     LinearLayoutManager linearManager;
@@ -72,7 +67,9 @@ public class MealsOfAreaActivity extends AppCompatActivity
         linearManager = new LinearLayoutManager(this);
         linearManager.setOrientation(LinearLayoutManager.VERTICAL);
         homeCategoryAdapter =
-                new HomeCategoryAdapter(this, new ArrayList<>(), new HomeFragment());
+                new HomeCategoryAdapter(this, new ArrayList<>()
+                        , new HomeFragment()
+                ,this);
         mealsOfCategoriesRecyclerView.setLayoutManager(linearManager);
         mealsOfCategoriesRecyclerView.setAdapter(homeCategoryAdapter);
         homeCategoryAdapter.setClickMeal((view1, position) -> {
@@ -99,5 +96,10 @@ public class MealsOfAreaActivity extends AppCompatActivity
     public void showMealsOfArea(List<Meal> meals) {
         homeCategoryAdapter.setMyList(meals);
         homeCategoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onMealClick(Meal meal) {
+        //mealsOfAreaActivityPresenterInter.addFavMeal(meal);
     }
 }

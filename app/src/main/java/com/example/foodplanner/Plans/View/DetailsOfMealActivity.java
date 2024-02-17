@@ -16,21 +16,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
-import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
-import com.example.foodplanner.Model.Area;
 import com.example.foodplanner.Model.Ingredient;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Plans.Presenter.DetailsOfMealActivityPres;
 import com.example.foodplanner.Plans.Presenter.DetailsOfMealActivityPresInter;
 import com.example.foodplanner.R;
-import com.example.foodplanner.Search.Presenter.AreaActivityPresenter;
-import com.example.foodplanner.Search.Presenter.AreaActivityPresenterInter;
-import com.example.foodplanner.Search.View.Area.MealsOfAreaActivity;
-import com.example.foodplanner.Search.View.AreaActivity;
-import com.example.foodplanner.Search.View.AreaAdapter;
 import com.example.foodplanner.Search.View.IngredientsAdapter;
-import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;

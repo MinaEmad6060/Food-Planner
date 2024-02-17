@@ -14,5 +14,4 @@ public interface HomeFragmentInter {
     void showRandomMeal(List<Meal> meals);
 
     void showErr(String err);
-    void onMealClick(Meal meal);
 }

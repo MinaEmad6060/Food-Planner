@@ -1,4 +1,4 @@
-package com.example.foodplanner.db;
+package com.example.foodplanner.db.FavDB;
 
 import com.example.foodplanner.Model.Meal;
 

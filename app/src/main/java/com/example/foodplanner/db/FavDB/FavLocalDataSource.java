@@ -1,4 +1,4 @@
-package com.example.foodplanner.db;
+package com.example.foodplanner.db.FavDB;
 
 import android.content.Context;
 
@@ -7,6 +7,7 @@ import com.example.foodplanner.Model.Meal;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class FavLocalDataSource implements InterFavLocalDataSource {
 
@@ -18,7 +19,7 @@ public class FavLocalDataSource implements InterFavLocalDataSource {
     private static FavLocalDataSource connectToMeal =null;
 
     private FavLocalDataSource(Context context){
-        AppDataBase db= AppDataBase.getInstance(context.getApplicationContext());
+        MealAppDataBase db= MealAppDataBase.getInstance(context.getApplicationContext());
         dao = db.getMealDAO();
         storedProducts=dao.getAllMeals();
     }
@@ -30,11 +31,8 @@ public class FavLocalDataSource implements InterFavLocalDataSource {
     }
     @Override
     public Flowable<List<Meal>> getAllMealsData() {
-        return storedProducts;
+        return storedProducts.subscribeOn(Schedulers.io());
     }
-//    public LiveData<List<Product>> getAllProductsData() {
-//        return storedProducts;
-//    }
 
     @Override
     public void insertMeal(Meal meal) {
