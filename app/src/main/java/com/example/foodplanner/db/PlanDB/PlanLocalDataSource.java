@@ -38,7 +38,6 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
         return storedProducts.subscribeOn(Schedulers.io());
     }
 
-
     @Override
     public void insertDayMealData(Plan plan) {
         new Thread(){
