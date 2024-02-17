@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="pad_left">10dp</dimen>
-    <dimen name="pad_left1">20dp</dimen>
+    <dimen name="widthOfBigButton">220dp</dimen>
+    <dimen name="widthOfHeader">270dp</dimen>
+    <dimen name="heightOfHeader">60dp</dimen>
+    <dimen name="fontSizeOfHeader">48dp</dimen>
+    <dimen name="fontSizeOfsmallHeader">38dp</dimen>
+    <dimen name="marginTop">35dp</dimen>
 </resources>

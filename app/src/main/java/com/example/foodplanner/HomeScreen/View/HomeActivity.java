@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.foodplanner.Favourate.View.FavouriteFragment;
-import com.example.foodplanner.Plans.View.PlanOfWeekFragment;
+import com.example.foodplanner.Plans.View.Plan.PlanOfWeekFragment;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.View.SearchFragment;
 import com.example.foodplanner.databinding.ActivityHomeBinding;

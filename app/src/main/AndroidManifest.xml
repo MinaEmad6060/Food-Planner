@@ -15,6 +15,18 @@
         android:theme="@style/Theme.FoodPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".Plans.View.Plan.MyPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Plans.View.Plan.MyWeekDaysActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Plans.View.Plan.AllMealsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Plans.View.Plan.WeekDaysActivity"
+            android:exported="false" />
+        <activity
             android:name=".Plans.View.VideoMealActivity"
             android:exported="false" />
         <activity

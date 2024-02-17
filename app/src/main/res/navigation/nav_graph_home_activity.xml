@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/planOfWeekFragment"
-        android:name="com.example.foodplanner.Plans.View.PlanOfWeekFragment"
+        android:name="com.example.foodplanner.Plans.View.Plan.PlanOfWeekFragment"
         android:label="fragment_plan_of_week"
         tools:layout="@layout/fragment_plan_of_week" />
     <fragment

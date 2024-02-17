@@ -31,7 +31,6 @@ public class IngredientsActivityPresenter implements IngredientsActivityPresente
         observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         ingredientsList -> {
-
                             ingredientActivityInter.showIngredients(ingredientsList.meals);
                         },
                         err -> {}
