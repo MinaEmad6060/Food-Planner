@@ -1,4 +1,4 @@
-package com.example.foodplanner.ConnectOnline.View;
+package com.example.foodplanner.ConnectOnline;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;

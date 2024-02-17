@@ -1,6 +1,5 @@
-package com.example.foodplanner.ConnectOnline.View;
+package com.example.foodplanner.ConnectOnline;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;

@@ -1,6 +1,7 @@
 package com.example.foodplanner.Plans.View;
 
 import static com.example.foodplanner.HomeScreen.View.HomeFragment.EXTRA_MEAL;
+import static com.example.foodplanner.Search.View.IngredientsActivity.CATEGORY_Ingredients;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Plans.Presenter.DetailsOfMealActivityPres;
 import com.example.foodplanner.Plans.Presenter.DetailsOfMealActivityPresInter;
 import com.example.foodplanner.R;
+import com.example.foodplanner.Search.View.Ingredients.MealsOfIngredientActivity;
 import com.example.foodplanner.Search.View.IngredientsAdapter;
 import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
@@ -31,6 +33,7 @@ import java.util.List;
 
 public class DetailsOfMealActivity extends AppCompatActivity
         implements DetailsOfMealViewInter{
+
 
 
     public static final String VIDEO_URI = "VIDEO";
@@ -90,13 +93,13 @@ public class DetailsOfMealActivity extends AppCompatActivity
                 new IngredientsAdapter(this, new ArrayList<>());
         mealDetailsRecyclerView.setLayoutManager(linearManager);
         mealDetailsRecyclerView.setAdapter(ingredientsAdapter);
-//        ingredientsAdapter.setClickMealArea((view, position) -> {
-//            String mealName = ingredientsAdapter.getItemArea(position).getAreaName();
-//            Intent intent = new Intent(getApplicationContext(),
-//                    MealsOfAreaActivity.class);
-//            intent.putExtra(CATEGORY_MEAL_DETAILS,mealName);
-//            startActivity(intent);
-//        });
+        ingredientsAdapter.setClickMealIngredints((view, position) -> {
+            String mealName = ingredientsAdapter.getItemIngredient(position).getIngredientName();
+            Intent intent = new Intent(getApplicationContext(),
+                    MealsOfIngredientActivity.class);
+            intent.putExtra(CATEGORY_Ingredients,mealName);
+            startActivity(intent);
+        });
 
 
 
@@ -104,10 +107,10 @@ public class DetailsOfMealActivity extends AppCompatActivity
         btnVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(DetailsOfMealActivity.this,
-//                        VideoMealActivity.class);
-//                intent.putExtra(VIDEO_URI,videoURI);
-//                startActivity(intent);
+                Intent intent = new Intent(DetailsOfMealActivity.this,
+                        VideoMealActivity.class);
+                intent.putExtra(VIDEO_URI,videoURI);
+                startActivity(intent);
             }
         });
     }

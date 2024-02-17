@@ -1,4 +1,4 @@
-package com.example.foodplanner.ConnectOnline.View;
+package com.example.foodplanner.ConnectOnline;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.R;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
