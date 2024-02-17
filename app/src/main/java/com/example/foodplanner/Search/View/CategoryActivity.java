@@ -44,7 +44,7 @@ public class CategoryActivity extends AppCompatActivity implements CategoryViewI
         categoriesRecyclerView=findViewById(R.id.Cat_Recycler_List);
         categoryActivityPresenterInter = new CategoryActivityPresenter(
                 this,
-                MealRepository.getInstance(
+                MealRepository.getFavInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(this)));
 

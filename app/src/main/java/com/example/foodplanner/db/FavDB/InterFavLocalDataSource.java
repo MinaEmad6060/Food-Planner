@@ -10,8 +10,8 @@ public interface InterFavLocalDataSource {
     Flowable<List<Meal>> getAllMealsData();
     //LiveData<List<Product>> getAllProductsData();
 
-    void insertMeal(Meal meal);
+    void insertMealData(Meal meal);
 
-    void deleteMeal(Meal meal);
+    void deleteMealData(Meal meal);
 
 }

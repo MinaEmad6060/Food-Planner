@@ -20,7 +20,7 @@ public class FavMealsPresenter implements InterFavMealsPresenter {
 
     @Override
     public Flowable<List<Meal>> getStoredDataDB() {
-        return mealRepositoryInter.getStoredProducts();
+        return mealRepositoryInter.getStoredMeals();
     }
 
 //    @Override
@@ -30,6 +30,6 @@ public class FavMealsPresenter implements InterFavMealsPresenter {
 
     @Override
     public void removeFavProduct(Meal meal) {
-        mealRepositoryInter.deleteProduct(meal);
+        mealRepositoryInter.deleteMeals(meal);
     }
 }

@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment
 
         homeScreenPresenterInter = new HomeScreenPresenter(
                 this,
-                MealRepository.getInstance(
+                MealRepository.getFavInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(viewFrag.getContext())));
 

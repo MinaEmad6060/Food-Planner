@@ -42,7 +42,7 @@
                 android:gravity="center"
                 android:text="Meal Of The Day"
                 android:textColor="#FFFFFF"
-                android:textSize="34sp" />
+                android:textSize="@dimen/headerTextSize" />
 
             <ImageView
                 android:id="@+id/random_img"
@@ -89,6 +89,7 @@
                     android:layout_gravity="right"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="75dp"
+                    android:background="@drawable/button_shape"
                     android:text="View Details" />
             </LinearLayout>
 

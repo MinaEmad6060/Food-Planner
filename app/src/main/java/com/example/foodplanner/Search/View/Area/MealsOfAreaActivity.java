@@ -58,7 +58,7 @@ public class MealsOfAreaActivity extends AppCompatActivity
 
         mealsOfAreaActivityPresenterInter = new MealsOfAreaActivityPresenter(
                 this,
-                MealRepository.getInstance(
+                MealRepository.getFavInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(this)));
 

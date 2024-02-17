@@ -6,5 +6,5 @@ public interface HomeScreenPresenterInter {
     void getRandomMealPres();
     void getMealsOfCategoryPres(String query);
 
-    public void addFavMeal(Meal meal);
+    void addFavMeal(Meal meal);
 }

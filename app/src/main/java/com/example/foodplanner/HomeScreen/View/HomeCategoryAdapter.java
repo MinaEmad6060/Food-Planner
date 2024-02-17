@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.Model.Meal;
+import com.example.foodplanner.Plans.View.Plan.OnAddPlanMealListener;
 import com.example.foodplanner.R;
 
 import java.util.ArrayList;
@@ -35,6 +36,10 @@ public class HomeCategoryAdapter extends
 
     OnAddMealListener onAddMealListener;
 
+    OnAddPlanMealListener onAddPlanMealListener;
+
+    boolean favOrPlan;
+
 
 
     public HomeCategoryAdapter(Context context,
@@ -45,6 +50,19 @@ public class HomeCategoryAdapter extends
         this.mealList = mealList;
         this.homeFragmentInter=homeFragmentInter;
         this.onAddMealListener=onAddMealListener;
+        //add to fav
+        favOrPlan=true;
+    }
+    public HomeCategoryAdapter(Context context,
+                               List<Meal> mealList,
+                               HomeFragmentInter homeFragmentInter,
+                               OnAddPlanMealListener onAddPlanMealListener) {
+        this.context = context;
+        this.mealList = mealList;
+        this.homeFragmentInter=homeFragmentInter;
+        this.onAddPlanMealListener=onAddPlanMealListener;
+        //add to plan
+        favOrPlan=false;
     }
 
     public void setMyList(List<Meal> myList) {
@@ -78,7 +96,11 @@ public class HomeCategoryAdapter extends
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onAddMealListener.onMealClick(meal);
+                if(favOrPlan){
+                    onAddMealListener.onMealClick(meal);
+                }else{
+                    onAddPlanMealListener.onPlanMealClick(meal,"");
+                }
             }
         });
     }
