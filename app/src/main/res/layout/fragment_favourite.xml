@@ -29,7 +29,7 @@
         android:background="#8C936060"
         android:text="Favourite Meals"
         android:textColor="#FFFFFF"
-        android:textSize="48sp"
+        android:textSize="@dimen/fontSizeOfsmallHeader"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"

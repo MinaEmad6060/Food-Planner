@@ -63,7 +63,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".ConnectOnline.StartActivity"
+            android:name=".Online.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
