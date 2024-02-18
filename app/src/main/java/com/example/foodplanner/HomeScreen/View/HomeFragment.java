@@ -81,6 +81,10 @@ public class HomeFragment extends Fragment
 
     InterFavMealsPresenter interFavMealsPresenter;
 
+    List<Meal> emptyList=new ArrayList<Meal>();
+
+    Meal emptyMeal=new Meal("","","","","","");
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +106,7 @@ public class HomeFragment extends Fragment
         btnLogout=view.findViewById(R.id.btn_logout);
         viewFrag=view;
         homeActivity=(HomeActivity)getActivity();
+        emptyList.add(emptyMeal);
 
         SharedPreferences sharedPreferences =
                 homeActivity.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
@@ -148,19 +153,36 @@ public class HomeFragment extends Fragment
                         .subscribe(
                                 mealsInfo -> {
                                     Log.i(TAG, "Obs: "+ mealsInfo.get(0).getName());
-
-                                    reference.child(userName).setValue(mealsInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
+                                    if(!mealsInfo.get(0).getName().equals("")){
+                                        reference.child(userName).setValue(mealsInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
 //                                            mealsInfo.clear();
 //                                            for(Meal myMeal : mealsInfo){
 //                                                interFavMealsPresenter.removeFavMeal(myMeal);
 //                                                Log.i(TAG, "clear: "+myMeal.getName());
 //                                            }
-                                            Log.i(TAG, "size of favList: "+mealsInfo.size());
-                                            Toast.makeText(homeActivity, "Added !", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                                Log.i(TAG, "size of favList: "+mealsInfo.size());
+                                                Toast.makeText(homeActivity, "Added !", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }else{
+
+                                        reference.child(userName).setValue(emptyList).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+//                                            mealsInfo.clear();
+//                                            for(Meal myMeal : mealsInfo){
+//                                                interFavMealsPresenter.removeFavMeal(myMeal);
+//                                                Log.i(TAG, "clear: "+myMeal.getName());
+//                                            }
+                                                Log.i(TAG, "size of favList: "+mealsInfo.size());
+                                                Toast.makeText(homeActivity, "Added !", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                    }
+
 
                                 },
                                 err -> Log.i(TAG, "ObsError: failure "),
