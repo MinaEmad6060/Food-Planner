@@ -14,7 +14,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
 
     private InterPlanDAO dao;
 //    private static ProductsLocalDataSource localSource = null;
-    private Observable<String> storedProducts;
+    private Observable<List<String>> storedProducts;
     PlanAppDataBase db;
     //private LiveData<List<Product>> storedProducts;
 
@@ -31,7 +31,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
         return connectToMeal;
     }
     @Override
-    public Observable<String> getDayMealsData(String columnName) {
+    public Observable<List<String>> getDayMealsData(String columnName) {
         checkDay(columnName);
         return storedProducts.subscribeOn(Schedulers.io());
     }

@@ -15,6 +15,6 @@ public interface SearchFragmentPresenterInter {
 
     void addPlanMeal(Meal meal,String day);
 
-    void removePlanMeal(Meal meal);
+    void removePlanMeal(String mealDetails,String day);
 
 }

@@ -43,19 +43,19 @@ public interface InterPlanDAO {
 //    @Query("SELECT * FROM plan_table")
 //    Flowable<List<Plan>> getAllMeals(); // Change return type to Flowable
     @Query("SELECT saturday FROM plan_table")
-    Observable<String> getSaturdayMeals();
+    Observable<List<String>> getSaturdayMeals();
     @Query("SELECT sunday FROM plan_table")
-    Observable<String> getSundayMeals();
+    Observable<List<String>> getSundayMeals();
     @Query("SELECT monday FROM plan_table")
-    Observable<String> getMondayMeals();
+    Observable<List<String>> getMondayMeals();
     @Query("SELECT tuesday FROM plan_table")
-    Observable<String> getTuesdayMeals();
+    Observable<List<String>> getTuesdayMeals();
     @Query("SELECT wednesday FROM plan_table")
-    Observable<String> getWednesdayMeals();
+    Observable<List<String>> getWednesdayMeals();
     @Query("SELECT thursday FROM plan_table")
-    Observable<String> getThursdayMeals();
+    Observable<List<String>> getThursdayMeals();
     @Query("SELECT friday FROM plan_table")
-    Observable<String> getFridayMeals();
+    Observable<List<String>> getFridayMeals();
 
 
 

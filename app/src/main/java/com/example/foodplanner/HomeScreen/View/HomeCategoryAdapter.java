@@ -129,7 +129,7 @@ public class HomeCategoryAdapter extends
                 }else if(favOrPlan=='p'){
                     onAddPlanMealListener.onPlanMealClick(meal,"");
                 }else if(favOrPlan=='r'){
-                    onRemovePlanMealListener.onRemoveFavClick(meal);
+                    onRemovePlanMealListener.onRemovePlanMealClick(meal);
                 }
             }
         });

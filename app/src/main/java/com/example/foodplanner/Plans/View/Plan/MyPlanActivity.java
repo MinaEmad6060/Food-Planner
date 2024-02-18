@@ -94,7 +94,8 @@ public class MyPlanActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRemoveFavClick(Meal meal) {
-        searchFragmentPresenterInter.removePlanMeal(meal);
+    public void onRemovePlanMealClick(Meal meal) {
+        String mealDetails = meal.getName() + "," + meal.getThumbnail();
+        searchFragmentPresenterInter.removePlanMeal(mealDetails,message);
     }
 }

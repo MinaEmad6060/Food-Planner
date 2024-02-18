@@ -115,7 +115,7 @@ public class MealRepository implements MealRepositoryInter{
 
     //plan
     @Override
-    public Observable<String> getDayMealsRepo(String columnName) {
+    public Observable<List<String>> getDayMealsRepo(String columnName) {
         return interPlanLocalDataSource.getDayMealsData(columnName);
     }
 

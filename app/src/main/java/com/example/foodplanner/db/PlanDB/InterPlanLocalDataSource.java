@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 
 public interface InterPlanLocalDataSource {
-    Observable<String> getDayMealsData(String columnName);
+    Observable<List<String>> getDayMealsData(String columnName);
 
     void insertDayMealData(Plan plan);
 

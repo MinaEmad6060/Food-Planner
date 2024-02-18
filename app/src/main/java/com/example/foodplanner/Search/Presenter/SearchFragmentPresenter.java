@@ -57,61 +57,39 @@ public class SearchFragmentPresenter implements SearchFragmentPresenterInter{
 
     @SuppressLint("CheckResult")
     public void getDayMealsPres(String columnName) {
-        Observable<String> observable =
+        Observable<List<String>> observable =
                 mealRepositoryInter.getDayMealsRepo(columnName);
         observable
-                .observeOn(AndroidSchedulers.mainThread()).map(mealInfo -> {
-                    List<Meal> meals = new ArrayList<Meal>();
-                    String[] s = mealInfo.split(",");
-                    Meal meal = new Meal("",s[0],"","","",s[1]);
-                    meals.add(meal);
-                    // Transform each string into another object
+                .observeOn(AndroidSchedulers.mainThread()).map(mealInfoList -> {
+                    List<Meal> meals = new ArrayList<>();
+                    for (String mealInfo : mealInfoList) {
+                        if(!mealInfo.equals("")){
+                            String[] s = mealInfo.split(",");
+                            Meal meal = new Meal("", s[0], "", "", "", s[1]);
+                            meals.add(meal);
+                        }
+                    }
                     return meals;
                 })
                 .subscribe(
                          mealsInfo -> {
                              Log.i(TAG_mealDetails_new, "Obs: "+ mealsInfo.get(0).getName());
                              searchViewInter.showSearchMeals(mealsInfo);
-//                             check(mealsInfo);
                         },
                         err -> Log.i(TAG_mealDetails_new, "ObsError: failure "),
                         () -> Log.i(TAG_mealDetails_new, "ObsComp: ")
                 );
-
-
-        searchViewInter.showSearchMeals(mealList);
-    }
-
-
-    void check(String s){
-        mealStringList.add(s);
-        Log.i(TAG_mealDetails, "check: "+mealStringList.size());
     }
 
 
 
-    List<Meal> convertStringToMeal(List<String> mealsString){
-        //Log.i(TAG_mealDetails, "Size of String List: "+mealDetails.size());
-        for(int i = 0; i< mealStringList.size(); i++){
-            String[] infoOfMeal;
-            Meal meal=new Meal("","","","","","");
-            infoOfMeal= mealStringList.get(i).split(",");
-            meal.setName(infoOfMeal[0]);
-            meal.setThumbnail(infoOfMeal[1]);
-            mealList.add(meal);
-        }
-        //Log.i(TAG_mealDetails, "Size of Meal List: "+mealList.size());
 
 
-        return mealList;
-    }
 
     @Override
     public void addPlanMeal(Meal meal,String day) {
 
         String mealDetails=meal.getName()+","+meal.getThumbnail();
-        //Log.i(TAG_mealDetails, "mealDetails: "+mealDetails);
-
 
         Plan plan=new Plan();
 
@@ -142,7 +120,29 @@ public class SearchFragmentPresenter implements SearchFragmentPresenterInter{
     }
 
     @Override
-    public void removePlanMeal(Meal meal) {
-
+    public void removePlanMeal(String mealDetails,String day) {
+        switch (day){
+            case "saturday":
+                mealRepositoryInter.deleteSatMeal(mealDetails);
+            break;
+            case "sunday":
+                mealRepositoryInter.deleteSunMeal(mealDetails);
+                break;
+            case "monday":
+                mealRepositoryInter.deleteMonMeal(mealDetails);
+                break;
+            case "tuesday":
+                mealRepositoryInter.deleteTueMeal(mealDetails);
+                break;
+            case "wednesday":
+                mealRepositoryInter.deleteWedMeal(mealDetails);
+                break;
+            case "thursday":
+                mealRepositoryInter.deleteThMeal(mealDetails);
+                break;
+            case "friday":
+                mealRepositoryInter.deleteFriMeal(mealDetails);
+                break;
+        }
     }
 }

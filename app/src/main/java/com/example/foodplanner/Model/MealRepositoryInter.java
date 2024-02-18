@@ -31,7 +31,7 @@ public interface MealRepositoryInter {
     void deleteMeals(Meal meal);
 
 
-    Observable<String> getDayMealsRepo(String columnName);
+    Observable<List<String>> getDayMealsRepo(String columnName);
 
     void insertDayMeal(Plan plan);
 
