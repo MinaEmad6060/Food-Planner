@@ -23,13 +23,8 @@ public class FavMealsPresenter implements InterFavMealsPresenter {
         return mealRepositoryInter.getStoredMeals();
     }
 
-//    @Override
-//    public LiveData<List<Product>> getStoredDataDB() {
-//        return interProductsRepository.getStoredProducts();
-//    }
-
     @Override
-    public void removeFavProduct(Meal meal) {
+    public void removeFavMeal(Meal meal) {
         mealRepositoryInter.deleteMeals(meal);
     }
 }

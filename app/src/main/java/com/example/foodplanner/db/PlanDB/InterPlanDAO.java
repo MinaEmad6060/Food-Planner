@@ -26,25 +26,38 @@
 package com.example.foodplanner.db.PlanDB;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.Plan;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 
 @Dao
 public interface InterPlanDAO {
 //    @Query("SELECT * FROM plan_table")
 //    Flowable<List<Plan>> getAllMeals(); // Change return type to Flowable
-    @Query("SELECT :columnName FROM plan_table")
-    Flowable<List<String>> getDayMeals(String columnName);
+    @Query("SELECT saturday FROM plan_table")
+    Observable<String> getSaturdayMeals();
+    @Query("SELECT sunday FROM plan_table")
+    Observable<String> getSundayMeals();
+    @Query("SELECT monday FROM plan_table")
+    Observable<String> getMondayMeals();
+    @Query("SELECT tuesday FROM plan_table")
+    Observable<String> getTuesdayMeals();
+    @Query("SELECT wednesday FROM plan_table")
+    Observable<String> getWednesdayMeals();
+    @Query("SELECT thursday FROM plan_table")
+    Observable<String> getThursdayMeals();
+    @Query("SELECT friday FROM plan_table")
+    Observable<String> getFridayMeals();
+
+
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Plan plan);

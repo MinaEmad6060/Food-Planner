@@ -21,8 +21,6 @@ public interface MealRepositoryInter {
 
     Observable<IngredientsList> getAllIngredientRepo();
 
-//    Observable<MealList>  getAllMealsOfCategoriesRepo();
-
 
 
 
@@ -33,7 +31,7 @@ public interface MealRepositoryInter {
     void deleteMeals(Meal meal);
 
 
-    Flowable<List<String>> getDayMeals(String columnName);
+    Observable<String> getDayMealsRepo(String columnName);
 
     void insertDayMeal(Plan plan);
 
