@@ -202,6 +202,7 @@ public class HomeFragment extends Fragment
         });
     }
 
+
     @Override
     public void showChickenCategory(List<Meal> meals) {
         setRecyclerViewAdpter(chickenRecyclerView,meals);
