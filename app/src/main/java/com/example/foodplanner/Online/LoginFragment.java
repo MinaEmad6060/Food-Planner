@@ -59,6 +59,9 @@ public class LoginFragment extends Fragment {
 
     StartActivity myStartActivity;
 
+    String userName;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -190,13 +193,15 @@ public class LoginFragment extends Fragment {
                                             String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                                             SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                                            editor.putString("name", userEmail);
+                                            assert userEmail != null;
+                                            userName=extractUserName(userEmail);
+                                            editor.putString("name", userName);
                                             editor.apply();
-                                            Log.i(TAG, "gmail: "+userEmail);
+                                            Log.i(TAG, "gmail: "+userName);
                                             startActivity(new Intent(getActivity(), HomeActivity.class));
                                             Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(getContext(), "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "Login fail, please try again", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -206,5 +211,10 @@ public class LoginFragment extends Fragment {
                 }
             }
         }
+    }
+
+    String extractUserName(String email){
+        String[] userInfo=email.split("@");
+        return userInfo[0];
     }
 }

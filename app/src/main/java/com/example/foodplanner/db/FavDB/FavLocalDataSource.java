@@ -17,9 +17,11 @@ public class FavLocalDataSource implements InterFavLocalDataSource {
     //private LiveData<List<Product>> storedProducts;
 
     private static FavLocalDataSource connectToMeal =null;
+    MealAppDataBase db;
+
 
     private FavLocalDataSource(Context context){
-        MealAppDataBase db= MealAppDataBase.getInstance(context.getApplicationContext());
+        db= MealAppDataBase.getInstance(context.getApplicationContext());
         dao = db.getMealDAO();
         storedMeals =dao.getAllMeals();
     }
