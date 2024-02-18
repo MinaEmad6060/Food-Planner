@@ -2,6 +2,7 @@ package com.example.foodplanner.HomeScreen.View;
 
 import static com.example.foodplanner.Online.LoginFragment.SHARED_PREF;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.foodplanner.Favourate.Presenter.FavMealsPresenter;
+import com.example.foodplanner.Favourate.Presenter.InterFavMealsPresenter;
+import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.Online.StartActivity;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
@@ -32,17 +36,27 @@ import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
 public class HomeFragment extends Fragment
             implements HomeFragmentInter,OnAddMealListener{
 
     //click on meal
+
     public static final String EXTRA_MEAL = "mealTag";
+
+    private static final String EMAIL = "Email";
     private static final String TAG = "HomeFragment";
     RecyclerView chickenRecyclerView;
     RecyclerView beefRecyclerView;
@@ -63,6 +77,19 @@ public class HomeFragment extends Fragment
 
     HomeActivity homeActivity;
 
+    DatabaseReference reference;
+    FirebaseDatabase fireDB;
+
+    MealRepositoryInter mealRepositoryInter;
+
+    InterFavMealsPresenter interFavMealsPresenter;
+
+    List<Meal> emptyList=new ArrayList<Meal>();
+
+    Meal emptyMeal=new Meal("","","","","","");
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +111,12 @@ public class HomeFragment extends Fragment
         btnLogout=view.findViewById(R.id.btn_logout);
         viewFrag=view;
         homeActivity=(HomeActivity)getActivity();
+        emptyList.add(emptyMeal);
 
-        SharedPreferences sharedPreferences =
-                homeActivity.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         String userName = sharedPreferences.getString("name","");
-        Log.i(TAG, "userName: "+userName);
+        Log.i(EMAIL, "userName: "+userName);
 
         mAuth=FirebaseAuth.getInstance();
 
@@ -107,17 +135,56 @@ public class HomeFragment extends Fragment
         homeScreenPresenterInter.getMealsOfCategoryPres("Beef");
         homeScreenPresenterInter.getMealsOfCategoryPres("Seafood");
 
+        mealRepositoryInter = MealRepository.getFavInstance(
+                MealsRemoteDataSource.getInstance(),
+                FavLocalDataSource.getInstance(viewFrag.getContext()));
+
+
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("CheckResult")
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                fireDB=FirebaseDatabase.getInstance();
+                reference=fireDB.getReference("users");
+
+                reference.child(userName).setValue(emptyList).addOnCompleteListener(
+                        new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(homeActivity, "empty add !", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                mealRepositoryInter.getStoredMeals()
+                        .observeOn(AndroidSchedulers.mainThread()).map(mealInfoList -> {
+                            Log.i(TAG, "resume: ");
+                            List<Meal> myMeals = new ArrayList<>();
+                            for (Meal meal : mealInfoList) {
+                                myMeals.add(meal);
+                            }
+                            return myMeals;
+                        })
+                        .subscribe(
+                                mealsInfo -> {
+                                    Log.i(TAG, "Obs: "+ mealsInfo.get(0).getName());
+                                        reference.child(userName).setValue(mealsInfo)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Log.i(TAG, "size of favList: "+mealsInfo.size());
+                                                Toast.makeText(homeActivity, "Added !", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                },
+                                err -> Log.i(TAG, "ObsError: failure "),
+                                () -> Log.i(TAG, "ObsComp: ")
+                        );
                 editor.putString("name", "");
                 editor.apply();
                 mAuth.signOut();
                 Intent intent = new Intent(homeActivity, StartActivity.class);
                 startActivity(intent);
-                homeActivity.finish();
+//                homeActivity.finish();
                 Toast.makeText(homeActivity, "Logout Successful !", Toast.LENGTH_SHORT).show();
             }
         });
@@ -134,6 +201,8 @@ public class HomeFragment extends Fragment
             }
         });
     }
+
+
     @Override
     public void showChickenCategory(List<Meal> meals) {
         setRecyclerViewAdpter(chickenRecyclerView,meals);
