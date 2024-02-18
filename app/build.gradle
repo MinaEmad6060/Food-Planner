@@ -81,6 +81,7 @@ dependencies {
             classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
         }
     }
+    implementation 'com.google.android.material:material:1.6.0'
 
     //Video
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'

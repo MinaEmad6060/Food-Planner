@@ -13,4 +13,5 @@
     <dimen name="headerTextSize">34dp</dimen>
     <dimen name="headerWidth">303dp</dimen>
     <dimen name="smallTextSize">14dp</dimen>
+    <dimen name="midText">24dp</dimen>
 </resources>
