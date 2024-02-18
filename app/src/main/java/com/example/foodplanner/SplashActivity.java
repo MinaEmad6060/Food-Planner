@@ -22,16 +22,16 @@ public class SplashActivity extends AppCompatActivity {
         animationView=findViewById(R.id.Lottie_Img);
 
 
-        myText.animate().translationY(-1400).setDuration(2700).setStartDelay(0) ;
+        myText.animate().translationY(-1000).setDuration(2700).setStartDelay(1) ;
         animationView.animate().translationX(2000).setDuration(2002).setStartDelay(2900);
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(getApplicationContext(), StartActivity.class);
-                    startActivity(i);
+                    Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                    startActivity(intent);
                 }
-            }, 5000);
+            }, 3000);
 
     }
 }

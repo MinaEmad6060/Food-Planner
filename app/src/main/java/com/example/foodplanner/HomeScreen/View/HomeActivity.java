@@ -1,10 +1,14 @@
 package com.example.foodplanner.HomeScreen.View;
 
+import static com.example.foodplanner.Online.LoginFragment.SHARED_PREF;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -22,6 +26,12 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        SharedPreferences sharedPreferences =
+                getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("name","a");
+        Log.i(TAG, "userName: "+userName);
+
         if(savedInstanceState == null){
             homeFragment = new HomeFragment();
             FragmentManager fragManager = getSupportFragmentManager();

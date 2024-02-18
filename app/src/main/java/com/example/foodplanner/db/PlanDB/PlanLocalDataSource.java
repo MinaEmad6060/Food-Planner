@@ -6,17 +6,14 @@ import com.example.foodplanner.Model.Plan;
 
 import java.util.List;
 
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class PlanLocalDataSource implements InterPlanLocalDataSource {
 
     private InterPlanDAO dao;
-//    private static ProductsLocalDataSource localSource = null;
-    private Observable<List<String>> storedProducts;
+    private Observable<List<String>> storedMeals;
     PlanAppDataBase db;
-    //private LiveData<List<Product>> storedProducts;
 
     private static PlanLocalDataSource connectToMeal =null;
 
@@ -33,7 +30,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     @Override
     public Observable<List<String>> getDayMealsData(String columnName) {
         checkDay(columnName);
-        return storedProducts.subscribeOn(Schedulers.io());
+        return storedMeals.subscribeOn(Schedulers.io());
     }
 
     @Override
@@ -122,27 +119,26 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
 
         switch (day){
             case "saturday":
-                storedProducts=dao.getSaturdayMeals();
+                storedMeals =dao.getSaturdayMeals();
                 break;
             case "sunday":
-                storedProducts=dao.getSundayMeals();
+                storedMeals =dao.getSundayMeals();
                 break;
             case "monday":
-                storedProducts=dao.getMondayMeals();
+                storedMeals =dao.getMondayMeals();
                 break;
             case "tuesday":
-                storedProducts=dao.getTuesdayMeals();
+                storedMeals =dao.getTuesdayMeals();
                 break;
             case "wednesday":
-                storedProducts=dao.getWednesdayMeals();
+                storedMeals =dao.getWednesdayMeals();
                 break;
             case "thursday":
-                storedProducts=dao.getThursdayMeals();
+                storedMeals =dao.getThursdayMeals();
                 break;
             case "friday":
-                storedProducts=dao.getFridayMeals();
+                storedMeals =dao.getFridayMeals();
                 break;
         }
-
     }
 }

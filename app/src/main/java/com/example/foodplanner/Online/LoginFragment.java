@@ -1,6 +1,8 @@
 package com.example.foodplanner.Online;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +42,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginFragment extends Fragment {
 
     static final String TAG = "Login";
+
+    public static final String SHARED_PREF = "sharedPre";
     EditText emailLogin;
     EditText passwordLogin;
     Button btnLogin;
@@ -48,10 +53,11 @@ public class LoginFragment extends Fragment {
     ImageView btnGoogle;
 
     FirebaseAuth mAuth;
+
     Button btnGuest;
     TextView signUp;
 
-    StartActivity startActivity;
+    StartActivity myStartActivity;
 
 
     @Override
@@ -72,12 +78,11 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         signUp=view.findViewById(R.id.Sign_Up);
         btnGuest=view.findViewById(R.id.btn_guest);
-        startActivity=(StartActivity)getActivity();
+        myStartActivity =(StartActivity)getActivity();
         btnGoogle=view.findViewById(R.id.btn_Google);
-//        btnGoogleLogin.setOnClickListener(v -> {
-//            NavDirections action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment();
-//            Navigation.findNavController(v).navigate(action);
-//        });
+        SharedPreferences sharedPreferences =
+                myStartActivity.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
 
         signUp.setOnClickListener(v -> {
             NavDirections action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment();
@@ -87,7 +92,9 @@ public class LoginFragment extends Fragment {
         btnGuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent moveToHome = new Intent(startActivity, HomeActivity.class);
+                editor.putString("name","");
+                editor.apply();
+                Intent moveToHome = new Intent(myStartActivity, HomeActivity.class);
                 startActivity(moveToHome);
             }
         });
@@ -96,8 +103,6 @@ public class LoginFragment extends Fragment {
         emailLogin=view.findViewById(R.id.Login_Email);
         passwordLogin=view.findViewById(R.id.Login_Password);
         btnLogin=view.findViewById(R.id.btn_login);
-        //btnGoogle=findViewById(R.id.btn_Google);
-
         mAuth = FirebaseAuth.getInstance();
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -115,25 +120,35 @@ public class LoginFragment extends Fragment {
                                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
-                                        Toast.makeText(startActivity, "Login Successful",
+                                        Log.i(TAG, "user: "+user);
+                                        editor.putString("name",user);
+                                        editor.apply();
+                                        Intent intent=new Intent(myStartActivity, HomeActivity.class);
+                                        Toast.makeText(myStartActivity, "Welcome" + " " + user,
                                                 Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(startActivity, HomeActivity.class));
+                                        startActivity(intent);
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(startActivity, "Login Failed",
+                                        Toast.makeText(myStartActivity, "Login Failed",
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     }else{
                         passwordLogin.setError("pass cant be empty");
+                        editor.putString("name","");
+                        editor.apply();
                     }
 
                 } else if (user.isEmpty()) {
                     emailLogin.setError("email cant be empty");
+                    editor.putString("name","");
+                    editor.apply();
                 }else{
                     emailLogin.setError("enter valid email");
+                    editor.putString("name","");
+                    editor.apply();
                 }
             }
         });
@@ -172,6 +187,12 @@ public class LoginFragment extends Fragment {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
+                                            String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putString("name", userEmail);
+                                            editor.apply();
+                                            Log.i(TAG, "gmail: "+userEmail);
                                             startActivity(new Intent(getActivity(), HomeActivity.class));
                                             Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                                         } else {

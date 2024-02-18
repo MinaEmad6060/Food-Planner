@@ -1,6 +1,10 @@
 package com.example.foodplanner.HomeScreen.View;
 
+import static com.example.foodplanner.Online.LoginFragment.SHARED_PREF;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,14 +13,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.foodplanner.Online.StartActivity;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenterInter;
@@ -25,6 +32,8 @@ import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +43,7 @@ public class HomeFragment extends Fragment
 
     //click on meal
     public static final String EXTRA_MEAL = "mealTag";
+    private static final String TAG = "HomeFragment";
     RecyclerView chickenRecyclerView;
     RecyclerView beefRecyclerView;
     RecyclerView seaFoodRecyclerView;
@@ -42,10 +52,16 @@ public class HomeFragment extends Fragment
 
     Button btnRandom;
 
+    FloatingActionButton btnLogout;
+    FirebaseAuth mAuth;
+
+
     View viewFrag;
     ImageView randomMealImg;
 
     HomeScreenPresenterInter homeScreenPresenterInter;
+
+    HomeActivity homeActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +81,16 @@ public class HomeFragment extends Fragment
         randomMealName=view.findViewById(R.id.random_name);
         randomMealImg=view.findViewById(R.id.random_img);
         btnRandom=view.findViewById(R.id.btn_random);
+        btnLogout=view.findViewById(R.id.btn_logout);
         viewFrag=view;
+        homeActivity=(HomeActivity)getActivity();
+
+        SharedPreferences sharedPreferences =
+                homeActivity.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("name","");
+        Log.i(TAG, "userName: "+userName);
+
+        mAuth=FirebaseAuth.getInstance();
 
         chickenRecyclerView=view.findViewById(R.id.Chicken_View);
         beefRecyclerView=view.findViewById(R.id.Beef_view);
@@ -81,6 +106,21 @@ public class HomeFragment extends Fragment
         homeScreenPresenterInter.getMealsOfCategoryPres("Chicken");
         homeScreenPresenterInter.getMealsOfCategoryPres("Beef");
         homeScreenPresenterInter.getMealsOfCategoryPres("Seafood");
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("name", "");
+                editor.apply();
+                mAuth.signOut();
+                Intent intent = new Intent(homeActivity, StartActivity.class);
+                startActivity(intent);
+                homeActivity.finish();
+                Toast.makeText(homeActivity, "Logout Successful !", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         btnRandom.setOnClickListener(new View.OnClickListener() {
