@@ -11,7 +11,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class PlanLocalDataSource implements InterPlanLocalDataSource {
 
-
     private InterPlanDAO dao;
     private Observable<List<String>> storedMeals;
     PlanAppDataBase db;
