@@ -59,6 +59,9 @@ public class LoginFragment extends Fragment {
 
     StartActivity myStartActivity;
 
+    String userName;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,10 +124,12 @@ public class LoginFragment extends Fragment {
                                     @Override
                                     public void onSuccess(AuthResult authResult) {
                                         Log.i(TAG, "user: "+user);
-                                        editor.putString("name",user);
+                                        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                                        userName=extractUserName(userEmail);
+                                        editor.putString("name",userName);
                                         editor.apply();
                                         Intent intent=new Intent(myStartActivity, HomeActivity.class);
-                                        Toast.makeText(myStartActivity, "Welcome" + " " + user,
+                                        Toast.makeText(myStartActivity, "Welcome" + " " + userName,
                                                 Toast.LENGTH_SHORT).show();
                                         startActivity(intent);
                                     }
@@ -190,13 +195,14 @@ public class LoginFragment extends Fragment {
                                             String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                                             SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                                            editor.putString("name", userEmail);
+                                            userName=extractUserName(userEmail);
+                                            editor.putString("name", userName);
                                             editor.apply();
-                                            Log.i(TAG, "gmail: "+userEmail);
+                                            Log.i(TAG, "gmail: "+userName);
                                             startActivity(new Intent(getActivity(), HomeActivity.class));
                                             Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(getContext(), "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), "Login fail, please try again", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -206,5 +212,10 @@ public class LoginFragment extends Fragment {
                 }
             }
         }
+    }
+
+    String extractUserName(String email){
+        String[] userInfo=email.split("@");
+        return userInfo[0];
     }
 }
