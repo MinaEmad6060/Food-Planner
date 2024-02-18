@@ -1,4 +1,4 @@
-package com.example.foodplanner.ConnectOnline;
+package com.example.foodplanner.Online;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,15 +15,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.R;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 
 public class LoginFragment extends Fragment {
@@ -33,9 +43,9 @@ public class LoginFragment extends Fragment {
     EditText passwordLogin;
     Button btnLogin;
 
-//    Button btnGoogle;
-//    GoogleSignInClient gClient;
-//    GoogleSignInOptions gOptions;
+    GoogleSignInClient googleSignInClient;
+
+    ImageView btnGoogle;
 
     FirebaseAuth mAuth;
     Button btnGuest;
@@ -43,7 +53,6 @@ public class LoginFragment extends Fragment {
 
     StartActivity startActivity;
 
-//    Button btnGoogleLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +73,7 @@ public class LoginFragment extends Fragment {
         signUp=view.findViewById(R.id.Sign_Up);
         btnGuest=view.findViewById(R.id.btn_guest);
         startActivity=(StartActivity)getActivity();
-//        btnGoogleLogin=view.findViewById(R.id.btn_Google);
+        btnGoogle=view.findViewById(R.id.btn_Google);
 //        btnGoogleLogin.setOnClickListener(v -> {
 //            NavDirections action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment();
 //            Navigation.findNavController(v).navigate(action);
@@ -132,5 +141,49 @@ public class LoginFragment extends Fragment {
 
 
 
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("173711819771-ikp71o791cj1vq0b75l0drndg81489up.apps.googleusercontent.com")
+                .requestEmail()
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(getContext(), googleSignInOptions);
+        btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = googleSignInClient.getSignInIntent();
+                startActivityForResult(intent, 100);
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
+            if (signInAccountTask.isSuccessful()) {
+                String s = "Google sign in successful";
+                Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                try {
+                    GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
+                    if (googleSignInAccount != null) {
+                        AuthCredential authCredential = GoogleAuthProvider.getCredential(googleSignInAccount.getIdToken(), null);
+                        mAuth.signInWithCredential(authCredential).addOnCompleteListener(requireActivity(),
+                                new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            startActivity(new Intent(getActivity(), HomeActivity.class));
+                                            Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getContext(), "Login Unsuccessful", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                    }
+                } catch (ApiException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

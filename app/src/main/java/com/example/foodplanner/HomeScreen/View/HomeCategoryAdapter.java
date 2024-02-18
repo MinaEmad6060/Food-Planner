@@ -1,5 +1,6 @@
 package com.example.foodplanner.HomeScreen.View;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Plans.View.Plan.OnAddPlanMealListener;
+import com.example.foodplanner.Plans.View.Plan.OnRemovePlanMealListener;
 import com.example.foodplanner.R;
 
 import java.util.ArrayList;
@@ -27,6 +29,8 @@ public class HomeCategoryAdapter extends
 
     HomeFragmentInter homeFragmentInter;
     private static final String TAG = "MyRecyclerAdapter";
+    private static final String TAG2 = "FPR";
+
     Context context;
 //    Meal meal = new Meal("","","","","","");
     List<Meal> mealList=new ArrayList<Meal>();
@@ -37,8 +41,9 @@ public class HomeCategoryAdapter extends
     OnAddMealListener onAddMealListener;
 
     OnAddPlanMealListener onAddPlanMealListener;
+    OnRemovePlanMealListener onRemovePlanMealListener;
 
-    boolean favOrPlan;
+    char favOrPlan;
 
 
 
@@ -51,7 +56,7 @@ public class HomeCategoryAdapter extends
         this.homeFragmentInter=homeFragmentInter;
         this.onAddMealListener=onAddMealListener;
         //add to fav
-        favOrPlan=true;
+        favOrPlan='f';
     }
     public HomeCategoryAdapter(Context context,
                                List<Meal> mealList,
@@ -62,7 +67,19 @@ public class HomeCategoryAdapter extends
         this.homeFragmentInter=homeFragmentInter;
         this.onAddPlanMealListener=onAddPlanMealListener;
         //add to plan
-        favOrPlan=false;
+        favOrPlan='p';
+    }
+
+    public HomeCategoryAdapter(Context context,
+                               List<Meal> mealList,
+                               HomeFragmentInter homeFragmentInter,
+                               OnRemovePlanMealListener onRemovePlanMealListener) {
+        this.context = context;
+        this.mealList = mealList;
+        this.homeFragmentInter=homeFragmentInter;
+        this.onRemovePlanMealListener=onRemovePlanMealListener;
+        //add to plan
+        favOrPlan='r';
     }
 
     public void setMyList(List<Meal> myList) {
@@ -93,17 +110,32 @@ public class HomeCategoryAdapter extends
         Glide.with(context).load(mealList.get(position).getThumbnail())
                 .into(holder.mealImg);
 
+        Log.i(TAG2, "test FPR : "+ favOrPlan);
+            if(favOrPlan=='f'){
+                holder.btnAdd.setText("Like It");
+            }else if(favOrPlan=='p'){
+                holder.btnAdd.setText("Add");
+            }else if(favOrPlan=='r'){
+                holder.btnAdd.setText("Remove");
+            }
+
+
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                if(favOrPlan){
+                if(favOrPlan=='f'){
                     onAddMealListener.onMealClick(meal);
-                }else{
+                }else if(favOrPlan=='p'){
                     onAddPlanMealListener.onPlanMealClick(meal,"");
+                }else if(favOrPlan=='r'){
+                    onRemovePlanMealListener.onRemovePlanMealClick(meal);
                 }
             }
         });
     }
+
+
 
     public Meal getItem (int position){
         return mealList.get(position);

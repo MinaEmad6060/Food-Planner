@@ -1,4 +1,4 @@
-package com.example.foodplanner.ConnectOnline;
+package com.example.foodplanner.Online;
 
 import android.os.Bundle;
 

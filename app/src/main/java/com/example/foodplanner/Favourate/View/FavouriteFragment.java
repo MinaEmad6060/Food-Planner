@@ -32,7 +32,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public class FavouriteFragment extends Fragment
-        implements InterFavProductsView, OnMealClickListener {
+        implements InterFavMealsView, OnRemoveMealClickListener {
 
     private static final String TAG = "FavProductsActivity";
     View viewFrag;
@@ -79,21 +79,6 @@ public class FavouriteFragment extends Fragment
         showData(interFavMealsPresenter.getStoredDataDB());
     }
 
-    //    @Override
-//    public void onFavClick(Product product) {
-//
-//    }
-//    public void getData() {
-//        Flowable<List<Meals.Meal>> data = presenter.getStoredMeals();
-//        data.subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(meals -> {
-//                    adapter.setMyList((ArrayList<Meals.Meal>) meals);
-//                    adapter.notifyDataSetChanged();
-//                });
-//
-//    }
-
     @SuppressLint({"CheckResult", "NotifyDataSetChanged"})
     @Override
     public void showData(Flowable<List<Meal>> meals) {
@@ -110,8 +95,8 @@ public class FavouriteFragment extends Fragment
     }
 
     @Override
-    public void onFavClick(Meal meal) {
-        interFavMealsPresenter.removeFavProduct(meal);
+    public void onRemoveFavClick(Meal meal) {
+        interFavMealsPresenter.removeFavMeal(meal);
     }
 
 }

@@ -14,15 +14,20 @@ import android.util.Log;
 import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.Model.Meal;
-import com.example.foodplanner.Plans.Presenter.Plan.AllMealsPresInter;
+import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
+import com.example.foodplanner.Search.Presenter.SearchFragmentPresenter;
 import com.example.foodplanner.Search.Presenter.SearchFragmentPresenterInter;
+import com.example.foodplanner.Search.View.SearchViewInter;
+import com.example.foodplanner.db.PlanDB.PlanLocalDataSource;
+import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AllMealsActivity extends AppCompatActivity
-            implements OnAddPlanMealListener{
+            implements OnAddPlanMealListener, SearchViewInter {
 
 
     private static final String TAG = "AllMealsActivity";
@@ -44,6 +49,13 @@ public class AllMealsActivity extends AppCompatActivity
         Intent listenMessage = getIntent();
         message = listenMessage.getStringExtra(EXTRA_DAY);
         Log.i(TAG, "message: "+message);
+
+        searchFragmentPresenterInter = new SearchFragmentPresenter(
+                this,
+                MealRepository.getPlanInstance(
+                        MealsRemoteDataSource.getInstance()
+                        , PlanLocalDataSource.getPlanInstance(AllMealsActivity.this)));
+
 
         MealsRecyclerView =findViewById(R.id.allMeals_Recycler_List);
         linearManagerSearch = new LinearLayoutManager(AllMealsActivity.this);
@@ -70,5 +82,11 @@ public class AllMealsActivity extends AppCompatActivity
     public void onPlanMealClick(Meal meal,String day) {
         day=message;
         searchFragmentPresenterInter.addPlanMeal(meal,day);
+    }
+
+    @Override
+    public void showSearchMeals(List<Meal> searchMeals) {
+        homeAdapter.setMyList(searchMeals);
+        homeAdapter.notifyDataSetChanged();
     }
 }

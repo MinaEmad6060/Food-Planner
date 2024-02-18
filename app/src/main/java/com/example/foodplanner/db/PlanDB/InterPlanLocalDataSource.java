@@ -5,9 +5,10 @@ import com.example.foodplanner.Model.Plan;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 public interface InterPlanLocalDataSource {
-    Flowable<List<String>> getDayMealsData(String columnName);
+    Observable<List<String>> getDayMealsData(String columnName);
 
     void insertDayMealData(Plan plan);
 

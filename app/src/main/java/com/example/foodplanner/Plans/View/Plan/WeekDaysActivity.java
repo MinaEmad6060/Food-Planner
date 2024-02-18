@@ -47,6 +47,62 @@ public class WeekDaysActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnSun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeekDaysActivity.this,
+                        AllMealsActivity.class);
+                intent.putExtra(EXTRA_DAY,"sunday");
+                startActivity(intent);
+            }
+        });
+
+        btnMon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeekDaysActivity.this,
+                        AllMealsActivity.class);
+                intent.putExtra(EXTRA_DAY,"monday");
+                startActivity(intent);
+            }
+        });
+        btnTue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeekDaysActivity.this,
+                        AllMealsActivity.class);
+                intent.putExtra(EXTRA_DAY,"tuesday");
+                startActivity(intent);
+            }
+        });
+        btnWed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeekDaysActivity.this,
+                        AllMealsActivity.class);
+                intent.putExtra(EXTRA_DAY,"wednesday");
+                startActivity(intent);
+            }
+        });
+        btnTh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeekDaysActivity.this,
+                        AllMealsActivity.class);
+                intent.putExtra(EXTRA_DAY,"thursday");
+                startActivity(intent);
+            }
+        });
+        btnFri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeekDaysActivity.this,
+                        AllMealsActivity.class);
+                intent.putExtra(EXTRA_DAY,"friday");
+                startActivity(intent);
+            }
+        });
+
 
 
     }

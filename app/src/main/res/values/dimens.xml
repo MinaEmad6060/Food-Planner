@@ -12,4 +12,5 @@
     <dimen name="buttonTextSize">20dp</dimen>
     <dimen name="headerTextSize">34dp</dimen>
     <dimen name="headerWidth">303dp</dimen>
+    <dimen name="smallTextSize">14dp</dimen>
 </resources>

@@ -6,7 +6,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
 
-public interface InterFavProductsView {
+public interface InterFavMealsView {
     void showData(Flowable<List<Meal>> meals);
 }
 
