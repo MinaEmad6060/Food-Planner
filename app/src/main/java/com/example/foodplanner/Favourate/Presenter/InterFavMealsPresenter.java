@@ -9,5 +9,5 @@ import io.reactivex.rxjava3.core.Flowable;
 public interface InterFavMealsPresenter {
 
     public Flowable<List<Meal>> getStoredDataDB();
-    public void removeFavProduct(Meal meal);
+    public void removeFavMeal(Meal meal);
 }

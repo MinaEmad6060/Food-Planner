@@ -26,9 +26,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="112dp"
-        android:text="Food Planner"
-        android:textColor="#913F5B"
-        android:textSize="25dp"
+        android:text="Let's Cook"
+        android:textColor="@color/splashText"
+        android:textSize="@dimen/fontSizeOfsmallHeader"
         android:textStyle="bold" />
 
     <com.airbnb.lottie.LottieAnimationView

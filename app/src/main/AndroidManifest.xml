@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,14 +15,26 @@
         android:theme="@style/Theme.FoodPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".Plans.View.Plan.MyPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Plans.View.Plan.MyWeekDaysActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Plans.View.Plan.AllMealsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Plans.View.Plan.WeekDaysActivity"
+            android:exported="false" />
+        <activity
             android:name=".Plans.View.VideoMealActivity"
             android:exported="false" />
         <activity
             android:name=".Search.View.Ingredients.MealsOfIngredientActivity"
             android:exported="false" />
-        <activity
-            android:name=".Search.View.MealsOfIngredientActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Search.View.MealsOfIngredientActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".Search.View.Category.MealsOfCategoryActivity"
             android:exported="false" />
@@ -45,28 +57,28 @@
             android:name=".HomeScreen.View.HomeActivity"
             android:exported="true">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
         <activity
-            android:name=".ConnectOnline.View.StartActivity"
+            android:name=".Online.StartActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".SplashActivity"
             android:exported="true">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
     </application>
 

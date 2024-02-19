@@ -16,8 +16,7 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.AreaActivityPresenter;
 import com.example.foodplanner.Search.Presenter.AreaActivityPresenterInter;
 import com.example.foodplanner.Search.View.Area.MealsOfAreaActivity;
-import com.example.foodplanner.Search.View.Category.MealsOfCategoryActivity;
-import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class AreaActivity extends AppCompatActivity implements AreaActivityInter
         areasRecyclerView =findViewById(R.id.Area_Recycler_List);
         areaActivityPresenterInter = new AreaActivityPresenter(
                 this,
-                MealRepository.getInstance(
+                MealRepository.getFavInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(this)));
 

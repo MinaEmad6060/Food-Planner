@@ -43,15 +43,19 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-auth:22.3.1'
+    implementation 'com.google.firebase:firebase-database:20.3.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
     //Room
     implementation "androidx.room:room-runtime:2.6.1"
     annotationProcessor "androidx.room:room-compiler:2.6.1"
-    implementation ("androidx.room:room-rxjava3:2.6.1")
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation ("io.reactivex.rxjava3:rxjava:3.1.6")
+    implementation ("com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0")
+    implementation 'androidx.room:room-rxjava3:2.6.1'
 
 
 
@@ -78,10 +82,24 @@ dependencies {
             classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3"
         }
     }
+    implementation 'com.google.android.material:material:1.6.0'
 
     //Video
-    implementation 'com.google.android.exoplayer:exoplayer:2.19.1'
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //Google
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth")
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
 
 
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Plans.View.Plan.MyPlanActivity">
+
+    <View
+        android:id="@+id/view_myPlan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#739E9A9A" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myPlan_Recycler_List"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@color/lightGray"
+        app:layout_constraintEnd_toEndOf="@+id/myPlanText"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/myPlanText"
+        app:layout_constraintTop_toBottomOf="@+id/myPlanText" />
+
+    <TextView
+        android:id="@+id/myPlanText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/brown"
+        android:text="My Plan"
+        android:textColor="@color/white"
+        android:textSize="@dimen/fontSizeOfsmallHeader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_myPlan"
+        app:layout_constraintVertical_bias="0.071" />
+
+    <ImageView
+        android:id="@+id/btn_myPlan_back"
+        android:layout_width="99dp"
+        android:layout_height="51dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.882"
+        app:srcCompat="@drawable/btn_back" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

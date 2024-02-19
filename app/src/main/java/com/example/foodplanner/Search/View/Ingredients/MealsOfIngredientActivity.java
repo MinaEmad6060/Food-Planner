@@ -1,7 +1,6 @@
 package com.example.foodplanner.Search.View.Ingredients;
 
 import static com.example.foodplanner.HomeScreen.View.HomeFragment.EXTRA_MEAL;
-import static com.example.foodplanner.Search.View.CategoryActivity.CATEGORY;
 import static com.example.foodplanner.Search.View.IngredientsActivity.CATEGORY_Ingredients;
 
 import android.annotation.SuppressLint;
@@ -18,26 +17,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
-import com.example.foodplanner.Model.Category;
+import com.example.foodplanner.HomeScreen.View.OnAddMealListener;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
-import com.example.foodplanner.Search.Presenter.Category.MealsOfCategoryActivityPresenterInter;
-import com.example.foodplanner.Search.Presenter.CategoryActivityPresenter;
-import com.example.foodplanner.Search.Presenter.CategoryActivityPresenterInter;
 import com.example.foodplanner.Search.Presenter.Ingredients.MealsOfIngredientsActivityPresenter;
 import com.example.foodplanner.Search.Presenter.Ingredients.MealsOfIngredientsActivityPresenterInter;
-import com.example.foodplanner.Search.View.CategoryAdapter;
-import com.example.foodplanner.Search.View.CategoryViewInter;
-import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MealsOfIngredientActivity extends AppCompatActivity
-        implements MealsOfIngredientsViewInter {
+        implements MealsOfIngredientsViewInter, OnAddMealListener {
     private static final String TAG = "MealsOfIngredientsActiv";
     LinearLayoutManager linearManager;
 
@@ -65,7 +59,7 @@ public class MealsOfIngredientActivity extends AppCompatActivity
         mealsOfIngredientsActivityPresenterInter =
                 new MealsOfIngredientsActivityPresenter(
                         this,
-                        MealRepository.getInstance(
+                        MealRepository.getFavInstance(
                                 MealsRemoteDataSource.getInstance()
                                 , FavLocalDataSource.getInstance(this)));
 
@@ -74,7 +68,8 @@ public class MealsOfIngredientActivity extends AppCompatActivity
         linearManager = new LinearLayoutManager(this);
         linearManager.setOrientation(LinearLayoutManager.VERTICAL);
         homeCategoryAdapter =
-                new HomeCategoryAdapter(this, new ArrayList<>(), new HomeFragment());
+                new HomeCategoryAdapter(this, new ArrayList<>(), new HomeFragment(),
+                        this);
         mealsOfIngredientsRecyclerView.setLayoutManager(linearManager);
         mealsOfIngredientsRecyclerView.setAdapter(homeCategoryAdapter);
         homeCategoryAdapter.setClickMeal((view1, position) -> {
@@ -102,5 +97,10 @@ public class MealsOfIngredientActivity extends AppCompatActivity
     public void showMealsOfIngredients(List<Meal> meals) {
         homeCategoryAdapter.setMyList(meals);
         homeCategoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onMealClick(Meal meal) {
+
     }
 }

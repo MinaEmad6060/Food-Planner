@@ -20,16 +20,11 @@ public class FavMealsPresenter implements InterFavMealsPresenter {
 
     @Override
     public Flowable<List<Meal>> getStoredDataDB() {
-        return mealRepositoryInter.getStoredProducts();
+        return mealRepositoryInter.getStoredMeals();
     }
 
-//    @Override
-//    public LiveData<List<Product>> getStoredDataDB() {
-//        return interProductsRepository.getStoredProducts();
-//    }
-
     @Override
-    public void removeFavProduct(Meal meal) {
-        mealRepositoryInter.deleteProduct(meal);
+    public void removeFavMeal(Meal meal) {
+        mealRepositoryInter.deleteMeals(meal);
     }
 }

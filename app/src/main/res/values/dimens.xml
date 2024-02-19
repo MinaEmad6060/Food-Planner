@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="pad_left">10dp</dimen>
-    <dimen name="pad_left1">20dp</dimen>
+    <dimen name="widthOfBigButton">220dp</dimen>
+    <dimen name="widthOfHeader">270dp</dimen>
+    <dimen name="heightOfHeader">60dp</dimen>
+    <dimen name="fontSizeOfHeader">48dp</dimen>
+    <dimen name="fontSizeOfsmallHeader">38dp</dimen>
+    <dimen name="marginTop">35dp</dimen>
+    <dimen name="heigthOfHorizontalView">116dp</dimen>
+    <dimen name="widthOfHorizontalView">391dp</dimen>
+    <dimen name="standardMargin">10dp</dimen>
+    <dimen name="buttonTextSize">20dp</dimen>
+    <dimen name="headerTextSize">34dp</dimen>
+    <dimen name="headerWidth">303dp</dimen>
+    <dimen name="smallTextSize">14dp</dimen>
+    <dimen name="midText">24dp</dimen>
+    <dimen name="specialTextSize">20dp</dimen>
 </resources>

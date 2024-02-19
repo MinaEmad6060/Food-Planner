@@ -3,12 +3,9 @@ package com.example.foodplanner.HomeScreen.Presenter;
 import android.annotation.SuppressLint;
 
 import com.example.foodplanner.HomeScreen.View.HomeFragmentInter;
-import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealList;
 import com.example.foodplanner.Model.MealRepositoryInter;
-
-import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -64,7 +61,7 @@ public class HomeScreenPresenter implements HomeScreenPresenterInter{
 
     @Override
     public void addFavMeal(Meal meal) {
-        mealRepositoryInter.insertProduct(meal);
+        mealRepositoryInter.insertMeals(meal);
     }
 
 }

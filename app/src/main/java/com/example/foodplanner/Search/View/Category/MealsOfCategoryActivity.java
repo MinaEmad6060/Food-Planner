@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
+import com.example.foodplanner.HomeScreen.View.OnAddMealListener;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
@@ -23,14 +24,14 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.Category.MealsOfCategoryActivityPresenter;
 import com.example.foodplanner.Search.Presenter.Category.MealsOfCategoryActivityPresenterInter;
 import com.example.foodplanner.Search.View.CategoryActivity;
-import com.example.foodplanner.db.FavLocalDataSource;
+import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MealsOfCategoryActivity extends AppCompatActivity
-        implements MealsOfCategoryViewInter {
+        implements MealsOfCategoryViewInter, OnAddMealListener {
 
     private static final String TAG = "MealsOfCategoryActivity";
     LinearLayoutManager linearManager;
@@ -56,7 +57,7 @@ public class MealsOfCategoryActivity extends AppCompatActivity
 
         mealsOfCategoryActivityPresenterInter = new MealsOfCategoryActivityPresenter(
                 this,
-                MealRepository.getInstance(
+                MealRepository.getFavInstance(
                         MealsRemoteDataSource.getInstance()
                         , FavLocalDataSource.getInstance(this)));
 
@@ -66,7 +67,9 @@ public class MealsOfCategoryActivity extends AppCompatActivity
         linearManager = new LinearLayoutManager(this);
         linearManager.setOrientation(LinearLayoutManager.VERTICAL);
         homeCategoryAdapter =
-                new HomeCategoryAdapter(this, new ArrayList<>(),new HomeFragment());
+                new HomeCategoryAdapter(this, new ArrayList<>()
+                        ,new HomeFragment()
+                ,this);
         mealsOfCategoriesRecyclerView.setLayoutManager(linearManager);
         mealsOfCategoriesRecyclerView.setAdapter(homeCategoryAdapter);
         homeCategoryAdapter.setClickMeal((view1, position) -> {
@@ -92,5 +95,10 @@ public class MealsOfCategoryActivity extends AppCompatActivity
     public void showMealsOfCategories(List<Meal> meals) {
         homeCategoryAdapter.setMyList(meals);
         homeCategoryAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onMealClick(Meal meal) {
+
     }
 }
