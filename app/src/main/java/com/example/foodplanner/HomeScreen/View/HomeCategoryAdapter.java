@@ -1,5 +1,7 @@
 package com.example.foodplanner.HomeScreen.View;
 
+import static com.example.foodplanner.HomeScreen.View.HomeFragment.userName;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -111,11 +114,11 @@ public class HomeCategoryAdapter extends
                 .into(holder.mealImg);
 
         Log.i(TAG2, "test FPR : "+ favOrPlan);
-            if(favOrPlan=='f'){
+            if((favOrPlan=='f')&&(!userName.equals(""))){
                 holder.btnAdd.setText("Like It");
-            }else if(favOrPlan=='p'){
+            }else if((favOrPlan=='p')&&(!userName.equals(""))){
                 holder.btnAdd.setText("Add");
-            }else if(favOrPlan=='r'){
+            }else if((favOrPlan=='r')&&(!userName.equals(""))){
                 holder.btnAdd.setText("Remove");
             }
 
@@ -124,12 +127,14 @@ public class HomeCategoryAdapter extends
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                if(favOrPlan=='f'){
+                if((favOrPlan=='f')&&(!userName.equals(""))){
                     onAddMealListener.onMealClick(meal);
-                }else if(favOrPlan=='p'){
+                }else if((favOrPlan=='p')&&(!userName.equals(""))){
                     onAddPlanMealListener.onPlanMealClick(meal,"");
-                }else if(favOrPlan=='r'){
+                }else if((favOrPlan=='r')&&(!userName.equals(""))){
                     onRemovePlanMealListener.onRemovePlanMealClick(meal);
+                }else{
+                    Toast.makeText(context, "Login and try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-
+    static String userName;
     DatabaseReference databaseReference;
 
 
@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment
 
         sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        String userName = sharedPreferences.getString("name","");
+        userName = sharedPreferences.getString("name","");
         Log.i(EMAIL, "userName: "+userName);
 
         mAuth=FirebaseAuth.getInstance();
