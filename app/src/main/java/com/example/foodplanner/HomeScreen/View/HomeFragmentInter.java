@@ -8,7 +8,6 @@ public interface HomeFragmentInter {
 
     void showChickenCategory(List<Meal> meals);
     void showBeefCategory(List<Meal> meals);
-
     void showSeaFoodCategory(List<Meal> meals);
 
     void showRandomMeal(List<Meal> meals);
