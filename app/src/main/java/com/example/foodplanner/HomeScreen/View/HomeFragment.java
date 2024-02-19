@@ -177,7 +177,43 @@ public class HomeFragment extends Fragment
                     Log.i(TAG_OnChange, "id: " + id + ", name: " + name + ", thumbnail: " + thumbnail);
                 }
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Failed to read value
+                Log.i(TAG_OnChange, "read fail");
+            }
+        });
 
+
+        databaseReference=FirebaseDatabase.getInstance().getReference("users").child(userName).child("plan");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    Plan plan=new Plan();
+                    int id = childSnapshot.child("id").getValue(int.class);
+                    String saturday = childSnapshot.child("saturday").getValue(String.class);
+                    String sunday = childSnapshot.child("sunday").getValue(String.class);
+                    String monday = childSnapshot.child("monday").getValue(String.class);
+                    String tuesday = childSnapshot.child("tuesday").getValue(String.class);
+                    String wednesday = childSnapshot.child("wednesday").getValue(String.class);
+                    String thursday = childSnapshot.child("thursday").getValue(String.class);
+                    String friday = childSnapshot.child("friday").getValue(String.class);
+
+                    plan.setId(id);
+                    plan.setSaturday(saturday);
+                    plan.setSunday(sunday);
+                    plan.setMonday(monday);
+                    plan.setTuesday(tuesday);
+                    plan.setWednesday(wednesday);
+                    plan.setThursday(thursday);
+                    plan.setFriday(friday);
+                    if(plan.getId()>0) {
+                        getPlanTable(plan);
+                    }
+                    Log.i(TAG_OnChange, "id: " + id + ", saturday: " + saturday + ", sunday: " + sunday);
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Failed to read value
@@ -197,7 +233,6 @@ public class HomeFragment extends Fragment
                         new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(homeActivity, "empty fav !", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -268,14 +303,8 @@ public class HomeFragment extends Fragment
                 mAuth.signOut();
                 Intent intent = new Intent(homeActivity, StartActivity.class);
                 startActivity(intent);
-//                homeActivity.finish();
-                Toast.makeText(homeActivity, "Logout Successful !", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
 
 
         btnRandom.setOnClickListener(new View.OnClickListener() {
@@ -300,6 +329,10 @@ public class HomeFragment extends Fragment
 
     void getFavTable(Meal meal){
         mealFavRepositoryInter.insertMeals(meal);
+    }
+
+    void getPlanTable(Plan plan){
+        mealPlanRepositoryInter.insertDayMeal(plan);
     }
 
                     @Override
