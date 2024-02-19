@@ -22,6 +22,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     private static PlanLocalDataSource connectToMeal =null;
 
 
+
     private PlanLocalDataSource(Context context){
         db= PlanAppDataBase.getInstance(context.getApplicationContext());
         dao = db.getMealDAO();
