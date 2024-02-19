@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -32,9 +32,9 @@
         <activity
             android:name=".Search.View.Ingredients.MealsOfIngredientActivity"
             android:exported="false" />
-        <activity
-            android:name=".Search.View.MealsOfIngredientActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Search.View.MealsOfIngredientActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".Search.View.Category.MealsOfCategoryActivity"
             android:exported="false" />

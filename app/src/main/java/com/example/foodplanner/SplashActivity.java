@@ -34,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
         Log.i(TAG, "userName: "+userName);
 
 
-        myText.animate().translationY(-1000).setDuration(2700).setStartDelay(1) ;
+        myText.animate().translationY(-1100).setDuration(2700).setStartDelay(1) ;
         animationView.animate().translationX(2000).setDuration(2002).setStartDelay(2900);
 
             new Handler().postDelayed(new Runnable() {
@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
                     }
 
                 }
-            }, 2000);
+            }, 3000);
 
     }
 }
