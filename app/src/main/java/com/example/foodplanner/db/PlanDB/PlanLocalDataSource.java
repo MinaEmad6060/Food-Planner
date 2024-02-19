@@ -6,6 +6,7 @@ import com.example.foodplanner.Model.Plan;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -13,6 +14,9 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
 
     private InterPlanDAO dao;
     private Observable<List<String>> storedMeals;
+
+    private Flowable<List<Plan>> storedPlans;
+
     PlanAppDataBase db;
 
     private static PlanLocalDataSource connectToMeal =null;
@@ -20,6 +24,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     private PlanLocalDataSource(Context context){
         db= PlanAppDataBase.getInstance(context.getApplicationContext());
         dao = db.getMealDAO();
+        storedPlans=dao.getAllPlans();
     }
     public static PlanLocalDataSource getPlanInstance(Context context){
         if(connectToMeal ==null){
@@ -34,11 +39,27 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     }
 
     @Override
+    public Flowable<List<Plan>> getAllPlans() {
+        return storedPlans.subscribeOn(Schedulers.io());
+    }
+
+
+    @Override
     public void insertDayMealData(Plan plan) {
         new Thread(){
             @Override
             public void run() {
                 dao.insert(plan);
+            }
+        }.start();
+    }
+
+    @Override
+    public void deleteAllPlanData() {
+        new Thread(){
+            @Override
+            public void run() {
+                dao.deleteAllPlan();
             }
         }.start();
     }

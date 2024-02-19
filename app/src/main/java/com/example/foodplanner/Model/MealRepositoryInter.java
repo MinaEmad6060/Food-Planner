@@ -14,6 +14,10 @@ public interface MealRepositoryInter {
 
 
 
+
+
+
+
     Observable<MealList> getSearchMealsRepo(String query);
     Observable<CategoryList>  getAllCategoriesRepo();
 
@@ -22,15 +26,19 @@ public interface MealRepositoryInter {
     Observable<IngredientsList> getAllIngredientRepo();
 
 
-
-
     Flowable<List<Meal>> getStoredMeals();
+
+
+    Flowable<List<Plan>> getAllPlansRepo();
 
     void insertMeals(Meal meal);
 
     void deleteMeals(Meal meal);
 
     void deleteAllFavMeals();
+
+
+    void deleteAllPlanMeals();
 
     Observable<List<String>> getDayMealsRepo(String columnName);
 

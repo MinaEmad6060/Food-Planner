@@ -40,8 +40,8 @@ import io.reactivex.rxjava3.core.Observable;
 
 @Dao
 public interface InterPlanDAO {
-//    @Query("SELECT * FROM plan_table")
-//    Flowable<List<Plan>> getAllMeals(); // Change return type to Flowable
+    @Query("SELECT * FROM plan_table")
+    Flowable<List<Plan>> getAllPlans();
     @Query("SELECT saturday FROM plan_table")
     Observable<List<String>> getSaturdayMeals();
     @Query("SELECT sunday FROM plan_table")
@@ -61,6 +61,9 @@ public interface InterPlanDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Plan plan);
+
+    @Query("DELETE FROM plan_table")
+    void deleteAllPlan();
 
 
 
