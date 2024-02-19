@@ -1,6 +1,11 @@
 package com.example.foodplanner.Favourate.View;
 
+import static com.example.foodplanner.Online.LoginFragment.SHARED_PREF;
+
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,12 +18,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.foodplanner.Favourate.Presenter.FavMealsPresenter;
 import com.example.foodplanner.Favourate.Presenter.InterFavMealsPresenter;
+import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Model.MealRepositoryInter;
+import com.example.foodplanner.Online.StartActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
@@ -44,9 +52,22 @@ public class FavouriteFragment extends Fragment
 
     InterFavMealsPresenter interFavMealsPresenter;
 
+    HomeActivity homeActivity;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        homeActivity=(HomeActivity)getActivity();
+        SharedPreferences sharedPreferences =
+                homeActivity.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("name","");
+        Log.i(TAG, "userName: "+userName);
+        if(userName.equals("")){
+            Toast.makeText(homeActivity, "Login to access Favourite meals",
+                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(homeActivity.getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override

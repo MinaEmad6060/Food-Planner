@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences =
                 getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("name","a");
+        String userName = sharedPreferences.getString("name","");
         Log.i(TAG, "userName: "+userName);
 
         if(savedInstanceState == null){
