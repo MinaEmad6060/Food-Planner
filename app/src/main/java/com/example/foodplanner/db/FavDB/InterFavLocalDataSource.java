@@ -8,8 +8,8 @@ import io.reactivex.rxjava3.core.Flowable;
 
 public interface InterFavLocalDataSource {
     Flowable<List<Meal>> getAllMealsData();
-    //LiveData<List<Product>> getAllProductsData();
 
+    void deleteAllFavData();
     void insertMealData(Meal meal);
 
     void deleteMealData(Meal meal);
