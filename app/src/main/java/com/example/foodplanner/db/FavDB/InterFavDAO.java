@@ -42,6 +42,8 @@ import io.reactivex.rxjava3.core.Flowable;
 public interface InterFavDAO {
     @Query("SELECT * FROM meal_table")
     Flowable<List<Meal>> getAllMeals(); // Change return type to Flowable
+    @Query("DELETE FROM meal_table")
+    void deleteAllFav();
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Meal meal);
     @Delete

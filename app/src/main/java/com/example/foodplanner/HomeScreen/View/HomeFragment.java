@@ -40,8 +40,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
@@ -58,6 +61,8 @@ public class HomeFragment extends Fragment
 
     private static final String EMAIL = "Email";
     private static final String TAG = "HomeFragment";
+
+    private static final String TAG_OnChange = "read";
     RecyclerView chickenRecyclerView;
     RecyclerView beefRecyclerView;
     RecyclerView seaFoodRecyclerView;
@@ -82,14 +87,21 @@ public class HomeFragment extends Fragment
 
     MealRepositoryInter mealRepositoryInter;
 
-    InterFavMealsPresenter interFavMealsPresenter;
 
     List<Meal> emptyList=new ArrayList<Meal>();
+
+    List<Meal> readList=new ArrayList<Meal>();
+
 
     Meal emptyMeal=new Meal("","","","","","");
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
+
+    DatabaseReference databaseReference;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,6 +152,43 @@ public class HomeFragment extends Fragment
                 FavLocalDataSource.getInstance(viewFrag.getContext()));
 
 
+        databaseReference=FirebaseDatabase.getInstance().getReference("users").child(userName);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    Meal meal=new Meal("","","","","","");
+                    String id = childSnapshot.child("id").getValue(String.class);
+                    String name = childSnapshot.child("name").getValue(String.class);
+                    String thumbnail = childSnapshot.child("thumbnail").getValue(String.class);
+                    meal.setId(id);
+                    meal.setName(name);
+                    meal.setThumbnail(thumbnail);
+                    readList.add(meal);
+                    if(!meal.getId().equals("")) {
+                        getFavTable(meal);
+                    }
+                    Log.i(TAG_OnChange, "readList: "+readList.size());
+                    Log.i(TAG_OnChange, "id: " + id + ", name: " + name + ", thumbnail: " + thumbnail);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Failed to read value
+                Log.i(TAG_OnChange, "read fail");
+            }
+        });
+
+
+
+
+
+
+
+
+
+
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("CheckResult")
@@ -172,6 +221,7 @@ public class HomeFragment extends Fragment
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Log.i(TAG, "size of favList: "+mealsInfo.size());
+                                                deleteFavTable();
                                                 Toast.makeText(homeActivity, "Added !", Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -190,6 +240,8 @@ public class HomeFragment extends Fragment
         });
 
 
+
+
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,8 +254,15 @@ public class HomeFragment extends Fragment
         });
     }
 
+    void deleteFavTable(){
+        mealRepositoryInter.deleteAllFavMeals();
+    }
 
-    @Override
+    void getFavTable(Meal meal){
+        mealRepositoryInter.insertMeals(meal);
+    }
+
+                    @Override
     public void showChickenCategory(List<Meal> meals) {
         setRecyclerViewAdpter(chickenRecyclerView,meals);
     }

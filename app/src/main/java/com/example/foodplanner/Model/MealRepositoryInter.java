@@ -30,6 +30,7 @@ public interface MealRepositoryInter {
 
     void deleteMeals(Meal meal);
 
+    void deleteAllFavMeals();
 
     Observable<List<String>> getDayMealsRepo(String columnName);
 
