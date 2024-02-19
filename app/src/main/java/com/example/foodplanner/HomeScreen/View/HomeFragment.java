@@ -181,15 +181,6 @@ public class HomeFragment extends Fragment
         });
 
 
-
-
-
-
-
-
-
-
-
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("CheckResult")
             @Override
