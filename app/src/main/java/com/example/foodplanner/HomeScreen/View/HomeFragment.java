@@ -254,7 +254,7 @@ public class HomeFragment extends Fragment
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Log.i(TAG, "size of favList: "+mealsInfo.size());
                                                 deleteFavTable();
-                                                Toast.makeText(homeActivity, "Added fav!", Toast.LENGTH_SHORT).show();
+//                                                Toast.makeText(homeActivity, "Added fav!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                 },
@@ -268,7 +268,7 @@ public class HomeFragment extends Fragment
                         new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(homeActivity, "empty plan !", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(homeActivity, "empty plan !", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -290,7 +290,7 @@ public class HomeFragment extends Fragment
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     Log.i(TAG, "size of favList: "+plansInfo.size());
                                                     deletePlanTable();
-                                                    Toast.makeText(homeActivity, "Added plan!", Toast.LENGTH_SHORT).show();
+//                                                    Toast.makeText(homeActivity, "Added plan!", Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                 },
@@ -368,6 +368,7 @@ public class HomeFragment extends Fragment
 
     @Override
     public void onMealClick(Meal meal) {
+        Toast.makeText(homeActivity, "Added to favourite!", Toast.LENGTH_SHORT).show();
         homeScreenPresenterInter.addFavMeal(meal);
     }
 

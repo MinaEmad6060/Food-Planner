@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
@@ -80,6 +81,7 @@ public class AllMealsActivity extends AppCompatActivity
 
     @Override
     public void onPlanMealClick(Meal meal,String day) {
+        Toast.makeText(AllMealsActivity.this, "Added to Plan!", Toast.LENGTH_SHORT).show();
         day=message;
         searchFragmentPresenterInter.addPlanMeal(meal,day);
     }

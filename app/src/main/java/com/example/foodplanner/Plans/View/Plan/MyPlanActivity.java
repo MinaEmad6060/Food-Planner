@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
@@ -95,6 +96,7 @@ public class MyPlanActivity extends AppCompatActivity
 
     @Override
     public void onRemovePlanMealClick(Meal meal) {
+        Toast.makeText(MyPlanActivity.this, "Remove from Plan!", Toast.LENGTH_SHORT).show();
         String mealDetails = meal.getName() + "," + meal.getThumbnail();
         searchFragmentPresenterInter.removePlanMeal(mealDetails,message);
     }

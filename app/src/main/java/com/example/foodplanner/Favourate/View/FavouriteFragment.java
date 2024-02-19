@@ -27,6 +27,7 @@ import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.Online.StartActivity;
+import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
@@ -97,6 +98,7 @@ public class FavouriteFragment extends Fragment
         recyclerView.setAdapter(favMealsAdapter);
 
 
+
         showData(interFavMealsPresenter.getStoredDataDB());
     }
 
@@ -117,6 +119,7 @@ public class FavouriteFragment extends Fragment
 
     @Override
     public void onRemoveFavClick(Meal meal) {
+        Toast.makeText(homeActivity, "Remove from favourite!", Toast.LENGTH_SHORT).show();
         interFavMealsPresenter.removeFavMeal(meal);
     }
 

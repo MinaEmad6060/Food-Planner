@@ -201,6 +201,8 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="32dp"
         android:layout_marginStart="500dp"
+        app:rippleColor="@color/lightGray"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

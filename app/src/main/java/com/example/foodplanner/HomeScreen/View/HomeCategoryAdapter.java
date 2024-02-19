@@ -78,7 +78,7 @@ public class HomeCategoryAdapter extends
         this.mealList = mealList;
         this.homeFragmentInter=homeFragmentInter;
         this.onRemovePlanMealListener=onRemovePlanMealListener;
-        //add to plan
+        //remove from plan
         favOrPlan='r';
     }
 

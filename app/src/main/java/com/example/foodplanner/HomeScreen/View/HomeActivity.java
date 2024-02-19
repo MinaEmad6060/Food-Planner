@@ -34,8 +34,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         if(isConnected()){
-            Toast.makeText(this, "connected",
-                    Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "connected",
+//                    Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "fail to connect",
                     Toast.LENGTH_SHORT).show();
