@@ -10,7 +10,12 @@ import io.reactivex.rxjava3.core.Observable;
 public interface InterPlanLocalDataSource {
     Observable<List<String>> getDayMealsData(String columnName);
 
+    Flowable<List<Plan>> getAllPlans();
+
+
     void insertDayMealData(Plan plan);
+
+    void deleteAllPlanData();
 
     void deleteSatMealData(String mealDetails);
     void deleteSunMealData(String mealDetails);

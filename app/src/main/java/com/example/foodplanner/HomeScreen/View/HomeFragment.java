@@ -24,9 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.foodplanner.Favourate.Presenter.FavMealsPresenter;
-import com.example.foodplanner.Favourate.Presenter.InterFavMealsPresenter;
 import com.example.foodplanner.Model.MealRepositoryInter;
+import com.example.foodplanner.Model.Plan;
 import com.example.foodplanner.Online.StartActivity;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
@@ -35,6 +34,7 @@ import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.FavDB.FavLocalDataSource;
+import com.example.foodplanner.db.PlanDB.PlanLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,7 +46,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,15 +84,18 @@ public class HomeFragment extends Fragment
     DatabaseReference reference;
     FirebaseDatabase fireDB;
 
-    MealRepositoryInter mealRepositoryInter;
+    MealRepositoryInter mealFavRepositoryInter;
+    MealRepositoryInter mealPlanRepositoryInter;
 
 
-    List<Meal> emptyList=new ArrayList<Meal>();
 
-    List<Meal> readList=new ArrayList<Meal>();
+    List<Meal> emptyFavList =new ArrayList<Meal>();
+    List<Plan> emptyPlanList=new ArrayList<Plan>();
+
+    Plan emptyPlan = new Plan();
 
 
-    Meal emptyMeal=new Meal("","","","","","");
+    Meal emptyFavMeal =new Meal("","","","","","");
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -123,7 +125,8 @@ public class HomeFragment extends Fragment
         btnLogout=view.findViewById(R.id.btn_logout);
         viewFrag=view;
         homeActivity=(HomeActivity)getActivity();
-        emptyList.add(emptyMeal);
+        emptyFavList.add(emptyFavMeal);
+        emptyPlanList.add(emptyPlan);
 
         sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -147,12 +150,16 @@ public class HomeFragment extends Fragment
         homeScreenPresenterInter.getMealsOfCategoryPres("Beef");
         homeScreenPresenterInter.getMealsOfCategoryPres("Seafood");
 
-        mealRepositoryInter = MealRepository.getFavInstance(
+        mealFavRepositoryInter = MealRepository.getFavInstance(
                 MealsRemoteDataSource.getInstance(),
                 FavLocalDataSource.getInstance(viewFrag.getContext()));
 
+        mealPlanRepositoryInter = MealRepository.getPlanInstance(
+                MealsRemoteDataSource.getInstance(),
+                PlanLocalDataSource.getPlanInstance(viewFrag.getContext()));
 
-        databaseReference=FirebaseDatabase.getInstance().getReference("users").child(userName);
+
+        databaseReference=FirebaseDatabase.getInstance().getReference("users").child(userName).child("fav");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -164,15 +171,49 @@ public class HomeFragment extends Fragment
                     meal.setId(id);
                     meal.setName(name);
                     meal.setThumbnail(thumbnail);
-                    readList.add(meal);
                     if(!meal.getId().equals("")) {
                         getFavTable(meal);
                     }
-                    Log.i(TAG_OnChange, "readList: "+readList.size());
                     Log.i(TAG_OnChange, "id: " + id + ", name: " + name + ", thumbnail: " + thumbnail);
                 }
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Failed to read value
+                Log.i(TAG_OnChange, "read fail");
+            }
+        });
 
+
+        databaseReference=FirebaseDatabase.getInstance().getReference("users").child(userName).child("plan");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    Plan plan=new Plan();
+                    int id = childSnapshot.child("id").getValue(int.class);
+                    String saturday = childSnapshot.child("saturday").getValue(String.class);
+                    String sunday = childSnapshot.child("sunday").getValue(String.class);
+                    String monday = childSnapshot.child("monday").getValue(String.class);
+                    String tuesday = childSnapshot.child("tuesday").getValue(String.class);
+                    String wednesday = childSnapshot.child("wednesday").getValue(String.class);
+                    String thursday = childSnapshot.child("thursday").getValue(String.class);
+                    String friday = childSnapshot.child("friday").getValue(String.class);
+
+                    plan.setId(id);
+                    plan.setSaturday(saturday);
+                    plan.setSunday(sunday);
+                    plan.setMonday(monday);
+                    plan.setTuesday(tuesday);
+                    plan.setWednesday(wednesday);
+                    plan.setThursday(thursday);
+                    plan.setFriday(friday);
+                    if(plan.getId()>0) {
+                        getPlanTable(plan);
+                    }
+                    Log.i(TAG_OnChange, "id: " + id + ", saturday: " + saturday + ", sunday: " + sunday);
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Failed to read value
@@ -188,16 +229,16 @@ public class HomeFragment extends Fragment
                 fireDB=FirebaseDatabase.getInstance();
                 reference=fireDB.getReference("users");
 
-                reference.child(userName).setValue(emptyList).addOnCompleteListener(
+                reference.child(userName).child("fav").setValue(emptyFavList).addOnCompleteListener(
                         new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(homeActivity, "empty add !", Toast.LENGTH_SHORT).show();
                     }
                 });
-                mealRepositoryInter.getStoredMeals()
+
+                mealFavRepositoryInter.getStoredMeals()
                         .observeOn(AndroidSchedulers.mainThread()).map(mealInfoList -> {
-                            Log.i(TAG, "resume: ");
+                            Log.i(TAG, "resume fav: ");
                             List<Meal> myMeals = new ArrayList<>();
                             for (Meal meal : mealInfoList) {
                                 myMeals.add(meal);
@@ -207,30 +248,63 @@ public class HomeFragment extends Fragment
                         .subscribe(
                                 mealsInfo -> {
                                     Log.i(TAG, "Obs: "+ mealsInfo.get(0).getName());
-                                        reference.child(userName).setValue(mealsInfo)
+                                        reference.child(userName).child("fav").setValue(mealsInfo)
                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Log.i(TAG, "size of favList: "+mealsInfo.size());
                                                 deleteFavTable();
-                                                Toast.makeText(homeActivity, "Added !", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(homeActivity, "Added fav!", Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                 },
                                 err -> Log.i(TAG, "ObsError: failure "),
                                 () -> Log.i(TAG, "ObsComp: ")
                         );
+
+
+
+                reference.child(userName).child("plan").setValue(emptyPlanList).addOnCompleteListener(
+                        new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(homeActivity, "empty plan !", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                mealPlanRepositoryInter.getAllPlansRepo()
+                        .observeOn(AndroidSchedulers.mainThread()).map(planInfoList -> {
+                            Log.i(TAG, "resume plan: ");
+                            List<Plan> myPlans = new ArrayList<Plan>();
+                            for (Plan plan : planInfoList) {
+                                myPlans.add(plan);
+                            }
+                            return myPlans;
+                        })
+                        .subscribe(
+                                plansInfo -> {
+                                    Log.i(TAG, "Obs: "+ plansInfo.get(0).getSaturday());
+                                    reference.child(userName).child("plan").setValue(plansInfo)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    Log.i(TAG, "size of favList: "+plansInfo.size());
+                                                    deletePlanTable();
+                                                    Toast.makeText(homeActivity, "Added plan!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                },
+                                err -> Log.i(TAG, "ObsError: failure "),
+                                () -> Log.i(TAG, "ObsComp: ")
+                        );
+
                 editor.putString("name", "");
                 editor.apply();
                 mAuth.signOut();
                 Intent intent = new Intent(homeActivity, StartActivity.class);
                 startActivity(intent);
-//                homeActivity.finish();
-                Toast.makeText(homeActivity, "Logout Successful !", Toast.LENGTH_SHORT).show();
             }
         });
-
-
 
 
         btnRandom.setOnClickListener(new View.OnClickListener() {
@@ -246,11 +320,19 @@ public class HomeFragment extends Fragment
     }
 
     void deleteFavTable(){
-        mealRepositoryInter.deleteAllFavMeals();
+        mealFavRepositoryInter.deleteAllFavMeals();
+    }
+
+    void deletePlanTable(){
+        mealPlanRepositoryInter.deleteAllPlanMeals();
     }
 
     void getFavTable(Meal meal){
-        mealRepositoryInter.insertMeals(meal);
+        mealFavRepositoryInter.insertMeals(meal);
+    }
+
+    void getPlanTable(Plan plan){
+        mealPlanRepositoryInter.insertDayMeal(plan);
     }
 
                     @Override

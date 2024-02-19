@@ -100,9 +100,20 @@ public class MealRepository implements MealRepositoryInter{
     public Flowable<List<Meal>> getStoredMeals() {
         return interFavLocalDataSource.getAllMealsData();
     }
+
+    @Override
+    public Flowable<List<Plan>> getAllPlansRepo() {
+        return interPlanLocalDataSource.getAllPlans();
+    }
+
     @Override
     public void deleteAllFavMeals() {
         interFavLocalDataSource.deleteAllFavData();
+    }
+
+    @Override
+    public void deleteAllPlanMeals() {
+        interPlanLocalDataSource.deleteAllPlanData();
     }
 
     @Override
