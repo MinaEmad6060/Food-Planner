@@ -89,15 +89,11 @@ public class FavouriteFragment extends Fragment
                 MealsRemoteDataSource.getInstance(),
                 FavLocalDataSource.getInstance(viewFrag.getContext()));
         interFavMealsPresenter = new FavMealsPresenter(mealRepositoryInter);
-
-
         favMealsAdapter =
                 new FavMealsAdapter(
                         viewFrag.getContext(), new ArrayList<>(),this);
         recyclerView.setLayoutManager(linearManager);
         recyclerView.setAdapter(favMealsAdapter);
-
-
 
         showData(interFavMealsPresenter.getStoredDataDB());
     }
