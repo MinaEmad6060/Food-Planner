@@ -30,6 +30,7 @@ public class PlanOfWeekFragment extends Fragment {
 
     HomeActivity homeActivity;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
