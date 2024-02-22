@@ -36,6 +36,8 @@ public class DetailsOfMealActivity extends AppCompatActivity
 
 
     public static final String VIDEO_URI = "VIDEO";
+    public static final String INST = "instructions";
+
     ImageView mealImg;
 
 
@@ -56,6 +58,8 @@ public class DetailsOfMealActivity extends AppCompatActivity
 
     String videoURI;
 
+    String instructions;
+
 
     private static final String TAG = "MealDetails";
     @Override
@@ -66,7 +70,6 @@ public class DetailsOfMealActivity extends AppCompatActivity
         mealImg=findViewById(R.id.meal_img);
         btnVideo=findViewById(R.id.btn_Video);
         areaOfMeal=findViewById(R.id.Area_text);
-        instructionsContent=findViewById(R.id.instructions_content);
 
 
         //click on meal
@@ -108,6 +111,7 @@ public class DetailsOfMealActivity extends AppCompatActivity
             public void onClick(View v) {
                 Intent intent = new Intent(DetailsOfMealActivity.this,
                         VideoMealActivity.class);
+                intent.putExtra(INST,instructions);
                 intent.putExtra(VIDEO_URI,videoURI);
                 startActivity(intent);
             }
@@ -121,8 +125,9 @@ public class DetailsOfMealActivity extends AppCompatActivity
 
         nameOfMeal.setText(meals.get(0).getName());
         areaOfMeal.setText(meals.get(0).getArea());
-        instructionsContent.setText(meals.get(0).getInstructions());
+//        instructionsContent.setText(meals.get(0).getInstructions());
         videoURI=meals.get(0).getVideoLink();
+        instructions=meals.get(0).getInstructions();
 
         Glide.with(this).load(meals.get(0).getThumbnail())
                 .into(mealImg);

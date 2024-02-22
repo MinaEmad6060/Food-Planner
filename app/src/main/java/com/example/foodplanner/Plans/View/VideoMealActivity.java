@@ -1,5 +1,6 @@
 package com.example.foodplanner.Plans.View;
 
+import static com.example.foodplanner.Plans.View.DetailsOfMealActivity.INST;
 import static com.example.foodplanner.Plans.View.DetailsOfMealActivity.VIDEO_URI;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,11 @@ public class VideoMealActivity extends AppCompatActivity {
         Intent listenMessage = getIntent();
         String message = listenMessage.getStringExtra(VIDEO_URI);
         Log.i(TAG, "message: "+message);
+
+        String instructions = listenMessage.getStringExtra(INST);
+        Log.i(TAG, "instructions: "+instructions);
+
+        inst.setText(instructions);
 
 
 
