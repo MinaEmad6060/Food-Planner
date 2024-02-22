@@ -88,7 +88,6 @@ public class HomeFragment extends Fragment
     MealRepositoryInter mealPlanRepositoryInter;
 
 
-
     List<Meal> emptyFavList =new ArrayList<Meal>();
     List<Plan> emptyPlanList=new ArrayList<Plan>();
 
