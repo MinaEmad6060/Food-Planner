@@ -26,71 +26,44 @@
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/instructions_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Instructions"
-        android:background="@color/lightGray"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.248" />
-
-    <TextView
         android:id="@+id/ingredients_text"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:text="Ingrediance"
-        android:textColor="#FFFFFF"
+        android:layout_marginLeft="10dp"
         android:background="@color/lightGray"
-        android:textSize="24sp"
+        android:text="Ingredients"
+        android:textColor="#FFFFFF"
+        android:textSize="33dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintEnd_toStartOf="@+id/btn_Video"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.429" />
+        app:layout_constraintVertical_bias="0.254" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredients_meal_recyckerView"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="356dp"
-        app:layout_constraintEnd_toEndOf="@+id/instructions_content"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="@+id/instructions_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="365dp"
+        android:layout_height="397dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Video"
+        app:layout_constraintHorizontal_bias="0.388"
+        app:layout_constraintStart_toStartOf="@+id/ingredients_text"
+        app:layout_constraintTop_toBottomOf="@+id/ingredients_text" />
 
     <Button
         android:id="@+id/btn_Video"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Watch Video"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.815"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.253" />
-
-    <TextView
-        android:id="@+id/instructions_content"
-        android:layout_width="371dp"
-        android:layout_height="49dp"
-        android:text="(Instructions)"
-        android:textColor="#FFFFFF"
-        android:background="@color/brown"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.337" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -106,32 +79,32 @@
 
     <TextView
         android:id="@+id/meal_name_detailes"
-        android:layout_width="206dp"
-        android:layout_height="38dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:background="@color/lightGreen"
         android:text="(Meal Name)"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/Area_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.79"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toEndOf="@+id/meal_img"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057" />
+        app:layout_constraintVertical_bias="0.654" />
 
     <TextView
         android:id="@+id/Area_text"
-        android:layout_width="143dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/blue"
         android:text="(Area)"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.864"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.434" />
+        app:layout_constraintVertical_bias="0.705" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
