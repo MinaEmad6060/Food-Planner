@@ -14,3 +14,4 @@ public interface HomeFragmentInter {
 
     void showErr(String err);
 }
+
