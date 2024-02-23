@@ -1,6 +1,7 @@
 package com.example.foodplanner.HomeScreen.View;
 
-import static com.example.foodplanner.Online.LoginFragment.SHARED_PREF;
+
+import static com.example.foodplanner.Online.Presenter.LoginFragmentPres.SHARED_PREF;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -25,7 +26,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.Model.Plan;
-import com.example.foodplanner.Online.StartActivity;
+import com.example.foodplanner.Online.View.StartActivity;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenter;
 import com.example.foodplanner.HomeScreen.Presenter.HomeScreenPresenterInter;
