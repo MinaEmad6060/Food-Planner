@@ -17,7 +17,7 @@
         android:id="@+id/Constrain_Layout"
         android:layout_width="410dp"
         android:layout_height="150dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,8 +36,8 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="2dp"
                 android:text="Suggested Meal"
                 android:textColor="@color/white"
                 android:textSize="@dimen/headerTextSize" />
@@ -66,8 +66,8 @@
                     android:id="@+id/random_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
                     android:layout_marginLeft="50dp"
+                    android:layout_marginTop="40dp"
                     android:gravity="right"
                     android:text="TextView"
                     android:textColor="@color/white"
@@ -101,8 +101,9 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chicken"
         android:layout_marginLeft="@dimen/standardMargin"
+        android:background="@color/brown"
+        android:text="Chicken"
         android:textColor="@color/white"
         android:textSize="@dimen/midText"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
@@ -116,48 +117,39 @@
         android:layout_width="@dimen/widthOfHorizontalView"
         android:layout_height="@dimen/heigthOfHorizontalView"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Constrain_Layout">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Chicken_View"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="234dp" />
     </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/standardMargin"
-        android:text="Beef"
-        android:textColor="@color/white"
-        android:textSize="@dimen/midText"
-        app:layout_constraintBottom_toTopOf="@+id/cardView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="@dimen/widthOfHorizontalView"
         android:layout_height="@dimen/heigthOfHorizontalView"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/Beef_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="390dp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -168,6 +160,7 @@
         android:layout_marginLeft="@dimen/standardMargin"
         android:text="Sea Food"
         android:textColor="@color/white"
+        android:background="@color/brown"
         android:textSize="@dimen/midText"
         app:layout_constraintBottom_toTopOf="@+id/cardView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -180,23 +173,26 @@
         android:layout_width="@dimen/widthOfHorizontalView"
         android:layout_height="@dimen/heigthOfHorizontalView"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SeaFood_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="546dp" />
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="103dp"
+        android:layout_marginTop="120dp"
         android:background="@color/white"
         android:src="@drawable/logout"
         app:layout_constraintEnd_toEndOf="@+id/cardView3"
@@ -204,6 +200,22 @@
         app:layout_constraintStart_toStartOf="@+id/cardView3"
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
         app:rippleColor="@color/lightGray" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/standardMargin"
+        android:background="@color/brown"
+        android:text="Beef"
+        android:textColor="@color/white"
+        android:textSize="@dimen/midText"
+        app:layout_constraintBottom_toTopOf="@+id/cardView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+         />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
