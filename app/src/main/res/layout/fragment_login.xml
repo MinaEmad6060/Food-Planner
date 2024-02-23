@@ -75,7 +75,7 @@
             android:id="@+id/btn_guest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/button_shape"
             android:padding="10dp"
             android:text="Guest"
@@ -90,7 +90,7 @@
             android:gravity="center">
 
 
-            <ImageView
+            <Button
                 android:id="@+id/btn_Google"
                 android:layout_width="84dp"
                 android:layout_height="74dp"
@@ -100,7 +100,7 @@
                 app:layout_constraintHorizontal_bias="0.828"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginBottom="11dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginRight="18dp"
                 android:background="@drawable/google"
                 />

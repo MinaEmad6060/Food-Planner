@@ -50,7 +50,7 @@ public class LoginFragment extends Fragment {
 
     GoogleSignInClient googleSignInClient;
 
-    ImageView btnGoogle;
+    Button btnGoogle;
 
     FirebaseAuth mAuth;
 
