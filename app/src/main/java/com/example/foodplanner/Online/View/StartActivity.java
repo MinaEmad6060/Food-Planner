@@ -1,19 +1,15 @@
-package com.example.foodplanner.Online;
+package com.example.foodplanner.Online.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
-
 import android.os.Bundle;
 import android.widget.Button;
-
 import com.example.foodplanner.R;
 
 public class StartActivity extends AppCompatActivity {
-
     NavController navController;
-
     Button btnGuest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

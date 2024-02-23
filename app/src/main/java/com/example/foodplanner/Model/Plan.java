@@ -6,23 +6,16 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "plan_table")
 public class Plan {
-
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
-
     private String saturday;
     private String sunday;
-
     private String monday;
-
     private String tuesday;
-
     private String wednesday;
-
     private String thursday;
     private String friday;
-
     public Plan() {
         this.saturday = "";
         this.sunday = "";

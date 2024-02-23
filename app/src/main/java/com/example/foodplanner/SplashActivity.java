@@ -1,6 +1,8 @@
 package com.example.foodplanner;
 
-import static com.example.foodplanner.Online.LoginFragment.SHARED_PREF;
+//import static com.example.foodplanner.Online.View.LoginFragment.SHARED_PREF;
+
+import static com.example.foodplanner.Online.Presenter.LoginFragmentPres.SHARED_PREF;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +16,7 @@ import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
-import com.example.foodplanner.Online.StartActivity;
+import com.example.foodplanner.Online.View.StartActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

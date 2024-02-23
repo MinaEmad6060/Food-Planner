@@ -1,6 +1,8 @@
 package com.example.foodplanner.Plans.View.Plan;
 
-import static com.example.foodplanner.Online.LoginFragment.SHARED_PREF;
+//import static com.example.foodplanner.Online.View.LoginFragment.SHARED_PREF;
+
+import static com.example.foodplanner.Online.Presenter.LoginFragmentPres.SHARED_PREF;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import android.widget.Toast;
 
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.R;
-import com.example.foodplanner.Search.View.IngredientsActivity;
 
 public class PlanOfWeekFragment extends Fragment {
 

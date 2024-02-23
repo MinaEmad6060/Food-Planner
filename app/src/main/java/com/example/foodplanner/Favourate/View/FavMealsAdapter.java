@@ -8,30 +8,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class FavMealsAdapter extends
         RecyclerView.Adapter<FavMealsAdapter.MyViewHolder>{
-
-
-    InterFavMealsView interFavMealsView;
     private static final String TAG = "MyRecyclerAdapter";
     Context context;
-//    Meal meal = new Meal("","","","","","");
     List<Meal> mealList=new ArrayList<Meal>();
-
-    Button btnRemove;
-
-
     OnRemoveMealClickListener onRemoveMealClickListener;
 
     public FavMealsAdapter(Context context,

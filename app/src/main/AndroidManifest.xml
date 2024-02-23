@@ -32,9 +32,6 @@
         <activity
             android:name=".Search.View.Ingredients.MealsOfIngredientActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".Search.View.MealsOfIngredientActivity"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".Search.View.Category.MealsOfCategoryActivity"
             android:exported="false" />
@@ -57,19 +54,19 @@
             android:name=".HomeScreen.View.HomeActivity"
             android:exported="true">
 
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+<!--             <intent-filter>-->
+<!--             <action android:name="android.intent.action.MAIN" />-->
+<!--             <category android:name="android.intent.category.LAUNCHER" />-->
+<!--             </intent-filter>-->
         </activity>
         <activity
-            android:name=".Online.StartActivity"
+            android:name=".Online.View.StartActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SplashActivity"

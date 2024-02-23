@@ -1,11 +1,8 @@
 package com.example.foodplanner.db.PlanDB;
 
 import android.content.Context;
-
 import com.example.foodplanner.Model.Plan;
-
 import java.util.List;
-
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -14,26 +11,23 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
 
     private InterPlanDAO dao;
     private Observable<List<String>> storedMeals;
-
     private Flowable<List<Plan>> storedPlans;
-
     PlanAppDataBase db;
-
     private static PlanLocalDataSource connectToMeal =null;
-
-
 
     private PlanLocalDataSource(Context context){
         db= PlanAppDataBase.getInstance(context.getApplicationContext());
         dao = db.getMealDAO();
         storedPlans=dao.getAllPlans();
     }
+
     public static PlanLocalDataSource getPlanInstance(Context context){
         if(connectToMeal ==null){
             connectToMeal = new PlanLocalDataSource(context);
         }
         return connectToMeal;
     }
+
     @Override
     public Observable<List<String>> getDayMealsData(String columnName) {
         checkDay(columnName);
@@ -44,7 +38,6 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
     public Flowable<List<Plan>> getAllPlans() {
         return storedPlans.subscribeOn(Schedulers.io());
     }
-
 
     @Override
     public void insertDayMealData(Plan plan) {
@@ -65,7 +58,6 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
             }
         }.start();
     }
-
 
     @Override
     public void deleteSatMealData(String mealDetails) {
@@ -122,7 +114,7 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
         new Thread(){
             @Override
             public void run() {
-                dao.deleteFri(mealDetails);
+                dao.deleteTh(mealDetails);
             }
         }.start();
     }
@@ -136,7 +128,6 @@ public class PlanLocalDataSource implements InterPlanLocalDataSource {
             }
         }.start();
     }
-
 
     void checkDay(String day){
 
