@@ -1,7 +1,5 @@
 package com.example.foodplanner.Search.View;
 
-import static com.example.foodplanner.HomeScreen.View.HomeFragment.EXTRA_MEAL;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +24,6 @@ import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.HomeScreen.View.OnAddMealListener;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
-import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.SearchFragmentPresenter;
 import com.example.foodplanner.Search.Presenter.SearchFragmentPresenterInter;
@@ -110,19 +107,18 @@ public class SearchFragment extends Fragment
         ,this);
         categoriesRecyclerView.setLayoutManager(linearManagerSearch);
         categoriesRecyclerView.setAdapter(adapter);
-        adapter.setClickMeal((view1, position) -> {
-            String mealName = adapter.getItem(position).getName();
-            Intent intent = new Intent(viewFrag.getContext(),
-                    DetailsOfMealActivity.class);
-            intent.putExtra(EXTRA_MEAL,mealName);
-            startActivity(intent);
-        });
-
-
         searchFragmentPresenterInter.getSearchMealsPres("");
 
 
 
+
+        //Category
+//        linearManager = new LinearLayoutManager(view.getContext());
+//        linearManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        categoriesAdapter =
+//                new CategoriesAdapter(viewFrag.getContext(), new ArrayList<>());
+//        categoriesRecyclerView.setLayoutManager(linearManager);
+//        categoriesRecyclerView.setAdapter(categoriesAdapter);
 
         category.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +133,7 @@ public class SearchFragment extends Fragment
         area.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                searchFragmentPresenterInter.getAllCategoriesPres();
                 Intent transferData = new Intent(homeActivity,AreaActivity.class);
                 startActivity(transferData);
             }
@@ -192,7 +189,8 @@ public class SearchFragment extends Fragment
                 err-> Log.i(TAG, "error: ")
                 );
     }
-    
+
+
     @Override
     public void showSearchMeals(List<Meal> meals) {
         searchMeals=meals;

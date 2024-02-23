@@ -7,6 +7,7 @@
     android:background="@drawable/background"
     tools:context=".Online.View.StartActivity">
 
+
     <fragment
         android:id="@+id/Start_nav_host_fragment"
         android:name=
