@@ -22,7 +22,7 @@ public class StartActivity extends AppCompatActivity {
 
         navController = Navigation.findNavController(
                 this,R.id.Start_nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this,navController);
+//        NavigationUI.setupActionBarWithNavController(this,navController);
 
     }
 
