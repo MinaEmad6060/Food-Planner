@@ -59,16 +59,16 @@ public class FavouriteFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         homeActivity=(HomeActivity)getActivity();
-        SharedPreferences sharedPreferences =
-                homeActivity.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("name","");
-        Log.i(TAG, "userName: "+userName);
-        if(userName.equals("")){
-            Toast.makeText(homeActivity, "Login to access Favourite meals",
-                    Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(homeActivity.getApplicationContext(), HomeActivity.class);
-            startActivity(intent);
-        }
+//        SharedPreferences sharedPreferences =
+//                homeActivity.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+//        String userName = sharedPreferences.getString("name","");
+//        Log.i(TAG, "userName: "+userName);
+//        if(userName.equals("")){
+//            Toast.makeText(homeActivity, "Login to access Favourite meals",
+//                    Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(homeActivity.getApplicationContext(), HomeActivity.class);
+//            startActivity(intent);
+//        }
     }
 
     @Override

@@ -27,6 +27,8 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
     HomeFragment homeFragment;
     ActivityHomeBinding activityMainBinding;
+    SharedPreferences sharedPreferences;
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,9 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
 
-        SharedPreferences sharedPreferences =
+        sharedPreferences =
                 getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-        String userName = sharedPreferences.getString("name","");
+        userName = sharedPreferences.getString("name","");
         Log.i(TAG, "userName: "+userName);
 
         if(savedInstanceState == null){
@@ -69,9 +71,25 @@ public class HomeActivity extends AppCompatActivity {
                 Log.i(TAG, "homeFrag: ");
                 replacementFragment(new HomeFragment());
             }else if(item.getItemId()==R.id.planOfWeekFragment){
-                replacementFragment(new PlanOfWeekFragment());
+                sharedPreferences =
+                        getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+                userName = sharedPreferences.getString("name","");
+                if(userName.equals("")){
+                    Toast.makeText(this, "Login to access Plan meals",
+                            Toast.LENGTH_SHORT).show();
+                }else{
+                    replacementFragment(new PlanOfWeekFragment());
+                }
             }else if(item.getItemId()==R.id.favouriteFragment){
-                replacementFragment(new FavouriteFragment());
+                sharedPreferences =
+                        getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+                userName = sharedPreferences.getString("name","");
+                if(userName.equals("")){
+                    Toast.makeText(this, "Login to access Favourite meals",
+                            Toast.LENGTH_SHORT).show();
+                }else{
+                    replacementFragment(new FavouriteFragment());
+                }
             }else if(item.getItemId()==R.id.searchFragment){
                 replacementFragment(new SearchFragment());
             }

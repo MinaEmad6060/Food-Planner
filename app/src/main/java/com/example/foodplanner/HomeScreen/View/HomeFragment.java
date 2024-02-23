@@ -354,6 +354,7 @@ public class HomeFragment extends Fragment
     public void showRandomMeal(List<Meal> meals) {
         randomMealName.setText(meals.get(0).getName());
             Glide.with(viewFrag.getContext()).load(meals.get(0).getThumbnail())
+                    .placeholder(R.drawable.progress_animation)
                     .into(randomMealImg);
     }
 

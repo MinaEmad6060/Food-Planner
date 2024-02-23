@@ -16,8 +16,8 @@
     <LinearLayout
         android:id="@+id/Constrain_Layout"
         android:layout_width="410dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="50dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,11 +44,12 @@
 
             <ImageView
                 android:id="@+id/random_img"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="55dp"
-                android:src="@drawable/ic_launcher_background"
+                android:layout_marginTop="70dp"
+                android:src="@drawable/progress_animation"
+                android:background="@color/lightGray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.049"
@@ -64,11 +65,12 @@
 
                 <TextView
                     android:id="@+id/random_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="65dp"
                     android:layout_marginTop="40dp"
-                    android:gravity="right"
+                    android:layout_marginBottom="25dp"
+                    android:gravity="center"
                     android:text="TextView"
                     android:textColor="@color/white"
                     android:textSize="18sp"
@@ -86,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginTop="5dp"
-                    android:layout_marginRight="75dp"
+                    android:layout_marginRight="65dp"
                     android:background="@drawable/button_shape"
                     android:text="View Details" />
             </LinearLayout>
@@ -117,7 +119,7 @@
         android:layout_width="@dimen/widthOfHorizontalView"
         android:layout_height="@dimen/heigthOfHorizontalView"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -137,7 +139,7 @@
         android:layout_width="@dimen/widthOfHorizontalView"
         android:layout_height="@dimen/heigthOfHorizontalView"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -173,12 +175,14 @@
         android:layout_width="@dimen/widthOfHorizontalView"
         android:layout_height="@dimen/heigthOfHorizontalView"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SeaFood_view"
@@ -192,6 +196,7 @@
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="120dp"
         android:background="@color/white"
         android:src="@drawable/logout"
