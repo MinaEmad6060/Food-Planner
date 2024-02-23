@@ -1,5 +1,7 @@
 package com.example.foodplanner.Search.View;
 
+import static com.example.foodplanner.HomeScreen.View.HomeFragment.EXTRA_MEAL;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.HomeScreen.View.OnAddMealListener;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
+import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.SearchFragmentPresenter;
 import com.example.foodplanner.Search.Presenter.SearchFragmentPresenterInter;
@@ -108,6 +111,13 @@ public class SearchFragment extends Fragment
         categoriesRecyclerView.setLayoutManager(linearManagerSearch);
         categoriesRecyclerView.setAdapter(adapter);
         searchFragmentPresenterInter.getSearchMealsPres("");
+        adapter.setClickMeal((view1, position) -> {
+            String mealName = adapter.getItem(position).getName();
+            Intent intent = new Intent(homeActivity,
+                    DetailsOfMealActivity.class);
+            intent.putExtra(EXTRA_MEAL,mealName);
+            startActivity(intent);
+        });
 
 
 

@@ -41,11 +41,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredients_meal_recyckerView"
-        android:layout_width="363dp"
+        android:layout_width="@dimen/widthOfRecyclerView"
         android:layout_height="434dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="24dp"
         android:layout_marginRight="15dp"
+        android:background="@color/bgOfRecyclerView"
         app:layout_constraintEnd_toEndOf="@+id/btn_Video"
         app:layout_constraintHorizontal_bias="0.388"
         app:layout_constraintStart_toStartOf="@+id/ingredients_text"

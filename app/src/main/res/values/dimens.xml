@@ -17,4 +17,5 @@
     <dimen name="specialTextSize">20dp</dimen>
     <dimen name="midTextSize">22dp</dimen>
     <dimen name="largeTextSize">24</dimen>
+    <dimen name="widthOfRecyclerView">360dp</dimen>
 </resources>

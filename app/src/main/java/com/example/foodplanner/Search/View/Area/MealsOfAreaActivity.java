@@ -24,6 +24,7 @@ import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.Search.Presenter.Area.MealsOfAreaActivityPresenter;
 import com.example.foodplanner.Search.Presenter.Area.MealsOfAreaActivityPresenterInter;
+import com.example.foodplanner.Search.View.AreaActivity;
 import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
 
@@ -84,7 +85,7 @@ public class MealsOfAreaActivity extends AppCompatActivity
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent transferData = new Intent(MealsOfAreaActivity.this, HomeActivity.class);
+                Intent transferData = new Intent(MealsOfAreaActivity.this, AreaActivity.class);
                 startActivity(transferData);
             }
         });
