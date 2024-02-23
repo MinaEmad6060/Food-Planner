@@ -15,4 +15,6 @@
     <dimen name="smallTextSize">14dp</dimen>
     <dimen name="midText">24dp</dimen>
     <dimen name="specialTextSize">20dp</dimen>
+    <dimen name="midTextSize">22dp</dimen>
+    <dimen name="largeTextSize">24</dimen>
 </resources>
