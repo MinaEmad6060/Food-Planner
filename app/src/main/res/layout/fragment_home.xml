@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:background="@drawable/background"
     tools:context=".HomeScreen.View.HomeFragment">
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#739E9A9A" />
+<!--    <View-->
+<!--        android:id="@+id/view2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#739E9A9A" />-->
 
     <LinearLayout
         android:id="@+id/Constrain_Layout"
@@ -90,7 +92,11 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="65dp"
                     android:background="@drawable/button_shape"
-                    android:text="View Details" />
+                    android:text="View Details"
+                    android:textColor="@color/white"
+                    android:textColorHighlight="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textColorLink="@color/white" />
             </LinearLayout>
 
 

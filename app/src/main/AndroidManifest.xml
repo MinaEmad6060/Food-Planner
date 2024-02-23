@@ -72,7 +72,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashActivity"
+            android:name=".HomeScreen.SplashActivity"
             android:exported="true">
 
 <!--             <intent-filter>-->
