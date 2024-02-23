@@ -1,7 +1,6 @@
 package com.example.foodplanner.HomeScreen.View;
 
 import static com.example.foodplanner.HomeScreen.View.HomeFragment.userName;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
@@ -12,43 +11,29 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-import com.example.foodplanner.Model.Category;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Plans.View.Plan.OnAddPlanMealListener;
 import com.example.foodplanner.Plans.View.Plan.OnRemovePlanMealListener;
 import com.example.foodplanner.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeCategoryAdapter extends
         RecyclerView.Adapter<HomeCategoryAdapter.MyViewHolder>{
-
-
     HomeFragmentInter homeFragmentInter;
     private static final String TAG = "MyRecyclerAdapter";
     private static final String TAG2 = "FPR";
-
     Context context;
-//    Meal meal = new Meal("","","","","","");
     List<Meal> mealList=new ArrayList<Meal>();
-
     //click on meal
     OnClickMealInter onClickMealInter;
-
     OnAddMealListener onAddMealListener;
-
     OnAddPlanMealListener onAddPlanMealListener;
     OnRemovePlanMealListener onRemovePlanMealListener;
-
     char favOrPlan;
-
-
 
     public HomeCategoryAdapter(Context context,
                                List<Meal> mealList,
@@ -122,7 +107,6 @@ public class HomeCategoryAdapter extends
                 holder.btnAdd.setText("Remove");
             }
 
-
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -140,20 +124,15 @@ public class HomeCategoryAdapter extends
         });
     }
 
-
-
     public Meal getItem (int position){
         return mealList.get(position);
     }
-
 
     @Override
     public int getItemCount() {
         return mealList.size();
     }
 
-
-    //click on meal
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nameView;
         ImageView mealImg;
@@ -167,8 +146,6 @@ public class HomeCategoryAdapter extends
             //click on meal
             v.setOnClickListener(this);
         }
-
-        //click on meal
         @Override
         public void onClick(View v) {
             onClickMealInter.onClick(v,getAdapterPosition());

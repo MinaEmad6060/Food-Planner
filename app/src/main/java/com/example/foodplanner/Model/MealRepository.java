@@ -5,22 +5,17 @@ import com.example.foodplanner.db.FavDB.InterFavLocalDataSource;
 import com.example.foodplanner.db.PlanDB.InterPlanLocalDataSource;
 import com.example.foodplanner.db.PlanDB.PlanLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSourceInter;
-
 import java.util.List;
-
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 
 public class MealRepository implements MealRepositoryInter{
 
     InterFavLocalDataSource interFavLocalDataSource;
-
     InterPlanLocalDataSource interPlanLocalDataSource;
     static MealsRemoteDataSourceInter interMealsRemoteDataSource;
-
     private static MealRepository favMealsRepository =null;
     private static MealRepository planMealsRepository =null;
-
 
     private MealRepository(MealsRemoteDataSourceInter interMealsRemoteDataSource
                             ,InterFavLocalDataSource interFavLocalDataSource) {

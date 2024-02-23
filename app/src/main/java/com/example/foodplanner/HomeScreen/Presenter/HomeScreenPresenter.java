@@ -1,28 +1,22 @@
 package com.example.foodplanner.HomeScreen.Presenter;
 
 import android.annotation.SuppressLint;
-
 import com.example.foodplanner.HomeScreen.View.HomeFragmentInter;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealList;
 import com.example.foodplanner.Model.MealRepositoryInter;
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 
 public class HomeScreenPresenter implements HomeScreenPresenterInter{
-
     private HomeFragmentInter homeFragmentInter;
-
     private static MealRepositoryInter mealRepositoryInter;
-
 
     public HomeScreenPresenter(HomeFragmentInter interAllProductsView,
                                 MealRepositoryInter interProductsRepository) {
         this.homeFragmentInter = interAllProductsView;
         this.mealRepositoryInter = interProductsRepository;
     }
-
 
     @SuppressLint("CheckResult")
     @Override
@@ -58,10 +52,8 @@ public class HomeScreenPresenter implements HomeScreenPresenterInter{
                 );
     }
 
-
     @Override
     public void addFavMeal(Meal meal) {
         mealRepositoryInter.insertMeals(meal);
     }
-
 }

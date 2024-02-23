@@ -3,8 +3,8 @@ package com.example.foodplanner.Model;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import com.google.gson.annotations.SerializedName;
+
 @Entity(tableName = "meal_table")
 public class Meal {
     @PrimaryKey
@@ -66,7 +66,6 @@ public class Meal {
     @SerializedName("strYoutube")
     private String videoLink;
 
-
     public Meal(String id, String name, String category, String area,
                 String instructions, String thumbnail) {
         this.id = id;
@@ -96,7 +95,6 @@ public class Meal {
         this.ingredient19 = "";
         this.ingredient20 = "";
         this.videoLink="";
-
     }
 
     public String getVideoLink() {

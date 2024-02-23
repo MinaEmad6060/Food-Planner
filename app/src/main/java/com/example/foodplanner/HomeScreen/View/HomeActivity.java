@@ -1,22 +1,18 @@
 package com.example.foodplanner.HomeScreen.View;
 
-import static com.example.foodplanner.Online.LoginFragment.SHARED_PREF;
-
+import static com.example.foodplanner.Online.Presenter.LoginFragmentPres.SHARED_PREF;
+//import static com.example.foodplanner.Online.View.LoginFragment.SHARED_PREF;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.example.foodplanner.Favourate.View.FavouriteFragment;
 import com.example.foodplanner.Plans.View.Plan.PlanOfWeekFragment;
 import com.example.foodplanner.R;
@@ -34,8 +30,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         if(isConnected()){
-//            Toast.makeText(this, "connected",
-//                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "connected",
+                    Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(this, "fail to connect",
                     Toast.LENGTH_SHORT).show();
@@ -54,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
             transFragment.commit();
         }
     }
-
 
     @Override
     protected void onResume() {
@@ -78,7 +73,6 @@ public class HomeActivity extends AppCompatActivity {
 
             return true;
         });
-
     }
 
     private void replacementFragment(Fragment fragment){
@@ -98,5 +92,4 @@ public class HomeActivity extends AppCompatActivity {
                 (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
                         networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR));
     }
-
 }

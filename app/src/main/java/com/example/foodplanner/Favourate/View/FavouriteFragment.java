@@ -1,40 +1,33 @@
 package com.example.foodplanner.Favourate.View;
 
-import static com.example.foodplanner.Online.LoginFragment.SHARED_PREF;
+import static com.example.foodplanner.Online.Presenter.LoginFragmentPres.SHARED_PREF;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.foodplanner.Favourate.Presenter.FavMealsPresenter;
 import com.example.foodplanner.Favourate.Presenter.InterFavMealsPresenter;
 import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealRepository;
 import com.example.foodplanner.Model.MealRepositoryInter;
-import com.example.foodplanner.Online.StartActivity;
-import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.FavDB.FavLocalDataSource;
 import com.example.foodplanner.network.MealsRemoteDataSource;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -42,17 +35,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class FavouriteFragment extends Fragment
         implements InterFavMealsView, OnRemoveMealClickListener {
-
     private static final String TAG = "FavProductsActivity";
     View viewFrag;
     RecyclerView recyclerView;
     LinearLayoutManager linearManager;
-
     FavMealsAdapter favMealsAdapter;
     MealRepositoryInter mealRepositoryInter;
-
     InterFavMealsPresenter interFavMealsPresenter;
-
     HomeActivity homeActivity;
 
     @Override
@@ -74,7 +63,6 @@ public class FavouriteFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favourite, container, false);
     }
 
@@ -94,7 +82,6 @@ public class FavouriteFragment extends Fragment
                         viewFrag.getContext(), new ArrayList<>(),this);
         recyclerView.setLayoutManager(linearManager);
         recyclerView.setAdapter(favMealsAdapter);
-
         showData(interFavMealsPresenter.getStoredDataDB());
     }
 
@@ -118,5 +105,4 @@ public class FavouriteFragment extends Fragment
         Toast.makeText(homeActivity, "Remove from favourite!", Toast.LENGTH_SHORT).show();
         interFavMealsPresenter.removeFavMeal(meal);
     }
-
 }

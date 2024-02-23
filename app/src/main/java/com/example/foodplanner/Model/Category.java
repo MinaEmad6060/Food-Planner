@@ -3,10 +3,8 @@ package com.example.foodplanner.Model;
 import com.google.gson.annotations.SerializedName;
 
 public class Category {
-
     @SerializedName("strCategory")
     private String name;
-
     @SerializedName("strCategoryThumb")
     private String thumbnail;
 
