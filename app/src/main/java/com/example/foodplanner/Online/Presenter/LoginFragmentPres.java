@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragmentPres {
 
+    private static final String TAG = "LoginFragmentPres";
+    
     public static final String SHARED_PREF = "sharedPre";
     GoogleSignInClient googleSignInClient;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -68,6 +70,7 @@ public class LoginFragmentPres {
                                 String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                                 userName=extractUserName(userEmail);
                                 editor.putString("name",userName);
+                                editor.putBoolean("isValid",true);
                                 editor.apply();
                                 loginFragment.showSuccessLogin(userName,context);
                             }

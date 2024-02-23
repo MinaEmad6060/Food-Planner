@@ -43,47 +43,26 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 
 public class LoginFragment extends Fragment {
-
     static final String TAG = "Login";
-
-//    public static final String SHARED_PREF = "sharedPre";
-    //    GoogleSignInClient googleSignInClient;
-    //    FirebaseAuth mAuth;
-    //    String userName;
-
-
-
     public EditText emailLogin;
     EditText passwordLogin;
     Button btnLogin;
-
     ImageView btnGoogle;
-
     SharedPreferences sharedPreferences;
     Button btnGuest;
     TextView signUp;
-
-    StartActivity myStartActivity=(StartActivity)getActivity();
-
-
+    StartActivity myStartActivity;
     LoginFragmentPres loginFragmentPres;
-
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -92,12 +71,8 @@ public class LoginFragment extends Fragment {
         emailLogin=view.findViewById(R.id.Login_Email);
         passwordLogin=view.findViewById(R.id.Login_Password);
         btnLogin=view.findViewById(R.id.btn_login);
-        myStartActivity =(StartActivity)getActivity();
-
         btnGoogle=view.findViewById(R.id.btn_Google);
-//        SharedPreferences sharedPreferences =
-//                myStartActivity.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor=sharedPreferences.edit();
+        myStartActivity =(StartActivity)getActivity();
 
         signUp.setOnClickListener(v -> {
             NavDirections action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment();
@@ -108,77 +83,24 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 loginFragmentPres=new LoginFragmentPres(myStartActivity);
-//                editor.putString("name","");
-//                editor.apply();
                 loginFragmentPres.accessGuest();
                 Intent moveToHome = new Intent(myStartActivity, HomeActivity.class);
                 startActivity(moveToHome);
             }
         });
 
-
-
-//        mAuth = FirebaseAuth.getInstance();
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 loginFragmentPres=new LoginFragmentPres(myStartActivity);
                 loginFragmentPres.accessLogin(emailLogin,passwordLogin);
                 sharedPreferences = getActivity().getSharedPreferences(
                         SHARED_PREF, Context.MODE_PRIVATE);
-                String userName = sharedPreferences.getString("name","");
-                if(!userName.equals("")){
-                    Log.i(TAG, "after: "+userName);
+                boolean isLoginValid = sharedPreferences.getBoolean("isValid",false);
+                if(isLoginValid){
                     Intent intent=new Intent(myStartActivity, HomeActivity.class);
                     startActivity(intent);
-                }else{
-                    Log.i(TAG, "after else: "+userName);
                 }
-
-//                String user = emailLogin.getText().toString();
-//                String pass = passwordLogin.getText().toString();
-//
-//                if(!user.isEmpty() && Patterns.EMAIL_ADDRESS
-//                        .matcher(user).matches()){
-//                    if(!pass.isEmpty()){
-//                        mAuth.signInWithEmailAndPassword(user, pass)
-//                                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-//                                    @Override
-//                                    public void onSuccess(AuthResult authResult) {
-//                                        Log.i(TAG, "user: "+user);
-//                                        String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-//                                        userName=extractUserName(userEmail);
-//                                        editor.putString("name",userName);
-//                                        editor.apply();
-//                                        Intent intent=new Intent(myStartActivity, HomeActivity.class);
-//                                        Toast.makeText(myStartActivity, "Welcome" + " " + userName,
-//                                                Toast.LENGTH_SHORT).show();
-//                                        startActivity(intent);
-//                                    }
-//                                }).addOnFailureListener(new OnFailureListener() {
-//                                    @Override
-//                                    public void onFailure(@NonNull Exception e) {
-//                                        Toast.makeText(myStartActivity, "Login Failed",
-//                                                Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
-//                    }else{
-//                        passwordLogin.setError("pass cant be empty");
-//                        editor.putString("name","");
-//                        editor.apply();
-//                    }
-//
-//                } else if (user.isEmpty()) {
-//                    emailLogin.setError("email cant be empty");
-//                    editor.putString("name","");
-//                    editor.apply();
-//                }else{
-//                    emailLogin.setError("enter valid email");
-//                    editor.putString("name","");
-//                    editor.apply();
-//                }
             }
         });
 
