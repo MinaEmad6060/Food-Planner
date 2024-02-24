@@ -71,8 +71,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categories_recyclerView"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/widthOfRecyclerView"
+        android:layout_height="@dimen/heightOfRecyclerView"
         android:layout_marginTop="28dp"
         android:background="#7ADAC7C7"
         app:layout_constraintEnd_toEndOf="@+id/ingredients_chip"

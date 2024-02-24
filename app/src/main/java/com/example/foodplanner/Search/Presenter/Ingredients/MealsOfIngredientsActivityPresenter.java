@@ -3,6 +3,7 @@ package com.example.foodplanner.Search.Presenter.Ingredients;
 import android.annotation.SuppressLint;
 
 import com.example.foodplanner.Model.IngredientsList;
+import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealList;
 import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.Search.View.IngredientActivityInter;
@@ -33,5 +34,10 @@ public class MealsOfIngredientsActivityPresenter implements MealsOfIngredientsAc
                         },
                         err -> {}
                 );
+    }
+
+    @Override
+    public void addFavMeal(Meal meal) {
+        mealRepositoryInter.insertMeals(meal);
     }
 }

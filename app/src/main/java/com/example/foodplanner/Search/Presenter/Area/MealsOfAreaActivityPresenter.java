@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.example.foodplanner.Model.AreasList;
+import com.example.foodplanner.Model.Meal;
 import com.example.foodplanner.Model.MealList;
 import com.example.foodplanner.Model.MealRepositoryInter;
 import com.example.foodplanner.Search.View.Area.MealsOfAreaViewInter;
@@ -38,5 +39,10 @@ public class MealsOfAreaActivityPresenter implements MealsOfAreaActivityPresente
                         },
                         err -> Log.i(TAG, "AreasPres: error")
                 );
+    }
+
+    @Override
+    public void addFavMeal(Meal meal) {
+        mealRepositoryInter.insertMeals(meal);
     }
 }

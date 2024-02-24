@@ -108,13 +108,6 @@ public class HomeFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isLogin=false;
-//        sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-//        editor = sharedPreferences.edit();
-//        userName = sharedPreferences.getString("name","");
-//        isLogin = sharedPreferences.getBoolean("isLogin",false);
-//        Log.i(EMAIL, "onCreate userName: "+userName);
-//        Log.i(EMAIL, "onCreate isLogin: "+isLogin);
     }
 
     @Override
@@ -171,10 +164,6 @@ public class HomeFragment extends Fragment
 
         if(isLogin) {
             Log.i(EMAIL, "before if isLogin: "+isLogin);
-//            sharedPreferences = getActivity().
-//                    getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-//            editor = sharedPreferences.edit();
-//            editor.putBoolean("isLogin",false);
             editor.putBoolean("isLogin",false);
             editor.apply();
             isLogin = sharedPreferences.getBoolean("isLogin",false);

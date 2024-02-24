@@ -16,7 +16,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allMeals_Recycler_List"
         android:layout_width="@dimen/widthOfRecyclerView"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/heightOfRecyclerView"
         android:layout_marginTop="48dp"
         android:background="@color/bgOfRecyclerView"
         app:layout_constraintEnd_toEndOf="@+id/allMealsText"
@@ -28,6 +28,7 @@
         android:id="@+id/allMealsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:background="@color/brown"
         android:text="All Meals"
         android:textColor="@color/white"
@@ -45,11 +46,11 @@
         android:layout_height="51dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.882"
-        app:srcCompat="@drawable/btn_back" />
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/back_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

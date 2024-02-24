@@ -17,7 +17,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Ingredients_Recycler_List"
         android:layout_width="@dimen/widthOfRecyclerView"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/heightOfRecyclerView"
         android:layout_marginTop="40dp"
         android:background="@color/bgOfRecyclerView"
         app:layout_constraintEnd_toEndOf="@+id/textView3"

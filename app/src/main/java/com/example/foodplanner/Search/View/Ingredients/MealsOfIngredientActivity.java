@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -102,6 +103,7 @@ public class MealsOfIngredientActivity extends AppCompatActivity
 
     @Override
     public void onMealClick(Meal meal) {
-
+        mealsOfIngredientsActivityPresenterInter.addFavMeal(meal);
+        Toast.makeText(this, "Added to favourite!", Toast.LENGTH_SHORT).show();
     }
 }

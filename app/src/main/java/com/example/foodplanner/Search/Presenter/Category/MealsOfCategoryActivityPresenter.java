@@ -40,4 +40,9 @@ public class MealsOfCategoryActivityPresenter implements
                         err -> {}
                 );
     }
+
+    @Override
+    public void addFavMeal(Meal meal) {
+        mealRepositoryInter.insertMeals(meal);
+    }
 }

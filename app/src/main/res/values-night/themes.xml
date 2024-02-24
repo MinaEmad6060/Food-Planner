@@ -3,5 +3,10 @@
     <style name="Base.Theme.FoodPlanner" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <item name="colorPrimary">@color/darkBrown</item>
+        <item name="android:fontFamily">@font/courgette_regular</item>
+
     </style>
+
+    <style name="Theme.FoodPlanner" parent="Base.Theme.FoodPlanner" />
+
 </resources>

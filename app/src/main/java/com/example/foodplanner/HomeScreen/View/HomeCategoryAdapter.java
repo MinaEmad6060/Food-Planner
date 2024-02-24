@@ -34,6 +34,8 @@ public class HomeCategoryAdapter extends
     private static final String TAG = "MyRecyclerAdapter";
     private static final String TAG2 = "FPR";
 
+    private static final String TAG3 = "HomeCategoryAdapter";
+
     Context context;
 //    Meal meal = new Meal("","","","","","");
     List<Meal> mealList=new ArrayList<Meal>();
@@ -127,6 +129,7 @@ public class HomeCategoryAdapter extends
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
+                Log.i(TAG3, "TAG3: "+userName+" "+favOrPlan);
                 if((favOrPlan=='f')&&(!userName.equals(""))){
                     onAddMealListener.onMealClick(meal);
                 }else if((favOrPlan=='p')&&(!userName.equals(""))){
