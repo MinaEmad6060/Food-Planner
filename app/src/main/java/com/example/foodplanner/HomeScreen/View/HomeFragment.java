@@ -99,6 +99,8 @@ public class HomeFragment extends Fragment
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+    boolean isLogin;
+
     static String userName;
     DatabaseReference databaseReference;
 
@@ -106,6 +108,13 @@ public class HomeFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isLogin=false;
+//        sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+//        editor = sharedPreferences.edit();
+//        userName = sharedPreferences.getString("name","");
+//        isLogin = sharedPreferences.getBoolean("isLogin",false);
+//        Log.i(EMAIL, "onCreate userName: "+userName);
+//        Log.i(EMAIL, "onCreate isLogin: "+isLogin);
     }
 
     @Override
@@ -130,7 +139,10 @@ public class HomeFragment extends Fragment
         sharedPreferences = getActivity().getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         userName = sharedPreferences.getString("name","");
+        isLogin = sharedPreferences.getBoolean("isLogin",false);
         Log.i(EMAIL, "userName: "+userName);
+        Log.i(EMAIL, "isLogin: "+isLogin);
+
 
         mAuth=FirebaseAuth.getInstance();
 
@@ -157,70 +169,83 @@ public class HomeFragment extends Fragment
                 MealsRemoteDataSource.getInstance(),
                 PlanLocalDataSource.getPlanInstance(viewFrag.getContext()));
 
+        if(isLogin) {
+            Log.i(EMAIL, "before if isLogin: "+isLogin);
+//            sharedPreferences = getActivity().
+//                    getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
+//            editor = sharedPreferences.edit();
+//            editor.putBoolean("isLogin",false);
+            editor.putBoolean("isLogin",false);
+            editor.apply();
+            isLogin = sharedPreferences.getBoolean("isLogin",false);
+            Log.i(EMAIL, "after if isLogin: "+isLogin);
 
-        databaseReference=FirebaseDatabase.getInstance().getReference("users").child(userName).child("fav");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    Meal meal=new Meal("","","","","","");
-                    String id = childSnapshot.child("id").getValue(String.class);
-                    String name = childSnapshot.child("name").getValue(String.class);
-                    String thumbnail = childSnapshot.child("thumbnail").getValue(String.class);
-                    meal.setId(id);
-                    meal.setName(name);
-                    meal.setThumbnail(thumbnail);
-                    if(!meal.getId().equals("")) {
-                        getFavTable(meal);
+
+            databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userName).child("fav");
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        Meal meal = new Meal("", "", "", "", "", "");
+                        String id = childSnapshot.child("id").getValue(String.class);
+                        String name = childSnapshot.child("name").getValue(String.class);
+                        String thumbnail = childSnapshot.child("thumbnail").getValue(String.class);
+                        meal.setId(id);
+                        meal.setName(name);
+                        meal.setThumbnail(thumbnail);
+                        if (!meal.getId().equals("")) {
+                            getFavTable(meal);
+                        }
+                        Log.i(TAG_OnChange, "id: " + id + ", name: " + name + ", thumbnail: " + thumbnail);
                     }
-                    Log.i(TAG_OnChange, "id: " + id + ", name: " + name + ", thumbnail: " + thumbnail);
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Failed to read value
-                Log.i(TAG_OnChange, "read fail");
-            }
-        });
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Failed to read value
+                    Log.i(TAG_OnChange, "read fail");
+                }
+            });
 
 
-        databaseReference=FirebaseDatabase.getInstance().getReference("users").child(userName).child("plan");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    Plan plan=new Plan();
-                    int id = childSnapshot.child("id").getValue(int.class);
-                    String saturday = childSnapshot.child("saturday").getValue(String.class);
-                    String sunday = childSnapshot.child("sunday").getValue(String.class);
-                    String monday = childSnapshot.child("monday").getValue(String.class);
-                    String tuesday = childSnapshot.child("tuesday").getValue(String.class);
-                    String wednesday = childSnapshot.child("wednesday").getValue(String.class);
-                    String thursday = childSnapshot.child("thursday").getValue(String.class);
-                    String friday = childSnapshot.child("friday").getValue(String.class);
+            databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userName).child("plan");
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        Plan plan = new Plan();
+                        int id = childSnapshot.child("id").getValue(int.class);
+                        String saturday = childSnapshot.child("saturday").getValue(String.class);
+                        String sunday = childSnapshot.child("sunday").getValue(String.class);
+                        String monday = childSnapshot.child("monday").getValue(String.class);
+                        String tuesday = childSnapshot.child("tuesday").getValue(String.class);
+                        String wednesday = childSnapshot.child("wednesday").getValue(String.class);
+                        String thursday = childSnapshot.child("thursday").getValue(String.class);
+                        String friday = childSnapshot.child("friday").getValue(String.class);
 
-                    plan.setId(id);
-                    plan.setSaturday(saturday);
-                    plan.setSunday(sunday);
-                    plan.setMonday(monday);
-                    plan.setTuesday(tuesday);
-                    plan.setWednesday(wednesday);
-                    plan.setThursday(thursday);
-                    plan.setFriday(friday);
-                    if(plan.getId()>0) {
-                        getPlanTable(plan);
+                        plan.setId(id);
+                        plan.setSaturday(saturday);
+                        plan.setSunday(sunday);
+                        plan.setMonday(monday);
+                        plan.setTuesday(tuesday);
+                        plan.setWednesday(wednesday);
+                        plan.setThursday(thursday);
+                        plan.setFriday(friday);
+                        if (plan.getId() > 0) {
+                            getPlanTable(plan);
+                        }
+                        Log.i(TAG_OnChange, "id: " + id + ", saturday: " + saturday + ", sunday: " + sunday);
                     }
-                    Log.i(TAG_OnChange, "id: " + id + ", saturday: " + saturday + ", sunday: " + sunday);
                 }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Failed to read value
-                Log.i(TAG_OnChange, "read fail");
-            }
-        });
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // Failed to read value
+                    Log.i(TAG_OnChange, "read fail");
+                }
+            });
 
+        }
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("CheckResult")
             @Override

@@ -127,6 +127,7 @@ public class LoginFragment extends Fragment {
                                         String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                                         userName=extractUserName(userEmail);
                                         editor.putString("name",userName);
+                                        editor.putBoolean("isLogin",true);
                                         editor.apply();
                                         Intent intent=new Intent(myStartActivity, HomeActivity.class);
                                         Toast.makeText(myStartActivity, "Welcome" + " " + userName,
@@ -197,6 +198,7 @@ public class LoginFragment extends Fragment {
                                             SharedPreferences.Editor editor = sharedPreferences.edit();
                                             userName=extractUserName(userEmail);
                                             editor.putString("name", userName);
+                                            editor.putBoolean("isLogin",true);
                                             editor.apply();
                                             Log.i(TAG, "gmail: "+userName);
                                             startActivity(new Intent(getActivity(), HomeActivity.class));
