@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.Plans.View.DetailsOfMealActivity;
 import com.example.foodplanner.R;
 
@@ -23,6 +24,9 @@ public class WeekDaysActivity extends AppCompatActivity {
     ImageView btnTh;
     ImageView btnFri;
 
+    ImageView btnBack;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,16 @@ public class WeekDaysActivity extends AppCompatActivity {
         btnWed=findViewById(R.id.btn_wednesday);
         btnTh=findViewById(R.id.btn_thursday);
         btnFri=findViewById(R.id.btn_friday);
+        btnBack=findViewById(R.id.btn_makePlanOfWeek_back);
+
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transferData = new Intent(WeekDaysActivity.this, HomeActivity.class);
+                startActivity(transferData);
+            }
+        });
 
 
         btnSat.setOnClickListener(new View.OnClickListener() {

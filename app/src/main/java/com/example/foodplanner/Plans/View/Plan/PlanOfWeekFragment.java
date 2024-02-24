@@ -35,15 +35,6 @@ public class PlanOfWeekFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         homeActivity=(HomeActivity)getActivity();
-//        SharedPreferences sharedPreferences =
-//                homeActivity.getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE);
-//        String userName = sharedPreferences.getString("name","");
-//        if(userName.equals("")){
-//            Toast.makeText(homeActivity, "Login to make a Plan",
-//                    Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(homeActivity.getApplicationContext(), HomeActivity.class);
-//            startActivity(intent);
-//        }
     }
 
 

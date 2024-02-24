@@ -21,7 +21,7 @@
         android:id="@+id/MyWeekText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="80dp"
         android:background="@color/brown"
         android:text="Plan Of Week"
         android:textColor="@color/white"
@@ -203,7 +203,7 @@
         android:id="@+id/Saturday_MyWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginTop"
+        android:layout_marginTop="48dp"
         android:text="Saturday"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
@@ -211,6 +211,18 @@
         app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MyWeekText" />
+
+    <ImageView
+        android:id="@+id/btn_PlanOfWeek_back"
+        android:layout_width="99dp"
+        android:layout_height="51dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/back_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

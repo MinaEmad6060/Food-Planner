@@ -13,5 +13,6 @@
     <color name="simpleGreen">#73245018</color>
     <color name="splashText">#A6512609</color>
     <color name="bgOfRecyclerView">#7ADAC7C7</color>
+    <color name="simon">#66F18484</color>
 
 </resources>
