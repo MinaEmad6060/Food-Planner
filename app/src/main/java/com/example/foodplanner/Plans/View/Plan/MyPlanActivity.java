@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.Model.Meal;
@@ -43,6 +46,8 @@ public class MyPlanActivity extends AppCompatActivity
     String message;
 
     TextView dayPlan;
+    ImageView btnBack;
+
 
 
     @Override
@@ -81,6 +86,16 @@ public class MyPlanActivity extends AppCompatActivity
                     DetailsOfMealActivity.class);
             intent.putExtra(EXTRA_MEAL,mealName);
             startActivity(intent);
+        });
+        btnBack=findViewById(R.id.btn_myPlan_back);
+
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transferData = new Intent(MyPlanActivity.this, HomeActivity.class);
+                startActivity(transferData);
+            }
         });
 
         searchFragmentPresenterInter.getDayMealsPres(message);

@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.foodplanner.HomeScreen.View.HomeActivity;
 import com.example.foodplanner.HomeScreen.View.HomeCategoryAdapter;
 import com.example.foodplanner.HomeScreen.View.HomeFragment;
 import com.example.foodplanner.Model.Meal;
@@ -41,6 +44,8 @@ public class AllMealsActivity extends AppCompatActivity
 
     LinearLayoutManager linearManagerSearch;
     String message;
+    ImageView btnBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +77,17 @@ public class AllMealsActivity extends AppCompatActivity
                     DetailsOfMealActivity.class);
             intent.putExtra(EXTRA_MEAL,mealName);
             startActivity(intent);
+        });
+
+        btnBack=findViewById(R.id.btn_allMeals_back);
+
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transferData = new Intent(AllMealsActivity.this, HomeActivity.class);
+                startActivity(transferData);
+            }
         });
 
 

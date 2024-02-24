@@ -67,14 +67,13 @@
         android:id="@+id/btn_wednesday"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginTop="420dp"
         android:backgroundTint="#00FFFFFF"
         android:src="@drawable/icons8_plus"
         app:layout_constraintBottom_toBottomOf="@+id/Wednesday"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.745"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/Wednesday" />
 
     <ImageButton
         android:id="@+id/btn_thursday"
@@ -105,7 +104,7 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:background="@color/brown"
         android:text="Plan Of Week"
         android:textColor="@color/white"
