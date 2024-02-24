@@ -89,7 +89,6 @@ public class SignUpFragment extends Fragment {
                                         Navigation.findNavController(view).navigate(action); }
                                     else {
                                         email.setError("Email Format should be like a@b.com");
-                                        Toast.makeText(startActivity, "SignUp Failed", Integer.parseInt(task.getException().getMessage())).show();
                                     }
                                 }
                             });
