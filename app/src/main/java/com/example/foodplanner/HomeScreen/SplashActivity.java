@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
         Log.i(TAG, "userName: "+userName);
 
 
-        myText.animate().translationY(-680).setDuration(2700).setStartDelay(1) ;
+        myText.animate().translationY(-750).setDuration(2300).setStartDelay(0) ;
         animationView.animate().translationX(2000).setDuration(2002).setStartDelay(2900);
 
             new Handler().postDelayed(new Runnable() {

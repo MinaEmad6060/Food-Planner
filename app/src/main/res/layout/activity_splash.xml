@@ -8,13 +8,13 @@
     tools:context=".HomeScreen.SplashActivity">
 
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#739E9A9A"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+<!--    <View-->
+<!--        android:id="@+id/view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#739E9A9A"-->
+<!--        tools:layout_editor_absoluteX="0dp"-->
+<!--        tools:layout_editor_absoluteY="0dp" />-->
 
     <TextView
         android:id="@+id/welcome"
@@ -27,7 +27,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="112dp"
         android:text="Let's Cook"
-        android:textColor="@color/splashText"
+        android:textColor="@color/white"
         android:textSize="@dimen/fontSizeOfsmallHeader"
         android:textStyle="bold" />
 

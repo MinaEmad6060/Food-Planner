@@ -41,8 +41,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredients_meal_recyckerView"
-        android:layout_width="@dimen/widthOfRecyclerView"
-        android:layout_height="434dp"
+        android:layout_width="358dp"
+        android:layout_height="466dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="24dp"
         android:layout_marginRight="15dp"

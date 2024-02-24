@@ -99,5 +99,6 @@ public class MyPlanActivity extends AppCompatActivity
         Toast.makeText(MyPlanActivity.this, "Remove from Plan!", Toast.LENGTH_SHORT).show();
         String mealDetails = meal.getName() + "," + meal.getThumbnail();
         searchFragmentPresenterInter.removePlanMeal(mealDetails,message);
+        searchFragmentPresenterInter.getDayMealsPres(message);
     }
 }

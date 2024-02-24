@@ -57,8 +57,8 @@
         app:layout_constraintTop_toBottomOf="@+id/display_video" />
 
     <ScrollView
-        android:layout_width="389dp"
-        android:layout_height="255dp"
+        android:layout_width="386dp"
+        android:layout_height="301dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
