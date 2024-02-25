@@ -98,6 +98,7 @@ public class FavouriteFragment extends Fragment
         showData(interFavMealsPresenter.getStoredDataDB());
     }
 
+
     @SuppressLint({"CheckResult", "NotifyDataSetChanged"})
     @Override
     public void showData(Flowable<List<Meal>> meals) {
